@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav"
+    app:startDestination="@id/authorization">
+
+    <fragment
+        android:id="@+id/authorization"
+        android:name="com.example.appwithcats.presentation.Authorization"
+        android:label="Authorization"
+        tools:layout="@layout/fragment_autorization">
+        <action
+            android:id="@+id/action_authorization_to_keyApi"
+            app:destination="@id/keyApi" />
+    </fragment>
+    <fragment
+        android:id="@+id/keyApi"
+        android:name="com.example.appwithcats.presentation.KeyApi"
+        android:label="KeyApi"
+        tools:layout="@layout/fragment_key_api">
+        <action
+            android:id="@+id/action_catsFragment_to_catsFragment"
+            app:destination="@id/catsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/catsFragment"
+        android:name="com.example.appwithcats.presentation.CatsFragment"
+        android:label="CatsFragment"
+        tools:layout="@layout/fragment_cats">
+        <action
+            android:id="@+id/action_catsFragment_to_catFragment"
+            app:destination="@id/catsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/catFragment"
+        android:name="com.example.appwithcats.presentation.CatFragment"
+        android:label="fragment_cat"
+        tools:layout="@layout/fragment_cat" >
+        <argument
+            android:name="url"
+            app:argType="string"
+            app:nullable="false"/>
+    </fragment>
+</navigation>

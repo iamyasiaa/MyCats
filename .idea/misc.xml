@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/yasmirnova/AndroidStudioProjects/AppWithCats3/app/src/main/res/drawable/edit_text.xml" value="0.328125" />
+        <entry key="..\:/Users/yasmirnova/AndroidStudioProjects/AppWithCats3/app/src/main/res/drawable/ic_launcher_background.xml" value="0.328125" />
+        <entry key="..\:/Users/yasmirnova/AndroidStudioProjects/AppWithCats3/app/src/main/res/drawable/in_back.xml" value="0.328125" />
+        <entry key="..\:/Users/yasmirnova/AndroidStudioProjects/AppWithCats3/app/src/main/res/drawable/item.xml" value="0.328125" />
+        <entry key="..\:/Users/yasmirnova/AndroidStudioProjects/AppWithCats3/app/src/main/res/drawable/sign_in.xml" value="0.328125" />
+        <entry key="..\:/Users/yasmirnova/AndroidStudioProjects/AppWithCats3/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/yasmirnova/AndroidStudioProjects/AppWithCats3/app/src/main/res/layout/fragment_api_key.xml" value="0.25" />
+        <entry key="..\:/Users/yasmirnova/AndroidStudioProjects/AppWithCats3/app/src/main/res/layout/fragment_autorization.xml" value="0.33" />
+        <entry key="..\:/Users/yasmirnova/AndroidStudioProjects/AppWithCats3/app/src/main/res/layout/fragment_cat.xml" value="0.1" />
+        <entry key="..\:/Users/yasmirnova/AndroidStudioProjects/AppWithCats3/app/src/main/res/layout/fragment_cat_list.xml" value="0.1" />
+        <entry key="..\:/Users/yasmirnova/AndroidStudioProjects/AppWithCats3/app/src/main/res/layout/fragment_cats.xml" value="0.2277580071174377" />
+        <entry key="..\:/Users/yasmirnova/AndroidStudioProjects/AppWithCats3/app/src/main/res/layout/fragment_key_api.xml" value="0.3560606060606061" />
+        <entry key="..\:/Users/yasmirnova/AndroidStudioProjects/AppWithCats3/app/src/main/res/layout/item.xml" value="0.1" />
+        <entry key="..\:/Users/yasmirnova/AndroidStudioProjects/AppWithCats3/app/src/main/res/menu/back.xml" value="0.1" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
