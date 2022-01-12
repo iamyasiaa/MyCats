@@ -12,7 +12,7 @@ class KeyApi : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_autorization, container, false)
+        val view = inflater.inflate(R.layout.fragment_key_api, container, false)
 
 
         return view

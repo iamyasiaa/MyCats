@@ -12,7 +12,7 @@ class App : Application(){
         app = this
 
         appComponent = DaggerAppComponent.builder()
-            .module(Module(getString(R.string.BaseUrl), getString(R.string.ApiKey)))
+            .module(Module(getString(R.string.BaseUrl), getString(R.string.ApiKey),this))
             .build()
     }
 

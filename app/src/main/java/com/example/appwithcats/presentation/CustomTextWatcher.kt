@@ -1,21 +1,15 @@
 package com.example.appwithcats.presentation
 
-import android.app.Activity
-import android.graphics.Color
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.widget.Button
-import android.widget.Toast
-import com.example.appwithcats.R
 import com.google.android.material.textfield.TextInputEditText
 
 
-class CustomTextWatcher(edList: Array<TextInputEditText>, v: Button) :
+class CustomTextWatcher(private var edList: Array<TextInputEditText>, v: Button) :
     TextWatcher {
     private var v: View = v
-    private var edList: Array<TextInputEditText> = edList
     var emailPattern = Regex("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")
 
     override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
@@ -37,7 +31,7 @@ class CustomTextWatcher(edList: Array<TextInputEditText>, v: Button) :
                     else
                     {
                         v.isEnabled = false
-                        editText.setError("Invalid email")
+                        editText.error = "Invalid email"
                     }
                 }
             }

@@ -1,17 +1,13 @@
-package com.example.appwithcats.domain
+package com.example.appwithcats
 
 import androidx.lifecycle.MutableLiveData
-import com.example.appwithcats.app.interseptor.Api
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.schedulers.Schedulers
+import com.example.appwithcats.domain.CatModel
 
 
-class MyRepository (private val api: Api) {
+class ApiKeyRepository {
     var const = 20
 
-    private val compositeDisposable = CompositeDisposable()
+  /*  private val compositeDisposable = CompositeDisposable()
     val getCatLiveData: MutableLiveData<MutableList<CatModel>>
         get() {
             val data: MutableLiveData<MutableList<CatModel>> = MutableLiveData<MutableList<CatModel>>()
@@ -27,10 +23,5 @@ class MyRepository (private val api: Api) {
                             })
                 }
             return data
-        }
-    fun postLoginIn(user:PersonalData): Observable<Model> {
-        return api.loginUser(user)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-    }
+        }*/
 }
