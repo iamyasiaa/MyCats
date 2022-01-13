@@ -6,6 +6,7 @@ import com.example.appwithcats.SharedPreferenceRepository
 import com.example.appwithcats.app.interseptor.Api
 import com.example.appwithcats.app.interseptor.KeyInterseptor
 import com.example.appwithcats.domain.MyRepository
+import com.example.appwithcats.presentation.KeyApi
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -63,7 +64,7 @@ class  Module (private val BaseUrl: String, private val ApiKey: String, private 
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
         okHttpClient.addInterceptor(interceptor)
-        okHttpClient.addInterceptor(KeyInterseptor(ApiKey))
+        okHttpClient.addInterceptor(KeyInterseptor(keyApi = KeyApi()))
         return okHttpClient.build()
     }
 

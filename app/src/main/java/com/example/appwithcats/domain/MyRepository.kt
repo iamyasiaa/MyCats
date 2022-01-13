@@ -33,4 +33,9 @@ class MyRepository (private val api: Api) {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
+   /* fun postApiKeyIn(user:aaaaaaaa): Observable<Model> {
+        return api.getApiKey(user)
+            .subscribeOn(Schedulers.io())
+
+    }*/
 }

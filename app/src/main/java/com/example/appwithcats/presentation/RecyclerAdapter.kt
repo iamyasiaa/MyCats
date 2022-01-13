@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.appwithcats.domain.CatModel
@@ -18,13 +19,13 @@ class RecyclerAdapter (var context: Context, var catList: MutableList<CatModel>)
 
         private lateinit var cat: CatModel
         var imageCat: ImageView = itemView.findViewById(R.id.image)
-        private var callbacks: Callbacks? = null
+
 
         init {
             imageCat.apply {
                 setOnClickListener {
-                    callbacks = context as Callbacks?
-                    callbacks?.onCatSelected(cat.url)
+                    val action = CatsFragmentDirections.actionCatsFragmentToCatFragment(urlCat = cat.url)
+                    Navigation.findNavController(itemView).navigate(action)
                 }
             }
         }

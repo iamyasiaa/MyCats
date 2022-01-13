@@ -1,5 +1,6 @@
 package com.example.appwithcats.app.interseptor
 
+import com.example.appwithcats.ApiKeyViewModel
 import com.example.appwithcats.AuthorizationViewModel
 import com.example.appwithcats.SharedPreferenceRepository
 import com.example.appwithcats.domain.MainViewModel
@@ -15,5 +16,6 @@ import javax.inject.Singleton
         fun inject(myRepository: MyRepository)
         fun inject(AuthorizationViewModel: AuthorizationViewModel)
         fun inject(SharedPreferenceRepository: SharedPreferenceRepository)
+        fun inject(ApiKeyViewModel: ApiKeyViewModel)
 
 }

@@ -20,7 +20,7 @@
         android:label="KeyApi"
         tools:layout="@layout/fragment_key_api">
         <action
-            android:id="@+id/action_catsFragment_to_catsFragment"
+            android:id="@+id/action_keyApi_to_catsFragment"
             app:destination="@id/catsFragment" />
     </fragment>
     <fragment
@@ -30,7 +30,7 @@
         tools:layout="@layout/fragment_cats">
         <action
             android:id="@+id/action_catsFragment_to_catFragment"
-            app:destination="@id/catsFragment" />
+            app:destination="@id/catFragment" />
     </fragment>
     <fragment
         android:id="@+id/catFragment"
@@ -38,7 +38,7 @@
         android:label="fragment_cat"
         tools:layout="@layout/fragment_cat" >
         <argument
-            android:name="url"
+            android:name="urlCat"
             app:argType="string"
             app:nullable="false"/>
     </fragment>

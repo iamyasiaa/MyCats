@@ -12,26 +12,5 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
-        /*val currentFragment = supportFragmentManager.findFragmentById(R.id.conteinerCats)
-
-        if(currentFragment == null) {
-            val fragment = Authorization.newInstance()
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.conteinerCats, fragment)
-                .commit()
-        }
-    }
-
-    override fun onCatSelected(url: String) {
-        val fragment = CatFragment.newInstance(url)
-        supportFragmentManager
-            .beginTransaction()
-            .add(R.id.conteinerCats,fragment)
-            .addToBackStack(null)
-            .commit()
-    }*/
     }
 }

@@ -8,6 +8,7 @@ import com.example.appwithcats.app.interseptor.App
 import com.example.appwithcats.domain.Model
 import com.example.appwithcats.domain.MyRepository
 import com.example.appwithcats.domain.PersonalData
+import com.example.appwithcats.domain.aaaaaaaa
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter
 import retrofit2.HttpException
@@ -15,7 +16,7 @@ import timber.log.Timber
 import java.io.IOException
 import javax.inject.Inject
 
-class AuthorizationViewModel (application: Application) : AndroidViewModel(application) {
+class ApiKeyViewModel (application: Application) : AndroidViewModel(application) {
     init {
         App.getInstance().appComponent.inject(this)
     }
@@ -26,15 +27,15 @@ class AuthorizationViewModel (application: Application) : AndroidViewModel(appli
     @Inject
     lateinit var sharedPreferenceRepository: SharedPreferenceRepository
 
-    private var _loginInLiveData = MutableLiveData<Model>()
-    val loginInLiveData: LiveData<Model>
-        get() = _loginInLiveData
+    private var _apiKeyLiveData = MutableLiveData<Model>()
+    val apiKeyLiveData: LiveData<Model>
+        get() = _apiKeyLiveData
 
-    fun postRequest() {
-        val user = PersonalData(sharedPreferenceRepository.email, sharedPreferenceRepository.description)
-        myRepository.postLoginIn(user)
+   /* fun postRequest() {
+        val user = aaaaaaaa(sharedPreferenceRepository.apikey)
+        myRepository.postApiKeyIn(user)
             .subscribe({
-                _loginInLiveData.value = it
+                _apiKeyLiveData.value = it
             }, {
                 if (it is HttpException) {
                     val body = it.response()?.errorBody()
@@ -44,17 +45,15 @@ class AuthorizationViewModel (application: Application) : AndroidViewModel(appli
                     try {
                         val error: Model =
                             adapter.fromJson(body?.string())
-                        _loginInLiveData.value = error
+                        _apiKeyLiveData.value = error
                     } catch (e: IOException) {
                         Timber.d(e.toString())
                     }
                 }
-            })
+            })*//*
     }
-    fun updateEmail(email: String) {
+    fun updateApiKey(email: String) {
         sharedPreferenceRepository.email = email
-    }
-    fun updateDescription(description: String) {
-        sharedPreferenceRepository.description = description
-    }
+    }*/
+
 }

@@ -52,8 +52,7 @@ class Authorization : Fragment() {
             val action = AuthorizationDirections.actionAuthorizationToKeyApi()
             loginViewModel.loginInLiveData.observe(viewLifecycleOwner) {
                 if (it.status == 400) showErrorWindow(it.message)
-                else
-                    Navigation.findNavController(view).navigate(action)
+                else Navigation.findNavController(view).navigate(action)
             }
             loginViewModel.updateEmail(email.text.toString())
             loginViewModel.updateDescription(description.text.toString())
