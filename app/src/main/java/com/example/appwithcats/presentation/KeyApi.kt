@@ -17,7 +17,7 @@ import com.google.android.material.textfield.TextInputEditText
 
 class KeyApi : Fragment() {
     private lateinit var loginButton1: Button
-    private lateinit var keyApi: TextInputEditText
+    private lateinit var apiKey: TextInputEditText
 
     private val apiKeyViewModel: ApiKeyViewModel by viewModels()
     private fun showErrorWindow(message: String) {
@@ -35,16 +35,23 @@ class KeyApi : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         loginButton1 = view!!.findViewById(R.id.loginButton1)
         loginButton1.isEnabled = false
-        keyApi = view!!.findViewById(R.id.keyApi)
-        val textWatcher1 = CustomTextWatcherApiKey(keyApi, loginButton1)
-        keyApi.addTextChangedListener(textWatcher1)
+        apiKey = view!!.findViewById(R.id.keyApi)
+        val textWatcher1 = CustomTextWatcherApiKey(apiKey, loginButton1)
+        apiKey.addTextChangedListener(textWatcher1)
 
 
         loginButton1.setOnClickListener {
+
             val action = KeyApiDirections.actionKeyApiToCatsFragment()
-            Navigation.findNavController(view).navigate(action)
+            apiKeyViewModel.apiKeyLiveData.observe(viewLifecycleOwner) {
+                if (it.status == 401) showErrorWindow(it.message)
+                else Navigation.findNavController(view).navigate(action)
+
             }
+            apiKeyViewModel.updateApiKey(apiKey.text.toString())
+            apiKeyViewModel.postRequest()
         }
+    }
 
 
     override fun onCreateView(

@@ -6,6 +6,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import org.jetbrains.annotations.NotNull
 
 
 class MyRepository (private val api: Api) {
@@ -33,6 +34,12 @@ class MyRepository (private val api: Api) {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
+    fun getApiKey(apiKey: String): @NotNull Observable<Model> {
+        return api.getApiKey(apiKey)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
    /* fun postApiKeyIn(user:aaaaaaaa): Observable<Model> {
         return api.getApiKey(user)
             .subscribeOn(Schedulers.io())

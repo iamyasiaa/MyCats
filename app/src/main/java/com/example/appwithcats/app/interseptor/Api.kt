@@ -22,6 +22,6 @@ interface Api {
         @GET("favourites")
         fun getApiKey(
          @Query("api_key") apiKey: String,
-): Observable<List<Model>>
+): Observable<Model>
 }
 

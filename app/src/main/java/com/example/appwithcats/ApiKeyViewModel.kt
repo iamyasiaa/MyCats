@@ -8,7 +8,6 @@ import com.example.appwithcats.app.interseptor.App
 import com.example.appwithcats.domain.Model
 import com.example.appwithcats.domain.MyRepository
 import com.example.appwithcats.domain.PersonalData
-import com.example.appwithcats.domain.aaaaaaaa
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter
 import retrofit2.HttpException
@@ -31,9 +30,8 @@ class ApiKeyViewModel (application: Application) : AndroidViewModel(application)
     val apiKeyLiveData: LiveData<Model>
         get() = _apiKeyLiveData
 
-   /* fun postRequest() {
-        val user = aaaaaaaa(sharedPreferenceRepository.apikey)
-        myRepository.postApiKeyIn(user)
+    fun postRequest() {
+        myRepository.getApiKey(sharedPreferenceRepository.apikey)
             .subscribe({
                 _apiKeyLiveData.value = it
             }, {
@@ -50,10 +48,11 @@ class ApiKeyViewModel (application: Application) : AndroidViewModel(application)
                         Timber.d(e.toString())
                     }
                 }
-            })*//*
+            })
     }
-    fun updateApiKey(email: String) {
-        sharedPreferenceRepository.email = email
-    }*/
+    fun updateApiKey(apiKey: String) {
+        sharedPreferenceRepository.apikey = apiKey
+    }
+
 
 }
