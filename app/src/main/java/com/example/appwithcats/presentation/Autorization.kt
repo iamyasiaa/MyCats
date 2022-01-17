@@ -14,6 +14,7 @@ import android.widget.Toast
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 import android.app.Activity
+import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.example.appwithcats.AuthorizationViewModel
@@ -57,29 +58,29 @@ class Authorization : Fragment() {
             val action = AuthorizationDirections.actionAuthorizationToKeyApi()
             val action1 = AuthorizationDirections.actionAuthorizationToCatsFragment()
             loginViewModel.loginInLiveData.observe(viewLifecycleOwner) {
-                if (it.status == 400) {
+                if (it.status == 400 && email.text.toString() == sharedPreferenceRepository.email) {
+                    Navigation.findNavController(view).navigate(action1)
+                } else if (it.status == 400 ) {
                     showErrorWindow(it.message)
-                  if(email.text.toString() == sharedPreferenceRepository.email)
-                  Navigation.findNavController(view).navigate(action1)
-                }
-                else if (it.status == 200)Navigation.findNavController(view).navigate(action)
+
+                } else Navigation.findNavController(view).navigate(action)
             }
-
-
             loginViewModel.updateEmail(email.text.toString())
             loginViewModel.updateDescription(description.text.toString())
             loginViewModel.postRequest()
         }
     }
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val view = inflater.inflate(R.layout.fragment_autorization, container, false)
-        return view
+
+        override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+        ): View {
+            val view = inflater.inflate(R.layout.fragment_autorization, container, false)
+            return view
+        }
+
+
     }
 
-
-}
 
