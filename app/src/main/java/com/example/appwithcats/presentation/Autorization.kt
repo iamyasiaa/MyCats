@@ -17,13 +17,17 @@ import android.app.Activity
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.example.appwithcats.AuthorizationViewModel
+import com.example.appwithcats.SharedPreferenceRepository
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import javax.inject.Inject
 
 
 class Authorization : Fragment() {
     private lateinit var loginButton: Button
     private lateinit var email: TextInputEditText
     private lateinit var description: TextInputEditText
+
+
 
     private val loginViewModel: AuthorizationViewModel by viewModels()
     private fun showErrorWindow(message: String) {
@@ -39,6 +43,7 @@ class Authorization : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val sharedPreferenceRepository = SharedPreferenceRepository(context!!)
         loginButton = view!!.findViewById(R.id.loginButton)
         loginButton.isEnabled = false
         email = view!!.findViewById(R.id.email)
@@ -50,10 +55,17 @@ class Authorization : Fragment() {
 
         loginButton.setOnClickListener {
             val action = AuthorizationDirections.actionAuthorizationToKeyApi()
+            val action1 = AuthorizationDirections.actionAuthorizationToCatsFragment()
             loginViewModel.loginInLiveData.observe(viewLifecycleOwner) {
-                if (it.status == 400) showErrorWindow(it.message)
-                else Navigation.findNavController(view).navigate(action)
+                if (it.status == 400) {
+                    showErrorWindow(it.message)
+                  if(email.text.toString() == sharedPreferenceRepository.email)
+                  Navigation.findNavController(view).navigate(action1)
+                }
+                else if (it.status == 200)Navigation.findNavController(view).navigate(action)
             }
+
+
             loginViewModel.updateEmail(email.text.toString())
             loginViewModel.updateDescription(description.text.toString())
             loginViewModel.postRequest()

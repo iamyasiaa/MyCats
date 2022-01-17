@@ -1,6 +1,7 @@
 package com.example.appwithcats.presentation
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -43,14 +44,17 @@ class KeyApi : Fragment() {
         loginButton1.setOnClickListener {
 
             val action = KeyApiDirections.actionKeyApiToCatsFragment()
-            apiKeyViewModel.apiKeyLiveData.observe(viewLifecycleOwner) {
-                if (it.status == 401) showErrorWindow(it.message)
-                else Navigation.findNavController(view).navigate(action)
-
-            }
             apiKeyViewModel.updateApiKey(apiKey.text.toString())
-            apiKeyViewModel.postRequest()
+            apiKeyViewModel.errorApiKeyData.observe(viewLifecycleOwner) {
+                if (it.status == 401) {
+                    showErrorWindow(it.message)
+                }
+            }
+            apiKeyViewModel.apiKeyLiveData.observe(viewLifecycleOwner) {
+                Navigation.findNavController(view).navigate(action)
+            }
         }
+        apiKeyViewModel.getApiKey()
     }
 
 
@@ -64,3 +68,4 @@ class KeyApi : Fragment() {
         return view
     }
 }
+

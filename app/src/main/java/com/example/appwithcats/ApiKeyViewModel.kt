@@ -7,11 +7,9 @@ import androidx.lifecycle.MutableLiveData
 import com.example.appwithcats.app.interseptor.App
 import com.example.appwithcats.domain.Model
 import com.example.appwithcats.domain.MyRepository
-import com.example.appwithcats.domain.PersonalData
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter
 import retrofit2.HttpException
-import timber.log.Timber
 import java.io.IOException
 import javax.inject.Inject
 
@@ -26,15 +24,20 @@ class ApiKeyViewModel (application: Application) : AndroidViewModel(application)
     @Inject
     lateinit var sharedPreferenceRepository: SharedPreferenceRepository
 
-    private var _apiKeyLiveData = MutableLiveData<Model>()
-    val apiKeyLiveData: LiveData<Model>
+    private var _apiKeyLiveData = MutableLiveData<Boolean>()
+    val apiKeyLiveData: LiveData<Boolean>
         get() = _apiKeyLiveData
 
-    fun postRequest() {
+    private var _errorApiKeyData = MutableLiveData<Model>()
+    val errorApiKeyData: LiveData<Model>
+        get() = _errorApiKeyData
+
+    fun getApiKey() {
         myRepository.getApiKey(sharedPreferenceRepository.apikey)
             .subscribe({
-                _apiKeyLiveData.value = it
+                _apiKeyLiveData.postValue(true)
             }, {
+                _apiKeyLiveData.postValue(false)
                 if (it is HttpException) {
                     val body = it.response()?.errorBody()
                     val gson = Gson()
@@ -43,9 +46,8 @@ class ApiKeyViewModel (application: Application) : AndroidViewModel(application)
                     try {
                         val error: Model =
                             adapter.fromJson(body?.string())
-                        _apiKeyLiveData.value = error
+                        _errorApiKeyData.value = error
                     } catch (e: IOException) {
-                        Timber.d(e.toString())
                     }
                 }
             })
