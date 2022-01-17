@@ -47,7 +47,7 @@ class KeyApi : Fragment() {
             apiKeyViewModel.updateApiKey(apiKey.text.toString())
             apiKeyViewModel.errorApiKeyData.observe(viewLifecycleOwner) {
                 if (it.status == 401) {
-                    /*showErrorWindow(it.message)*/
+                    showErrorWindow(it.message)
                 }
             }
             apiKeyViewModel.apiKeyLiveData.observe(viewLifecycleOwner) {

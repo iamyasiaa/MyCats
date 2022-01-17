@@ -57,17 +57,21 @@ class Authorization : Fragment() {
         loginButton.setOnClickListener {
             val action = AuthorizationDirections.actionAuthorizationToKeyApi()
             val action1 = AuthorizationDirections.actionAuthorizationToCatsFragment()
-            loginViewModel.loginInLiveData.observe(viewLifecycleOwner) {
-                if (it.status == 400 && email.text.toString() == sharedPreferenceRepository.email) {
-                    Navigation.findNavController(view).navigate(action1)
-                } else if (it.status == 400 ) {
-                    showErrorWindow(it.message)
 
-                } else Navigation.findNavController(view).navigate(action)
+            if(email.text.toString() == sharedPreferenceRepository.email){
+                Navigation.findNavController(view).navigate(action1)
+            }else{
+                loginViewModel.loginInLiveData.observe(viewLifecycleOwner) {
+                    if (it.status == 400 ) {
+                        showErrorWindow(it.message)
+                    } else {
+                        Navigation.findNavController(view).navigate(action)
+                    }
+                }
+                loginViewModel.updateEmail(email.text.toString())
+                loginViewModel.updateDescription(description.text.toString())
+                loginViewModel.postRequest()
             }
-            loginViewModel.updateEmail(email.text.toString())
-            loginViewModel.updateDescription(description.text.toString())
-            loginViewModel.postRequest()
         }
     }
 
