@@ -50,11 +50,12 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/keyApi"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:layout_marginStart="66dp"
+            android:layout_width="378dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="66dp"
+            android:fontFamily="@font/shrift"
             android:background="@drawable/edit_text"
             android:hint="Api Key" />
 
@@ -63,12 +64,14 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/loginButton1"
-        android:layout_width="314dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginEnd="52dp"
-        android:layout_marginBottom="168dp"
+        android:layout_width="383dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="136dp"
+        android:fontFamily="@font/shrift"
         android:text="Next"
+        android:textColor="#433A3A"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

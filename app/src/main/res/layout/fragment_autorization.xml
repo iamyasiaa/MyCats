@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/Autorization"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -27,15 +26,15 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="125dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginTop="145dp"
+        android:layout_marginBottom="31dp"
         android:fontFamily="@font/shrift"
         android:gravity="center_horizontal"
         android:text="Welcome to the AppWithCats \n Let's Start!"
         android:textColor="#E6A1BD"
         app:layout_constraintBottom_toTopOf="@+id/emailContainer"
-        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
@@ -56,8 +55,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:hint="Email"
-        app:counterEnabled="true"
-        app:counterMaxLength="30"
         app:errorEnabled="true"
         app:layout_constraintBottom_toTopOf="@+id/descriptionContainer"
         app:layout_constraintEnd_toEndOf="parent"
@@ -67,12 +64,13 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:layout_marginStart="66dp"
+            android:layout_width="378dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="66dp"
             android:background="@drawable/edit_text"
+            android:fontFamily="@font/shrift"
 
             android:inputType="textWebEmailAddress|textEmailAddress" />
 
@@ -84,12 +82,10 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="340dp"
+        android:layout_marginBottom="106dp"
         android:hint="For what?"
-        app:counterEnabled="true"
-        app:counterMaxLength="100"
         app:errorEnabled="true"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/loginButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailContainer">
@@ -97,11 +93,12 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/description"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:layout_marginStart="66dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="66dp"
+            android:layout_width="378dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/shrift"
             android:background="@drawable/edit_text" />
 
 
@@ -109,12 +106,15 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/loginButton"
-        android:layout_width="0dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginEnd="52dp"
+        android:layout_width="383dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="136dp"
+        android:fontFamily="@font/shrift"
         android:text="Login"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        android:textColor="#453C3C"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descriptionContainer" />
