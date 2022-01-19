@@ -5,7 +5,7 @@
     android:id="@+id/KeyApi"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.KeyApi">
+    tools:context=".ui.KeyApi">
 
     <ImageView
         android:id="@+id/imageView"
