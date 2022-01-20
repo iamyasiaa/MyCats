@@ -31,9 +31,9 @@ class KeyApi : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loginButton1 = view!!.findViewById(R.id.loginButton1)
+        loginButton1 = view.findViewById(R.id.loginButton1)
         loginButton1.isEnabled = false
-        apiKey = view!!.findViewById(R.id.apiKey)
+        apiKey = view.findViewById(R.id.apiKey)
         val textWatcher1 = CustomTextWatcherApiKey(apiKey, loginButton1)
         apiKey.addTextChangedListener(textWatcher1)
 

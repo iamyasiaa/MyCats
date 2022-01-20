@@ -2,9 +2,9 @@ package com.example.appwithcats
 
 import android.app.Application
 import android.util.Log
-import com.example.appwithcats.app.interseptor.DaggerAppComponent
 import com.example.appwithcats.app.interseptor.modules.Module
 import com.example.appwithcats.dagger.AppComponent
+import com.example.appwithcats.dagger.DaggerAppComponent
 import com.example.appwithcats.repository.SharedPreferenceRepository
 
 class App : Application(){

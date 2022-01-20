@@ -20,7 +20,6 @@ class Authorization : Fragment() {
     private lateinit var description: TextInputEditText
 
 
-
     private val authorizationViewModel: AuthorizationViewModel by viewModels()
     private fun showErrorWindow(message: String) {
         context?.let {
@@ -35,47 +34,46 @@ class Authorization : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loginButton = view!!.findViewById(R.id.loginButton)
+        loginButton = view.findViewById(R.id.loginButton)
         loginButton.isEnabled = false
-        email = view!!.findViewById(R.id.email)
-        description = view!!.findViewById(R.id.description)
+        email = view.findViewById(R.id.email)
+        description = view.findViewById(R.id.description)
         val edList = arrayOf(email, description)
         val textWatcher = CustomTextWatcher(edList = edList, loginButton)
         for (editText in edList) editText.addTextChangedListener(textWatcher)
-
+        val action1 = AuthorizationDirections.actionAuthorizationToCatsFragment()
+        if (authorizationViewModel.sharedPreferenceRepository.email != "") {
+            Navigation.findNavController(view).navigate(action1)
+        }
 
         loginButton.setOnClickListener {
             val action = AuthorizationDirections.actionAuthorizationToKeyApi()
-            val action1 = AuthorizationDirections.actionAuthorizationToCatsFragment()
-            if(authorizationViewModel.sharedPreferenceRepository.email != ""){
-                Navigation.findNavController(view).navigate(action1)
-            }
-                Navigation.findNavController(view).navigate(action1)
-
-                authorizationViewModel.loginInLiveData.observe(viewLifecycleOwner) {
-                    if (it.status == 400 ) {
-                        showErrorWindow(it.message)
-                    } else {
-                        Navigation.findNavController(view).navigate(action)
-                    }
+            authorizationViewModel.loginInLiveData.observe(viewLifecycleOwner) {
+                if (it.status == 400) {
+                    showErrorWindow(it.message)
+                    authorizationViewModel.updateEmail("")
+                    authorizationViewModel.updateDescription("")
+                } else {
+                    Navigation.findNavController(view).navigate(action)
                 }
-                authorizationViewModel.updateEmail(email.text.toString())
-                authorizationViewModel.updateDescription(description.text.toString())
-                authorizationViewModel.postRequest()
-
             }
+            authorizationViewModel.updateEmail(email.text.toString())
+            authorizationViewModel.updateDescription(description.text.toString())
+            authorizationViewModel.postRequest()
+
         }
-
-        override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-        ): View {
-            val view = inflater.inflate(R.layout.fragment_autorization, container, false)
-            return view
-        }
-
-
     }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        val view = inflater.inflate(R.layout.fragment_autorization, container, false)
+        return view
+    }
+
+
+}
 
 
