@@ -5,7 +5,7 @@
     android:id="@+id/loginFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.authorization.Authorization">
+    tools:context=".ui.authorization.AuthorizationFragment">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/app_header"

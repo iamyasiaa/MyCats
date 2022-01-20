@@ -30,17 +30,11 @@ class CatsFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_cats, container, false)
 
-        mainViewModel.randomImage.observe(viewLifecycleOwner, { cats ->
-            Log.e("CatFragment", "cats" + cats[0].id)
-        })
-
         recyclerView = view.findViewById(R.id.recyclerCats) as RecyclerView
         recyclerView?.layoutManager = LinearLayoutManager(context)
         recyclerView?.adapter = adapter
         if (isShow) {
             mainViewModel.randomImage.observe(viewLifecycleOwner, { cats ->
-                Log.e("CatFragment", "cats " + cats[0].url)
-
                 adapter = context?.let { RecyclerAdapter(it, cats) }
                 adapter?.notifyDataSetChanged()
                 recyclerView!!.adapter = adapter

@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
-    android:background="#E6A1BD"
-    app:cardBackgroundColor="#E6A1BD">
+    android:background="@color/white"
+    app:cardBackgroundColor="@color/white">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="#E6A1BD"
-        android:backgroundTint="#E6A1BD">
+        android:background="@color/white"
+        android:backgroundTint="@color/white">
 
         <ImageView
             android:id="@+id/image"

@@ -13,22 +13,21 @@ import com.example.appwithcats.R
 import com.example.appwithcats.ui.cats.CatsFragmentDirections
 
 
-class RecyclerAdapter (var context: Context, var catList: MutableList<CatModel>):
+class RecyclerAdapter (private var context: Context, private var catList: MutableList<CatModel>):
     RecyclerView.Adapter<RecyclerAdapter.CatHolder>() {
 
     inner class CatHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
         private lateinit var cat: CatModel
-        var imageCat: ImageView = itemView.findViewById(R.id.image)
+        private var imageCat: ImageView = itemView.findViewById(R.id.image)
 
 
         init {
-            imageCat.apply {
-                setOnClickListener {
+            imageCat.setOnClickListener {
                     val action = CatsFragmentDirections.actionCatsFragmentToCatFragment(urlCat = cat.url)
                     Navigation.findNavController(itemView).navigate(action)
                 }
-            }
+
         }
 
         fun bind(cat: CatModel) {
