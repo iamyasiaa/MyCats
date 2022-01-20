@@ -1,4 +1,4 @@
-package com.example.appwithcats.ui
+package com.example.appwithcats.ui.authorization
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -7,8 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import com.example.appwithcats.App
 import com.example.appwithcats.repository.MyRepository
 import com.example.appwithcats.repository.SharedPreferenceRepository
-import com.example.appwithcats.model.Model
 import com.example.appwithcats.model.PersonalData
+import com.example.appwithcats.model.UserModel
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter
 import retrofit2.HttpException
@@ -27,8 +27,8 @@ class AuthorizationViewModel (application: Application) : AndroidViewModel(appli
     @Inject
     lateinit var sharedPreferenceRepository: SharedPreferenceRepository
 
-    private var _loginInLiveData = MutableLiveData<Model>()
-    val loginInLiveData: LiveData<Model>
+    private var _loginInLiveData = MutableLiveData<UserModel>()
+    val loginInLiveData: LiveData<UserModel>
         get() = _loginInLiveData
 
     fun postRequest() {
@@ -40,10 +40,10 @@ class AuthorizationViewModel (application: Application) : AndroidViewModel(appli
                 if (it is HttpException) {
                     val body = it.response()?.errorBody()
                     val gson = Gson()
-                    val adapter: TypeAdapter<Model> =
-                        gson.getAdapter(Model::class.java)
+                    val adapter: TypeAdapter<UserModel> =
+                        gson.getAdapter(UserModel::class.java)
                     try {
-                        val error: Model =
+                        val error: UserModel =
                             adapter.fromJson(body?.string())
                         _loginInLiveData.value = error
                     } catch (e: IOException) {
@@ -57,5 +57,11 @@ class AuthorizationViewModel (application: Application) : AndroidViewModel(appli
     }
     fun updateDescription(description: String) {
         sharedPreferenceRepository.description = description
+    }
+    fun checkOnError(){
+        if (loginInLiveData.value?.status == 400 ) {
+
+
+        }
     }
 }

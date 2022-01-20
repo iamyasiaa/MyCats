@@ -1,4 +1,4 @@
-package com.example.appwithcats.ui
+package com.example.appwithcats.ui.authorization
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,7 +11,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.example.appwithcats.textwatcher.CustomTextWatcher
 import com.example.appwithcats.R
-import com.example.appwithcats.repository.SharedPreferenceRepository
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 
@@ -22,11 +21,11 @@ class Authorization : Fragment() {
 
 
 
-    private val loginViewModel: AuthorizationViewModel by viewModels()
+    private val authorizationViewModel: AuthorizationViewModel by viewModels()
     private fun showErrorWindow(message: String) {
         context?.let {
             MaterialAlertDialogBuilder(it)
-                .setTitle("Ошибка")
+                .setTitle(getString(R.string.Error))
                 .setMessage(message)
                 .setPositiveButton("ОК") { dialog, _ -> dialog.dismiss() }
                 .show()
@@ -36,7 +35,6 @@ class Authorization : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val sharedPreferenceRepository = SharedPreferenceRepository(context!!)
         loginButton = view!!.findViewById(R.id.loginButton)
         loginButton.isEnabled = false
         email = view!!.findViewById(R.id.email)
@@ -49,26 +47,24 @@ class Authorization : Fragment() {
         loginButton.setOnClickListener {
             val action = AuthorizationDirections.actionAuthorizationToKeyApi()
             val action1 = AuthorizationDirections.actionAuthorizationToCatsFragment()
-
-            if(email.text.toString() == sharedPreferenceRepository.email && sharedPreferenceRepository.apikey != ""){
+            if(authorizationViewModel.sharedPreferenceRepository.email != ""){
                 Navigation.findNavController(view).navigate(action1)
-            }else{
-                loginViewModel.loginInLiveData.observe(viewLifecycleOwner) {
+            }
+                Navigation.findNavController(view).navigate(action1)
+
+                authorizationViewModel.loginInLiveData.observe(viewLifecycleOwner) {
                     if (it.status == 400 ) {
                         showErrorWindow(it.message)
-                        loginViewModel.updateEmail("")
-                        loginViewModel.updateDescription("")
                     } else {
                         Navigation.findNavController(view).navigate(action)
                     }
                 }
-                loginViewModel.updateEmail(email.text.toString())
-                loginViewModel.updateDescription(description.text.toString())
-                loginViewModel.postRequest()
+                authorizationViewModel.updateEmail(email.text.toString())
+                authorizationViewModel.updateDescription(description.text.toString())
+                authorizationViewModel.postRequest()
 
             }
         }
-    }
 
         override fun onCreateView(
             inflater: LayoutInflater,

@@ -1,6 +1,6 @@
 package com.example.appwithcats.interseptor
 
-import com.example.appwithcats.ui.KeyApi
+import com.example.appwithcats.ui.apiKey.KeyApi
 import okhttp3.Interceptor
 import okhttp3.Response
 

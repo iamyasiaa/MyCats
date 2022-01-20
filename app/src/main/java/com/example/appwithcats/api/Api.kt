@@ -1,8 +1,8 @@
 package com.example.appwithcats.api
 
 import com.example.appwithcats.model.CatModel
-import com.example.appwithcats.model.Model
 import com.example.appwithcats.model.PersonalData
+import com.example.appwithcats.model.UserModel
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -16,11 +16,11 @@ interface Api {
         ): Observable<MutableList<CatModel>>
 
         @POST("user/passwordlesssignup")
-        fun loginUser(@Body body: PersonalData): Observable<Model>
+        fun loginUser(@Body body: PersonalData): Observable<UserModel>
 
         @GET("favourites")
         fun getApiKey(
          @Query("api_key") apiKey: String,
-): Observable<Model>
+): Observable<UserModel>
 }
 

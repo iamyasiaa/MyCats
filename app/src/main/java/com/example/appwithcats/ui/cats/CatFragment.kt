@@ -1,4 +1,4 @@
-package com.example.appwithcats.ui
+package com.example.appwithcats.ui.cats
 
 import android.os.Bundle
 import android.view.*

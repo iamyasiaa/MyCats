@@ -1,4 +1,4 @@
-package com.example.appwithcats.ui
+package com.example.appwithcats.ui.apiKey
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -21,7 +21,7 @@ class KeyApi : Fragment() {
     private fun showErrorWindow(message: String) {
         context?.let {
             MaterialAlertDialogBuilder(it)
-                .setTitle("Ошибка")
+                .setTitle(getString(R.string.Error))
                 .setMessage(message)
                 .setPositiveButton("ОК") { dialog, _ -> dialog.dismiss() }
                 .show()
@@ -33,7 +33,7 @@ class KeyApi : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         loginButton1 = view!!.findViewById(R.id.loginButton1)
         loginButton1.isEnabled = false
-        apiKey = view!!.findViewById(R.id.keyApi)
+        apiKey = view!!.findViewById(R.id.apiKey)
         val textWatcher1 = CustomTextWatcherApiKey(apiKey, loginButton1)
         apiKey.addTextChangedListener(textWatcher1)
 

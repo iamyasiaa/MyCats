@@ -9,8 +9,8 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.appwithcats.model.CatModel
-import com.example.appwithcats.CatsFragmentDirections
 import com.example.appwithcats.R
+import com.example.appwithcats.ui.CatsFragmentDirections
 
 
 class RecyclerAdapter (var context: Context, var catList: MutableList<CatModel>):

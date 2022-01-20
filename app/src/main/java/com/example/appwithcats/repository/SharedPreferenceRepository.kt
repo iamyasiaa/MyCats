@@ -1,10 +1,11 @@
 package com.example.appwithcats.repository
 
 import android.content.Context
-import com.example.appwithcats.SerPref
+import com.example.appwithcats.inresfaces.ISharPref
 
 
-class SharedPreferenceRepository (context: Context) : SerPref {
+
+class SharedPreferenceRepository (context: Context) : ISharPref {
 
     companion object {
         private const val EMAIL = "e-mail"

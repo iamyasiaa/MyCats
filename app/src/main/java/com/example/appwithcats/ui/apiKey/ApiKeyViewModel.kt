@@ -1,4 +1,4 @@
-package com.example.appwithcats.ui
+package com.example.appwithcats.ui.apiKey
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.appwithcats.App
 import com.example.appwithcats.repository.MyRepository
 import com.example.appwithcats.repository.SharedPreferenceRepository
-import com.example.appwithcats.model.Model
+import com.example.appwithcats.model.UserModel
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter
 import retrofit2.HttpException
@@ -29,8 +29,8 @@ class ApiKeyViewModel (application: Application) : AndroidViewModel(application)
     val apiKeyLiveData: LiveData<Boolean>
         get() = _apiKeyLiveData
 
-    private var _errorApiKeyData = MutableLiveData<Model>()
-    val errorApiKeyData: LiveData<Model>
+    private var _errorApiKeyData = MutableLiveData<UserModel>()
+    val errorApiKeyData: LiveData<UserModel>
         get() = _errorApiKeyData
 
     fun getApiKey() {
@@ -42,10 +42,10 @@ class ApiKeyViewModel (application: Application) : AndroidViewModel(application)
                 if (it is HttpException) {
                     val body = it.response()?.errorBody()
                     val gson = Gson()
-                    val adapter: TypeAdapter<Model> =
-                        gson.getAdapter(Model::class.java)
+                    val adapter: TypeAdapter<UserModel> =
+                        gson.getAdapter(UserModel::class.java)
                     try {
-                        val error: Model =
+                        val error: UserModel =
                             adapter.fromJson(body?.string())
                         _errorApiKeyData.value = error
                     } catch (e: IOException) {

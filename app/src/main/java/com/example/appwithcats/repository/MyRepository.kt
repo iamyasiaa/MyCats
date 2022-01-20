@@ -3,8 +3,8 @@ package com.example.appwithcats.repository
 import androidx.lifecycle.MutableLiveData
 import com.example.appwithcats.api.Api
 import com.example.appwithcats.model.CatModel
-import com.example.appwithcats.model.Model
 import com.example.appwithcats.model.PersonalData
+import com.example.appwithcats.model.UserModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -32,12 +32,12 @@ class MyRepository (private val api: Api) {
                 }
             return data
         }
-    fun postLoginIn(user: PersonalData): Observable<Model> {
+    fun postLoginIn(user: PersonalData): Observable<UserModel> {
         return api.loginUser(user)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
-    fun getApiKey(apiKey: String): @NotNull Observable<Model> {
+    fun getApiKey(apiKey: String): @NotNull Observable<UserModel> {
         return api.getApiKey(apiKey)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

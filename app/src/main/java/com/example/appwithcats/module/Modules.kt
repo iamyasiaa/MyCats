@@ -6,7 +6,7 @@ import com.example.appwithcats.repository.SharedPreferenceRepository
 import com.example.appwithcats.api.Api
 import com.example.appwithcats.interseptor.KeyInterseptor
 import com.example.appwithcats.repository.MyRepository
-import com.example.appwithcats.ui.KeyApi
+import com.example.appwithcats.ui.apiKey.KeyApi
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module

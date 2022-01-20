@@ -1,11 +1,11 @@
-package com.example.appwithcats
+package com.example.appwithcats.dagger
 
 import com.example.appwithcats.app.interseptor.modules.Module
 import com.example.appwithcats.repository.MyRepository
 import com.example.appwithcats.repository.SharedPreferenceRepository
-import com.example.appwithcats.ui.ApiKeyViewModel
-import com.example.appwithcats.ui.AuthorizationViewModel
-import com.example.appwithcats.ui.MainViewModel
+import com.example.appwithcats.ui.apiKey.ApiKeyViewModel
+import com.example.appwithcats.ui.authorization.AuthorizationViewModel
+import com.example.appwithcats.ui.cats.MainViewModel
 import dagger.Component
 import javax.inject.Singleton
 

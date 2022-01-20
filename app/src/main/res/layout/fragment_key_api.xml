@@ -2,80 +2,63 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/KeyApi"
+    android:id="@+id/apiKeyFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.KeyApi">
+    tools:context=".ui.apiKey.KeyApi">
 
-    <ImageView
-        android:id="@+id/imageView"
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/app_header"
         android:layout_width="0dp"
-        android:layout_height="592dp"
-        android:layout_gravity="bottom"
-        android:background="@drawable/api_key"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="65dp"
-        android:layout_marginTop="175dp"
-        android:layout_marginEnd="65dp"
-        android:layout_marginBottom="73dp"
-        android:fontFamily="@font/shrift"
-        android:gravity="center_horizontal"
-        android:text="Please, enter your api key!"
-        android:textColor="#E6A1BD"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/ApiKeyContainer"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="108dp"
+        android:gravity="center"
+        android:text="@string/app_name"
+        android:textColor="@color/green_700"
+        android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/ApiKeyContainer"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/apikey_edit_text"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="92dp"
-        app:endIconMode="clear_text"
-        app:layout_constraintBottom_toTopOf="@+id/loginButton1"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="109dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="8dp"
+        android:hint="@string/api_key"
+        app:boxStrokeColor="@color/green_500"
+        app:hintTextColor="@color/green_500"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
-
+        app:layout_constraintTop_toBottomOf="@id/app_header"
+        app:layout_constraintVertical_chainStyle="packed">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/keyApi"
-            android:layout_width="378dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="66dp"
-            android:fontFamily="@font/shrift"
-            android:background="@drawable/edit_text"
-            android:hint="Api Key" />
-
+            android:id="@+id/apiKey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/loginButton1"
-        android:layout_width="383dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="136dp"
-        android:fontFamily="@font/shrift"
-        android:text="Next"
-        android:textColor="#433A3A"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="39dp"
+        android:text="@string/next_button"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:icon="@drawable/ic_arrow"
+        app:iconGravity="end"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ApiKeyContainer" />
-
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
