@@ -15,6 +15,7 @@ class App : Application(){
         app = this
         val sharedPreferenceRepository = SharedPreferenceRepository(applicationContext)
 
+
         appComponent = DaggerAppComponent.builder()
             .module(Module(getString(R.string.BaseUrl), sharedPreferenceRepository.apikey ,this))
             .build()

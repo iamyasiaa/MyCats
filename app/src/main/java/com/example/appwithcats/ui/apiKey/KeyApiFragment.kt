@@ -14,7 +14,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 
 class KeyApiFragment : Fragment() {
-    private lateinit var loginButton1: Button
+    private lateinit var keyButton: Button
     private lateinit var apiKey: TextInputEditText
 
     private val apiKeyViewModel: ApiKeyViewModel by viewModels()
@@ -31,29 +31,24 @@ class KeyApiFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loginButton1 = view.findViewById(R.id.loginButton1)
-        loginButton1.isEnabled = false
+        keyButton = view.findViewById(R.id.loginButton1)
+        keyButton.isEnabled = false
         apiKey = view.findViewById(R.id.apiKey)
-        val textWatcher1 = CustomTextWatcherApiKey(apiKey, loginButton1)
+        val textWatcher1 = CustomTextWatcherApiKey(apiKey, keyButton)
         apiKey.addTextChangedListener(textWatcher1)
 
-
-        loginButton1.setOnClickListener {
-            checkOnError()
-        }
-        apiKeyViewModel.getApiKey()
-    }
-
-    private fun checkOnError() {
-        val action = KeyApiFragmentDirections.actionKeyApiToCatsFragment()
-        apiKeyViewModel.updateApiKey(apiKey.text.toString())
         apiKeyViewModel.errorApiKeyData.observe(viewLifecycleOwner) {
+            val action = KeyApiFragmentDirections.actionKeyApiToCatsFragment()
             if (apiKeyViewModel.checkOnStatus()) {
                 showErrorWindow(it.message)
-            } else {
-                apiKeyViewModel.apiKeyLiveData.observe(viewLifecycleOwner) {
-                    Navigation.findNavController(view!!).navigate(action)
-                }
+            } else Navigation.findNavController(view!!).navigate(action)
+
+        }
+
+        keyButton.setOnClickListener {
+            apiKeyViewModel.apply {
+                updateApiKey(apiKey.text.toString())
+                getApiKey()
             }
         }
 

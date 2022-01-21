@@ -65,7 +65,7 @@ class  Module (private val baseUrl: String, private val apiKey: String, private 
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
         okHttpClient.addInterceptor(interceptor)
-        okHttpClient.addInterceptor(KeyInterseptor(keyApi = KeyApiFragment()))
+        okHttpClient.addInterceptor(KeyInterseptor(apiKey))
         return okHttpClient.build()
     }
 

@@ -29,16 +29,14 @@ class CatsFragment : Fragment() {
 
         recyclerView = view.findViewById(R.id.recyclerCats) as RecyclerView
         recyclerView?.layoutManager = LinearLayoutManager(context)
+        recyclerView?.adapter = RecyclerAdapter(requireContext(), arrayListOf())
 
         if (isShow) {
             mainViewModel.randomImage.observe(viewLifecycleOwner, { cats ->
-                myAdapter = context?.let { RecyclerAdapter(it, cats) }
+                myAdapter?.catList = cats
                 myAdapter?.notifyDataSetChanged()
-                recyclerView?.adapter = myAdapter
             })
             isShow = false
-        } else {
-            recyclerView?.adapter = myAdapter
         }
     }
 

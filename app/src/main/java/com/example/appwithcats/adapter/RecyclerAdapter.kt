@@ -13,7 +13,7 @@ import com.example.appwithcats.R
 import com.example.appwithcats.ui.cats.CatsFragmentDirections
 
 
-class RecyclerAdapter (private var context: Context, private var catList: MutableList<CatModel>):
+class RecyclerAdapter (private var context: Context, var catList: MutableList<CatModel>):
     RecyclerView.Adapter<RecyclerAdapter.CatHolder>() {
 
     inner class CatHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
