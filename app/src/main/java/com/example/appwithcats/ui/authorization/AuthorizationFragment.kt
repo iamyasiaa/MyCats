@@ -47,20 +47,26 @@ class AuthorizationFragment : Fragment() {
         }
 
         loginButton.setOnClickListener {
-            val action = AuthorizationFragmentDirections.actionAuthorizationToKeyApi()
-            authorizationViewModel.loginInLiveData.observe(viewLifecycleOwner) {
-                if (it.status == 400) {
-                    showErrorWindow(it.message)
-                    authorizationViewModel.updateEmail("")
-                    authorizationViewModel.updateDescription("")
-                } else {
-                    Navigation.findNavController(view).navigate(action)
-                }
+            checkOnError()
+            authorizationViewModel.apply {
+                updateEmail(email.text.toString())
+                updateDescription(description.text.toString())
+                postRequest()
             }
-            authorizationViewModel.updateEmail(email.text.toString())
-            authorizationViewModel.updateDescription(description.text.toString())
-            authorizationViewModel.postRequest()
 
+        }
+    }
+
+    private fun checkOnError() {
+        val action = AuthorizationFragmentDirections.actionAuthorizationToKeyApi()
+        authorizationViewModel.loginInLiveData.observe(viewLifecycleOwner) {
+            if (authorizationViewModel.checkOnStatus()) {
+                showErrorWindow(it.message)
+                authorizationViewModel.updateEmail("")
+                authorizationViewModel.updateDescription("")
+            } else {
+                Navigation.findNavController(view!!).navigate(action)
+            }
         }
     }
 
@@ -69,8 +75,7 @@ class AuthorizationFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.fragment_autorization, container, false)
-        return view
+        return inflater.inflate(R.layout.fragment_autorization, container, false)
     }
 
 

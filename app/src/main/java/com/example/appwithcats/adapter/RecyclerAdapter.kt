@@ -21,13 +21,11 @@ class RecyclerAdapter (private var context: Context, private var catList: Mutabl
         private lateinit var cat: CatModel
         private var imageCat: ImageView = itemView.findViewById(R.id.image)
 
-
         init {
-            imageCat.setOnClickListener {
-                    val action = CatsFragmentDirections.actionCatsFragmentToCatFragment(urlCat = cat.url)
-                    Navigation.findNavController(itemView).navigate(action)
-                }
-
+           imageCat.setOnClickListener {
+                  val action = CatsFragmentDirections.actionCatsFragmentToCatFragment(urlCat = cat.url)
+                  Navigation.findNavController(itemView).navigate(action)
+               }
         }
 
         fun bind(cat: CatModel) {
@@ -35,6 +33,7 @@ class RecyclerAdapter (private var context: Context, private var catList: Mutabl
             val url = cat.url
             Glide.with(context).load(url).into(imageCat)
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatHolder {

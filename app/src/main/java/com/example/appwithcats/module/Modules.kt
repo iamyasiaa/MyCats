@@ -5,7 +5,7 @@ import android.content.Context
 import com.example.appwithcats.repository.SharedPreferenceRepository
 import com.example.appwithcats.api.Api
 import com.example.appwithcats.interseptor.KeyInterseptor
-import com.example.appwithcats.repository.MyRepository
+import com.example.appwithcats.repository.CatRepository
 import com.example.appwithcats.ui.apiKey.KeyApiFragment
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -35,8 +35,8 @@ class  Module (private val baseUrl: String, private val apiKey: String, private 
 
     @Provides
     @Singleton
-    fun providesRepository(api: Api): MyRepository {
-        return MyRepository(api)
+    fun providesRepository(api: Api): CatRepository {
+        return CatRepository(api)
     }
     @Provides
     @Singleton

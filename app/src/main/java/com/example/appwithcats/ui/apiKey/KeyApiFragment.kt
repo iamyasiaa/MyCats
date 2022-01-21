@@ -39,19 +39,24 @@ class KeyApiFragment : Fragment() {
 
 
         loginButton1.setOnClickListener {
-
-            val action = KeyApiFragmentDirections.actionKeyApiToCatsFragment()
-            apiKeyViewModel.updateApiKey(apiKey.text.toString())
-            apiKeyViewModel.errorApiKeyData.observe(viewLifecycleOwner) {
-                if (it.status == 401) {
-                    showErrorWindow(it.message)
-                }
-            }
-            apiKeyViewModel.apiKeyLiveData.observe(viewLifecycleOwner) {
-                Navigation.findNavController(view).navigate(action)
-            }
+            checkOnError()
         }
         apiKeyViewModel.getApiKey()
+    }
+
+    private fun checkOnError() {
+        val action = KeyApiFragmentDirections.actionKeyApiToCatsFragment()
+        apiKeyViewModel.updateApiKey(apiKey.text.toString())
+        apiKeyViewModel.errorApiKeyData.observe(viewLifecycleOwner) {
+            if (apiKeyViewModel.checkOnStatus()) {
+                showErrorWindow(it.message)
+            } else {
+                apiKeyViewModel.apiKeyLiveData.observe(viewLifecycleOwner) {
+                    Navigation.findNavController(view!!).navigate(action)
+                }
+            }
+        }
+
     }
 
 
@@ -59,10 +64,7 @@ class KeyApiFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_key_api, container, false)
-
-
-        return view
+        return inflater.inflate(R.layout.fragment_key_api, container, false)
     }
 }
 

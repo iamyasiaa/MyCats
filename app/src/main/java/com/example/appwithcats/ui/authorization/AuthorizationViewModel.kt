@@ -1,14 +1,15 @@
 package com.example.appwithcats.ui.authorization
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.appwithcats.App
-import com.example.appwithcats.repository.MyRepository
 import com.example.appwithcats.repository.SharedPreferenceRepository
 import com.example.appwithcats.model.PersonalData
 import com.example.appwithcats.model.UserModel
+import com.example.appwithcats.repository.CatRepository
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter
 import retrofit2.HttpException
@@ -22,7 +23,7 @@ class AuthorizationViewModel (application: Application) : AndroidViewModel(appli
     }
 
     @Inject
-    lateinit var myRepository: MyRepository
+    lateinit var myRepository: CatRepository
 
     @Inject
     lateinit var sharedPreferenceRepository: SharedPreferenceRepository
@@ -32,7 +33,8 @@ class AuthorizationViewModel (application: Application) : AndroidViewModel(appli
         get() = _loginInLiveData
 
     fun postRequest() {
-        val user = PersonalData(sharedPreferenceRepository.email, sharedPreferenceRepository.description)
+        val user =
+            PersonalData(sharedPreferenceRepository.email, sharedPreferenceRepository.description)
         myRepository.postLoginIn(user)
             .subscribe({
                 _loginInLiveData.value = it
@@ -52,16 +54,21 @@ class AuthorizationViewModel (application: Application) : AndroidViewModel(appli
                 }
             })
     }
+
     fun updateEmail(email: String) {
         sharedPreferenceRepository.email = email
     }
+
     fun updateDescription(description: String) {
         sharedPreferenceRepository.description = description
     }
-    fun checkOnError(){
-        if (loginInLiveData.value?.status == 400 ) {
 
-
+    fun checkOnStatus(): Boolean {
+        if (loginInLiveData.value!!.status == 400) {
+            Timber.e("400")
+            return true
+        } else{
+            return false
         }
     }
 }

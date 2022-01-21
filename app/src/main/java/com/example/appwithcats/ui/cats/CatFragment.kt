@@ -17,7 +17,7 @@ class CatFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val view = inflater.inflate(R.layout.fragment_cat, container, false)
 
         image2 = view!!.findViewById(R.id.showCat)
@@ -26,25 +26,5 @@ class CatFragment : Fragment() {
             .load(url)
             .into(image2)
         return view
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater!!.inflate(R.menu.back, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id = item!!.itemId
-
-        if (id == R.id.back){
-            val transaction = activity?.supportFragmentManager?.beginTransaction()
-            transaction?.add(R.id.nav_host_fragment_container, CatsFragment())
-            transaction?.disallowAddToBackStack()
-            transaction?.commit()
-
-
-            Toast.makeText(activity, "Назад", Toast.LENGTH_SHORT).show()
-        }
-        return super.onOptionsItemSelected(item)
     }
 }
