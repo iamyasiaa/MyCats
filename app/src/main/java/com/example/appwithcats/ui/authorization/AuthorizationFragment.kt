@@ -62,8 +62,7 @@ class AuthorizationFragment : Fragment() {
         authorizationViewModel.loginInLiveData.observe(viewLifecycleOwner) {
             if (authorizationViewModel.checkOnStatus()) {
                 showErrorWindow(it.message)
-                authorizationViewModel.updateEmail("")
-                authorizationViewModel.updateDescription("")
+                authorizationViewModel.checkOnEmpty()
             } else {
                 Navigation.findNavController(view!!).navigate(action)
             }

@@ -59,12 +59,12 @@ class ApiKeyViewModel (application: Application) : AndroidViewModel(application)
     }
     fun checkOnStatus(): Boolean {
         if (errorApiKeyData.value!!.status == 401) {
+
             Timber.e("401")
             return true
-        } else{
+        } else
             return false
         }
-    }
-
-
 }
+
+
