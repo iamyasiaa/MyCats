@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_keyApi_to_catsFragment"
             app:destination="@id/catsFragment" />
+        <action
+            android:id="@+id/action_keyApi_to_authorization"
+            app:destination="@id/authorization" />
     </fragment>
     <fragment
         android:id="@+id/catsFragment"

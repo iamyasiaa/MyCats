@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.example.appwithcats.textwatcher.CustomTextWatcherApiKey
@@ -18,7 +19,7 @@ import com.google.android.material.textfield.TextInputEditText
 class KeyApiFragment : Fragment() {
     private lateinit var keyButton: Button
     private lateinit var apiKey: TextInputEditText
-    private lateinit var backAuthorization:Button
+    private lateinit var backAuthorization: ImageButton
 
     private val apiKeyViewModel: ApiKeyViewModel by viewModels()
     private fun showErrorWindow(message: String) {
@@ -34,12 +35,22 @@ class KeyApiFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        keyButton = view.findViewById(R.id.loginButton1)
         backAuthorization = view.findViewById(R.id.back_authorization)
+        keyButton = view.findViewById(R.id.loginButton1)
         keyButton.isEnabled = false
         apiKey = view.findViewById(R.id.apiKey)
         val textWatcher1 = CustomTextWatcherApiKey(apiKey, keyButton)
         apiKey.addTextChangedListener(textWatcher1)
+
+        backAuthorization.setOnClickListener {
+            Log.e("Нажал","AAAAAAAAAAAAAAAAAAAAAAA")
+            val action3 = KeyApiFragmentDirections.actionKeyApiToAuthorization()
+                Navigation.findNavController(view).navigate(action3)
+
+        }
+
+
+
 
 
 
@@ -50,12 +61,7 @@ class KeyApiFragment : Fragment() {
                 getApiKey()
             }
         }
-        backAuthorization.setOnClickListener{
-            val action = KeyApiFragmentDirections.actionKeyApiToCatsFragment()
-            apiKeyViewModel.apiKeyLiveData.observe(viewLifecycleOwner) {
-                Navigation.findNavController(view!!).navigate(action)
-            }
-        }
+
 
     }
 
@@ -66,13 +72,11 @@ class KeyApiFragment : Fragment() {
             if (apiKeyViewModel.checkOnStatus()) {
                 showErrorWindow(it.message)
             }
-
         }
         val action = KeyApiFragmentDirections.actionKeyApiToCatsFragment()
         apiKeyViewModel.apiKeyLiveData.observe(viewLifecycleOwner) {
             Navigation.findNavController(view!!).navigate(action)
         }
-
     }
 
 
