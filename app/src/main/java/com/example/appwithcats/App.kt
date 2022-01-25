@@ -7,7 +7,7 @@ import com.example.appwithcats.dagger.AppComponent
 import com.example.appwithcats.dagger.DaggerAppComponent
 import com.example.appwithcats.repository.SharedPreferenceRepository
 
-class App : Application(){
+class App : Application() {
     lateinit var appComponent: AppComponent
 
     override fun onCreate() {
@@ -17,7 +17,7 @@ class App : Application(){
 
 
         appComponent = DaggerAppComponent.builder()
-            .module(Module(getString(R.string.BaseUrl), sharedPreferenceRepository.apikey ,this))
+            .module(Module(getString(R.string.BaseUrl), sharedPreferenceRepository.apikey, this))
             .build()
 
         Log.e("app", "" + sharedPreferenceRepository.apikey)
@@ -25,6 +25,7 @@ class App : Application(){
 
     companion object {
         private lateinit var app: App
+
         @Synchronized
         fun getInstance(): App {
             return app

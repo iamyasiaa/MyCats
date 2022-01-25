@@ -15,7 +15,7 @@ import timber.log.Timber
 import java.io.IOException
 import javax.inject.Inject
 
-class ApiKeyViewModel (application: Application) : AndroidViewModel(application) {
+class ApiKeyViewModel(application: Application) : AndroidViewModel(application) {
     init {
         App.getInstance().appComponent.inject(this)
     }
@@ -54,17 +54,18 @@ class ApiKeyViewModel (application: Application) : AndroidViewModel(application)
                 }
             })
     }
+
     fun updateApiKey(apiKey: String) {
         sharedPreferenceRepository.apikey = apiKey
     }
+
     fun checkOnStatus(): Boolean {
         if (errorApiKeyData.value!!.status == 401) {
-
             Timber.e("401")
             return true
         } else
             return false
-        }
+    }
 }
 
 

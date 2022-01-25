@@ -11,11 +11,11 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [(Module::class)])
-    interface AppComponent {
-        fun inject(mainViewModel: MainViewModel)
-        fun inject(catRepository: CatRepository)
-        fun inject(AuthorizationViewModel: AuthorizationViewModel)
-        fun inject(SharedPreferenceRepository: SharedPreferenceRepository)
-        fun inject(ApiKeyViewModel: ApiKeyViewModel)
+interface AppComponent {
+    fun inject(mainViewModel: MainViewModel)
+    fun inject(catRepository: CatRepository)
+    fun inject(AuthorizationViewModel: AuthorizationViewModel)
+    fun inject(SharedPreferenceRepository: SharedPreferenceRepository)
+    fun inject(ApiKeyViewModel: ApiKeyViewModel)
 
 }

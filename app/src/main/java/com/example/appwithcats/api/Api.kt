@@ -10,17 +10,17 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface Api {
-        @GET("images/search")
-        fun getRandomImage(
-            @Query("limit") amountOfCats: Int,
-        ): Observable<MutableList<CatModel>>
+    @GET("images/search")
+    fun getRandomImage(
+        @Query("limit") amountOfCats: Int,
+    ): Observable<MutableList<CatModel>>
 
-        @POST("user/passwordlesssignup")
-        fun loginUser(@Body body: PersonalData): Observable<UserModel>
+    @POST("user/passwordlesssignup")
+    fun loginUser(@Body body: PersonalData): Observable<UserModel>
 
-        @GET("favourites")
-        fun getApiKey(
-         @Query("api_key") apiKey: String,
-): Observable<UserModel>
+    @GET("favourites")
+    fun getApiKey(
+        @Query("api_key") apiKey: String,
+    ): Observable<UserModel>
 }
 

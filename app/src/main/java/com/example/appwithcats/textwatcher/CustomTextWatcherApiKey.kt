@@ -6,7 +6,8 @@ import android.view.View
 import android.widget.Button
 import com.google.android.material.textfield.TextInputEditText
 
-class CustomTextWatcherApiKey (private val editText: TextInputEditText, button: Button): TextWatcher {
+class CustomTextWatcherApiKey(private val editText: TextInputEditText, button: Button) :
+    TextWatcher {
 
     private var button: View = button
 

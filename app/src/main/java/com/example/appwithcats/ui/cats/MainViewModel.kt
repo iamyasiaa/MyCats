@@ -8,10 +8,11 @@ import com.example.appwithcats.model.CatModel
 import com.example.appwithcats.repository.CatRepository
 import javax.inject.Inject
 
-class MainViewModel (application: Application) : AndroidViewModel(application) {
+class MainViewModel(application: Application) : AndroidViewModel(application) {
     init {
         App.getInstance().appComponent.inject(this)
     }
+
     @Inject
     lateinit var catRepository: CatRepository
 

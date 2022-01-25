@@ -17,7 +17,7 @@ import timber.log.Timber
 import java.io.IOException
 import javax.inject.Inject
 
-class AuthorizationViewModel (application: Application) : AndroidViewModel(application) {
+class AuthorizationViewModel(application: Application) : AndroidViewModel(application) {
     init {
         App.getInstance().appComponent.inject(this)
     }
@@ -64,14 +64,15 @@ class AuthorizationViewModel (application: Application) : AndroidViewModel(appli
     }
 
     fun checkOnStatus(): Boolean {
-        if (loginInLiveData.value!!.status == 400 ) {
+        if (loginInLiveData.value!!.status == 400) {
             Timber.e("400")
             return true
-        } else{
+        } else {
             return false
         }
     }
-    fun checkOnEmpty(){
+
+    fun checkOnEmpty() {
         updateEmail("")
         updateDescription("")
     }

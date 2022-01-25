@@ -8,15 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.appwithcats.R
-import com.example.appwithcats.adapter.RecyclerAdapter
+import com.example.appwithcats.adapter.CatListAdapter
+import com.example.appwithcats.databinding.FragmentCatsBinding
 
-class CatsFragment : Fragment() {
+
+class CatsFragment : Fragment(R.layout.fragment_cats) {
 
     private var isShow = true
-    private var recyclerView: RecyclerView? = null
-    private var myAdapter: RecyclerAdapter? = null
+    private val catListAdapter = CatListAdapter()
 
 
     private val mainViewModel: MainViewModel by lazy {
@@ -27,21 +27,20 @@ class CatsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recyclerView = view.findViewById(R.id.recyclerCats) as RecyclerView
-        recyclerView?.layoutManager = LinearLayoutManager(context)
-        recyclerView?.adapter = RecyclerAdapter(requireContext(), arrayListOf())
+        val binding = FragmentCatsBinding.bind(view)
 
-
-        if (isShow) {
-            mainViewModel.randomImage.observe(viewLifecycleOwner, { cats ->
-                myAdapter = context?.let{RecyclerAdapter(it, cats)}
-                myAdapter?.notifyDataSetChanged()
-                recyclerView!!.adapter = myAdapter
-            })
-            isShow = false
+        binding.apply {
+            recyclerCats.apply {
+                adapter = catListAdapter
+                layoutManager = LinearLayoutManager(requireContext())
+                setHasFixedSize(true)
+            }
         }
-        else {
-            recyclerView!!.adapter = myAdapter
+        if (isShow) {
+            mainViewModel.randomImage.observe(viewLifecycleOwner) {
+                catListAdapter.submitList(it)
+                isShow = false
+            }
         }
     }
 
@@ -49,6 +48,9 @@ class CatsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_cats, container, false)
+        var view = inflater.inflate(R.layout.fragment_cats, container, false)
+
+
+        return view
     }
 }

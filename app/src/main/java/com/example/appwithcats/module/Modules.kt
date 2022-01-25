@@ -20,7 +20,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
-class  Module (private val baseUrl: String, private val apiKey: String, private val application: Application) {
+class Module(
+    private val baseUrl: String,
+    private val apiKey: String,
+    private val application: Application
+) {
     @Singleton
     @Provides
     fun providesRetrofit(gson: Gson, client: OkHttpClient): Retrofit {
@@ -38,6 +42,7 @@ class  Module (private val baseUrl: String, private val apiKey: String, private 
     fun providesRepository(api: Api): CatRepository {
         return CatRepository(api)
     }
+
     @Provides
     @Singleton
     fun providesContext(): Context = application
@@ -53,11 +58,13 @@ class  Module (private val baseUrl: String, private val apiKey: String, private 
     fun providesAPI(retrofit: Retrofit): Api {
         return retrofit.create(Api::class.java)
     }
+
     @Provides
     @Singleton
     fun providesGson(): Gson {
         return GsonBuilder().create()
     }
+
     @Provides
     @Singleton
     fun providesOkHttpClient(): OkHttpClient {

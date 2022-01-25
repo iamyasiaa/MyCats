@@ -18,6 +18,7 @@ import com.google.android.material.textfield.TextInputEditText
 class KeyApiFragment : Fragment() {
     private lateinit var keyButton: Button
     private lateinit var apiKey: TextInputEditText
+    private lateinit var backAuthorization:Button
 
     private val apiKeyViewModel: ApiKeyViewModel by viewModels()
     private fun showErrorWindow(message: String) {
@@ -34,6 +35,7 @@ class KeyApiFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         keyButton = view.findViewById(R.id.loginButton1)
+        backAuthorization = view.findViewById(R.id.back_authorization)
         keyButton.isEnabled = false
         apiKey = view.findViewById(R.id.apiKey)
         val textWatcher1 = CustomTextWatcherApiKey(apiKey, keyButton)
@@ -48,8 +50,15 @@ class KeyApiFragment : Fragment() {
                 getApiKey()
             }
         }
+        backAuthorization.setOnClickListener{
+            val action = KeyApiFragmentDirections.actionKeyApiToCatsFragment()
+            apiKeyViewModel.apiKeyLiveData.observe(viewLifecycleOwner) {
+                Navigation.findNavController(view!!).navigate(action)
+            }
+        }
 
     }
+
 
     private fun checkOnError() {
 
@@ -57,6 +66,7 @@ class KeyApiFragment : Fragment() {
             if (apiKeyViewModel.checkOnStatus()) {
                 showErrorWindow(it.message)
             }
+
         }
         val action = KeyApiFragmentDirections.actionKeyApiToCatsFragment()
         apiKeyViewModel.apiKeyLiveData.observe(viewLifecycleOwner) {

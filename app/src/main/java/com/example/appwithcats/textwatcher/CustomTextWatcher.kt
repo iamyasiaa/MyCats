@@ -24,12 +24,10 @@ class CustomTextWatcher(private var edList: Array<TextInputEditText>, v: Button)
                 v.isEnabled = false
                 break
             } else {
-                if(count == 1){
-                    if (editText.text.toString().matches(emailPattern)){
+                if (count == 1) {
+                    if (editText.text.toString().matches(emailPattern)) {
                         v.isEnabled = true
-                    }
-                    else
-                    {
+                    } else {
                         v.isEnabled = false
                         editText.error = "Invalid email"
                     }
