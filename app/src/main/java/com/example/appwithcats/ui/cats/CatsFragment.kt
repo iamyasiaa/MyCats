@@ -6,13 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.appwithcats.R
 import com.example.appwithcats.adapter.CatListAdapter
 import com.example.appwithcats.databinding.FragmentCatsBinding
-import com.example.appwithcats.repository.SharedPreferenceRepository
 
 
 class CatsFragment : Fragment(R.layout.fragment_cats) {
@@ -28,10 +27,7 @@ class CatsFragment : Fragment(R.layout.fragment_cats) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val action1 = CatsFragmentDirections.actionCatsFragmentToAuthorization()
-        if (mainViewModel.sharedPreferenceRepository.email == "") {
-            Navigation.findNavController(view).navigate(action1)
-        }
+
 
         val binding = FragmentCatsBinding.bind(view)
 

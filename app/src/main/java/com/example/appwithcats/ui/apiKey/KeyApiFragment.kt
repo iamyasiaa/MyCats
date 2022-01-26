@@ -63,7 +63,7 @@ class KeyApiFragment : Fragment() {
                 showErrorWindow(it.message)
             }
         }
-        val action = KeyApiFragmentDirections.actionKeyApiToCatsFragment()
+        val action = KeyApiFragmentDirections.actionKeyApiToNavCats()
         apiKeyViewModel.apiKeyLiveData.observe(viewLifecycleOwner) {
             Navigation.findNavController(view!!).navigate(action)
         }
