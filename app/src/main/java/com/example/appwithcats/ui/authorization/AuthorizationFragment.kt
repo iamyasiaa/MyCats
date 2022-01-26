@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.example.appwithcats.textwatcher.CustomTextWatcher
 import com.example.appwithcats.R
+import com.example.appwithcats.ui.cats.CatsFragmentDirections
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 
@@ -41,10 +42,7 @@ class AuthorizationFragment : Fragment() {
         val edList = arrayOf(email, description)
         val textWatcher = CustomTextWatcher(edList = edList, loginButton)
         for (editText in edList) editText.addTextChangedListener(textWatcher)
-        val action1 = AuthorizationFragmentDirections.actionAuthorizationToCatsFragment()
-        if (authorizationViewModel.sharedPreferenceRepository.apikey != "") {
-            Navigation.findNavController(view).navigate(action1)
-        }
+
 
         loginButton.setOnClickListener {
             checkOnError()

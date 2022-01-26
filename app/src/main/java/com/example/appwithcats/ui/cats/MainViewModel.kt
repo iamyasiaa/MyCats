@@ -6,12 +6,17 @@ import androidx.lifecycle.LiveData
 import com.example.appwithcats.App
 import com.example.appwithcats.model.CatModel
 import com.example.appwithcats.repository.CatRepository
+import com.example.appwithcats.repository.SharedPreferenceRepository
 import javax.inject.Inject
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
     init {
         App.getInstance().appComponent.inject(this)
     }
+
+    @Inject
+    lateinit var sharedPreferenceRepository: SharedPreferenceRepository
+
 
     @Inject
     lateinit var catRepository: CatRepository

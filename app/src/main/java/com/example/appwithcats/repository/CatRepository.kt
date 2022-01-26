@@ -28,7 +28,7 @@ class CatRepository(private val api: Api) {
                             it?.let {
                                 data.value = it
                             }
-                            compositeDisposable.dispose()
+//                            compositeDisposable.dispose()
                         })
 
                 }

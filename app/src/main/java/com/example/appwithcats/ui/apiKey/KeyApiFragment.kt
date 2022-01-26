@@ -42,18 +42,12 @@ class KeyApiFragment : Fragment() {
         val textWatcher1 = CustomTextWatcherApiKey(apiKey, keyButton)
         apiKey.addTextChangedListener(textWatcher1)
 
+
         backAuthorization.setOnClickListener {
-            Log.e("Нажал","AAAAAAAAAAAAAAAAAAAAAAA")
-            val action3 = KeyApiFragmentDirections.actionKeyApiToAuthorization()
-                Navigation.findNavController(view).navigate(action3)
+            val action = KeyApiFragmentDirections.actionKeyApiToAuthorization()
+                Navigation.findNavController(view).navigate(action)
 
         }
-
-
-
-
-
-
         keyButton.setOnClickListener {
             apiKeyViewModel.apply {
                 checkOnError()
@@ -61,13 +55,9 @@ class KeyApiFragment : Fragment() {
                 getApiKey()
             }
         }
-
-
     }
 
-
     private fun checkOnError() {
-
         apiKeyViewModel.errorApiKeyData.observe(viewLifecycleOwner) {
             if (apiKeyViewModel.checkOnStatus()) {
                 showErrorWindow(it.message)
@@ -78,7 +68,6 @@ class KeyApiFragment : Fragment() {
             Navigation.findNavController(view!!).navigate(action)
         }
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
