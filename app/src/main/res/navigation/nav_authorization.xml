@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav"
+    app:startDestination="@id/authorization">
+
+    <fragment
+        android:id="@+id/authorization"
+        android:name="com.example.appwithcats.ui.authorization.AuthorizationFragment"
+        android:label="Authorization"
+        tools:layout="@layout/fragment_autorization">
+        <action
+            android:id="@+id/action_authorization_to_keyApi"
+            app:destination="@id/keyApi" />
+        <action
+            android:id="@+id/action_authorization_to_nav_cats"
+            app:destination="@id/nav_cats" />
+    </fragment>
+    <fragment
+        android:id="@+id/keyApi"
+        android:name="com.example.appwithcats.ui.apiKey.KeyApiFragment"
+        android:label="KeyApi"
+        tools:layout="@layout/fragment_key_api">
+        <action
+            android:id="@+id/action_keyApi_to_authorization"
+            app:destination="@id/authorization" />
+        <action
+            android:id="@+id/action_keyApi_to_nav_cats"
+            app:destination="@id/nav_cats"
+            app:popUpTo="@id/nav"
+            app:popUpToInclusive="true"
+           />
+
+    </fragment>
+    <include app:graph="@navigation/nav_cats" />
+
+</navigation>
