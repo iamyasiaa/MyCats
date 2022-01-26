@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav"
-    app:startDestination="@id/catsFragment">
+    app:startDestination="@id/authorization">
 
     <fragment
         android:id="@+id/authorization"
@@ -15,7 +15,9 @@
             app:destination="@id/keyApi" />
         <action
             android:id="@+id/action_authorization_to_catsFragment"
-            app:destination="@id/catsFragment" />
+            app:destination="@id/catsFragment"
+            app:popUpTo="@id/nav"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/keyApi"
@@ -24,10 +26,9 @@
         tools:layout="@layout/fragment_key_api">
         <action
             android:id="@+id/action_keyApi_to_catsFragment"
-            app:destination="@id/catsFragment" />
-        <action
-            android:id="@+id/action_keyApi_to_authorization"
-            app:destination="@id/authorization" />
+            app:destination="@id/catsFragment"
+            app:popUpTo="@id/nav"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/catsFragment"
@@ -37,12 +38,6 @@
         <action
             android:id="@+id/action_catsFragment_to_catFragment"
             app:destination="@id/catFragment" />
-        <action
-            android:id="@+id/action_catsFragment_to_authorization"
-            app:destination="@id/authorization"/>
-            <argument
-
-            />
     </fragment>
     <fragment
         android:id="@+id/catFragment"

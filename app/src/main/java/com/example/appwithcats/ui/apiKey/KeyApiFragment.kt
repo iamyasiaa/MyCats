@@ -43,11 +43,11 @@ class KeyApiFragment : Fragment() {
         apiKey.addTextChangedListener(textWatcher1)
 
 
-        backAuthorization.setOnClickListener {
-            val action = KeyApiFragmentDirections.actionKeyApiToAuthorization()
-                Navigation.findNavController(view).navigate(action)
-
-        }
+//        backAuthorization.setOnClickListener {
+//            val action = KeyApiFragmentDirections.actionKeyApiToAuthorization()
+//                Navigation.findNavController(view).navigate(action)
+//
+//        }
         keyButton.setOnClickListener {
             apiKeyViewModel.apply {
                 checkOnError()

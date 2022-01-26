@@ -1,9 +1,6 @@
 package com.example.appwithcats
 
 import android.os.Bundle
-import android.view.KeyEvent
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.appwithcats.databinding.ActivityMainBinding
 
@@ -15,6 +12,15 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
+//    override fun onBackPressed() {
+//        val count = supportFragmentManager.backStackEntryCount
+//        if (count == 0) {
+//            super.onBackPressed()
+//            //additional code
+//        } else {
+//            supportFragmentManager.popBackStack()
+//        }
+//    }
 //    override fun onBackPressed() {
 //        AlertDialog.Builder(this).apply {
 //            setTitle("accept")
