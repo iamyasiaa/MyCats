@@ -2,13 +2,13 @@ package com.example.appwithcats.ui.cats
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.appwithcats.R
 import com.example.appwithcats.adapter.CatListAdapter
 import com.example.appwithcats.databinding.FragmentCatsBinding
@@ -16,8 +16,10 @@ import com.example.appwithcats.databinding.FragmentCatsBinding
 
 class CatsFragment : Fragment(R.layout.fragment_cats) {
 
-    private var isShow = true
+
     private val catListAdapter = CatListAdapter()
+    private var mSwipeRefreshLayout: SwipeRefreshLayout? = null
+    private var isShow = true
 
 
     private val mainViewModel: MainViewModel by lazy {
@@ -27,7 +29,11 @@ class CatsFragment : Fragment(R.layout.fragment_cats) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        mSwipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout)
+        if(isShow){
+            onInitVM()
+        }
+        isShow = false
 
         val binding = FragmentCatsBinding.bind(view)
 
@@ -38,11 +44,17 @@ class CatsFragment : Fragment(R.layout.fragment_cats) {
                 setHasFixedSize(true)
             }
         }
-        if (isShow) {
-            mainViewModel.randomImage.observe(viewLifecycleOwner) {
-                catListAdapter.submitList(it)
-                isShow = false
-            }
+        mSwipeRefreshLayout!!.setOnRefreshListener {
+            onInitVM()
+            mSwipeRefreshLayout!!.isRefreshing = false
+        }
+    }
+
+    fun onInitVM() {
+        mainViewModel.randomImage.observe(viewLifecycleOwner) {
+            catListAdapter.submitList(it)
+
+
         }
     }
 
@@ -50,9 +62,6 @@ class CatsFragment : Fragment(R.layout.fragment_cats) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var view = inflater.inflate(R.layout.fragment_cats, container, false)
-
-
-        return view
+        return inflater.inflate(R.layout.fragment_cats, container, false)
     }
 }

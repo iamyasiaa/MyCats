@@ -22,19 +22,25 @@ class CatRepository(private val api: Api) {
                 MutableLiveData<MutableList<CatModel>>()
             api.getRandomImage(const)
                 .subscribeOn(Schedulers.io())
-                ?.observeOn(AndroidSchedulers.mainThread())?.let { it ->
+                .observeOn(AndroidSchedulers.mainThread()).let { it ->
                     compositeDisposable.add(
                         it.subscribe {
-                            it?.let {
+                            it.let {
                                 data.value = it
                             }
-//                            compositeDisposable.dispose()
                         })
 
                 }
 
             return data
         }
+
+    fun getCats(url: CatModel): Observable<MutableList<CatModel>>{
+        return api.getRandomImage(const)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+
+    }
 
     fun postLoginIn(user: PersonalData): Observable<UserModel> {
         return api.loginUser(user)

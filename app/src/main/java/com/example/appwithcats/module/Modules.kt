@@ -1,4 +1,4 @@
-package com.example.appwithcats.app.interseptor.modules
+package com.example.appwithcats.module
 
 import android.app.Application
 import android.content.Context
@@ -6,7 +6,6 @@ import com.example.appwithcats.repository.SharedPreferenceRepository
 import com.example.appwithcats.api.Api
 import com.example.appwithcats.interseptor.KeyInterseptor
 import com.example.appwithcats.repository.CatRepository
-import com.example.appwithcats.ui.apiKey.KeyApiFragment
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module

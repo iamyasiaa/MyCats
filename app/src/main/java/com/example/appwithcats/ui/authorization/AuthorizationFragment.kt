@@ -11,7 +11,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.example.appwithcats.textwatcher.CustomTextWatcher
 import com.example.appwithcats.R
-import com.example.appwithcats.ui.cats.CatsFragmentDirections
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 
@@ -65,7 +64,7 @@ class AuthorizationFragment : Fragment() {
                 showErrorWindow(it.message)
                 authorizationViewModel.checkOnEmpty()
             } else {
-                Navigation.findNavController(view!!).navigate(action)
+                Navigation.findNavController(requireView()).navigate(action)
             }
         }
     }

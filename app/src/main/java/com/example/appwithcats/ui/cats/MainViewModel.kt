@@ -23,4 +23,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val randomImage: LiveData<MutableList<CatModel>>
         get() = catRepository.getCatLiveData
+
+
 }

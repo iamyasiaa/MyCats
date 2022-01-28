@@ -1,11 +1,11 @@
 package com.example.appwithcats
 
 import android.app.Application
-import android.util.Log
-import com.example.appwithcats.app.interseptor.modules.Module
+import com.example.appwithcats.module.Module
 import com.example.appwithcats.dagger.AppComponent
 import com.example.appwithcats.dagger.DaggerAppComponent
 import com.example.appwithcats.repository.SharedPreferenceRepository
+import timber.log.Timber
 
 class App : Application() {
     lateinit var appComponent: AppComponent
@@ -20,7 +20,7 @@ class App : Application() {
             .module(Module(getString(R.string.BaseUrl), sharedPreferenceRepository.apikey, this))
             .build()
 
-        Log.e("app", "" + sharedPreferenceRepository.apikey)
+        Timber.e("" + sharedPreferenceRepository.apikey)
     }
 
     companion object {

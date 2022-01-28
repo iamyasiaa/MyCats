@@ -17,7 +17,7 @@
             android:id="@+id/action_authorization_to_catsFragment"
             app:destination="@id/catsFragment"
             app:popUpTo="@id/nav"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/keyApi"
@@ -29,6 +29,9 @@
             app:destination="@id/catsFragment"
             app:popUpTo="@id/nav"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_keyApi_to_authorization"
+            app:destination="@id/authorization" />
     </fragment>
     <fragment
         android:id="@+id/catsFragment"
