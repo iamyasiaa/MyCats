@@ -52,4 +52,19 @@
             app:argType="string"
             app:nullable="false"/>
     </fragment>
+    <fragment
+        android:id="@+id/blankFragment"
+        android:name="com.example.appwithcats.ui.BlankFragment"
+        android:label="fragment_blank"
+        tools:layout="@layout/fragment_blank" />
+    <fragment
+        android:id="@+id/blankFragment2"
+        android:name="com.example.appwithcats.ui.BlankFragment2"
+        android:label="fragment_blank2"
+        tools:layout="@layout/fragment_blank2" />
+    <fragment
+        android:id="@+id/blankFragment3"
+        android:name="com.example.appwithcats.ui.cats.BlankFragment3"
+        android:label="fragment_blank3"
+        tools:layout="@layout/fragment_blank3" />
 </navigation>
