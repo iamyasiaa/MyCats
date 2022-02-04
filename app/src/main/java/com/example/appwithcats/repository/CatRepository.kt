@@ -2,9 +2,7 @@ package com.example.appwithcats.repository
 
 import androidx.lifecycle.MutableLiveData
 import com.example.appwithcats.api.Api
-import com.example.appwithcats.model.CatModel
-import com.example.appwithcats.model.PersonalData
-import com.example.appwithcats.model.UserModel
+import com.example.appwithcats.model.*
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -14,6 +12,7 @@ import org.jetbrains.annotations.NotNull
 
 class CatRepository(private val api: Api) {
     var const = 20
+
 
     private val compositeDisposable = CompositeDisposable()
     val getCatLiveData: MutableLiveData<MutableList<CatModel>>
@@ -35,12 +34,6 @@ class CatRepository(private val api: Api) {
             return data
         }
 
-    fun getCats(url: CatModel): Observable<MutableList<CatModel>>{
-        return api.getRandomImage(const)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-
-    }
 
     fun postLoginIn(user: PersonalData): Observable<UserModel> {
         return api.loginUser(user)
@@ -50,6 +43,11 @@ class CatRepository(private val api: Api) {
 
     fun getApiKey(apiKey: String): @NotNull Observable<UserModel> {
         return api.getApiKey(apiKey)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+    fun postFavorites(vote: VoteCatsModel): Observable<VoteModel> {
+        return api.voteCats(vote)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }

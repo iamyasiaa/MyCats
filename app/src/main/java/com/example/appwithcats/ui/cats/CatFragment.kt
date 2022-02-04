@@ -23,6 +23,7 @@ class CatFragment : Fragment() {
         val url = args.urlCat
         Glide.with(this)
             .load(url)
+            .placeholder(R.drawable.progress_animation)
             .into(image2)
         return view
     }

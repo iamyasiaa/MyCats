@@ -17,12 +17,14 @@
       <androidx.recyclerview.widget.RecyclerView
           android:id="@+id/recyclerCats"
           android:layout_width="match_parent"
-          android:layout_height="match_parent"
+          android:layout_height="675dp"
           android:background="@color/white" />
   </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"

@@ -1,8 +1,6 @@
 package com.example.appwithcats.api
 
-import com.example.appwithcats.model.CatModel
-import com.example.appwithcats.model.PersonalData
-import com.example.appwithcats.model.UserModel
+import com.example.appwithcats.model.*
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -22,5 +20,8 @@ interface Api {
     fun getApiKey(
         @Query("api_key") apiKey: String,
     ): Observable<UserModel>
+
+    @POST("votes")
+    fun voteCats(@Body body: VoteCatsModel): Observable<VoteModel>
 }
 

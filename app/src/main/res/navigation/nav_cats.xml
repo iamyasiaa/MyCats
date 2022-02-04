@@ -38,6 +38,10 @@
         android:name="com.example.appwithcats.ui.cats.CatsFragment"
         android:label="CatsFragment"
         tools:layout="@layout/fragment_cats">
+        <argument
+            android:name="idCat"
+            app:argType="string"
+            app:nullable="false"/>
         <action
             android:id="@+id/action_catsFragment_to_catFragment"
             app:destination="@id/catFragment" />

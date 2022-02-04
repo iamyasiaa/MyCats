@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.appwithcats.R
+import com.example.appwithcats.ui.cats.CatsFragment
 
 class BlankFragment : Fragment(R.layout.fragment_blank) {
 
@@ -13,6 +14,13 @@ class BlankFragment : Fragment(R.layout.fragment_blank) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+    }
+    companion object {
+
+        fun newInstance() =
+            BlankFragment().apply {
+
+            }
     }
 
     override fun onCreateView(
