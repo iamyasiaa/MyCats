@@ -1,15 +1,8 @@
 package com.example.appwithcats.adapter
 
 import android.app.Application
-import android.graphics.Color
-import android.graphics.drawable.Drawable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.Toast
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -18,7 +11,6 @@ import com.example.appwithcats.R
 import com.example.appwithcats.Util
 import com.example.appwithcats.model.CatModel
 import com.example.appwithcats.databinding.ItemBinding
-import com.example.appwithcats.ui.authorization.AuthorizationViewModel
 import com.example.appwithcats.ui.cats.CatsFragmentDirections
 import com.example.appwithcats.ui.cats.MainViewModel
 

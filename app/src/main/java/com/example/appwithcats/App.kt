@@ -19,8 +19,6 @@ class App : Application() {
         appComponent = DaggerAppComponent.builder()
             .module(Module(getString(R.string.BaseUrl), sharedPreferenceRepository.apikey, this))
             .build()
-
-        Timber.e("" + sharedPreferenceRepository.apikey)
     }
 
     companion object {
