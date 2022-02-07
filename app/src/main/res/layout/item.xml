@@ -19,10 +19,10 @@
 
     <ImageView
         android:id="@+id/like"
-        android:layout_width="60dp"
+        android:layout_width="46dp"
         android:layout_height="35dp"
-        android:layout_marginTop="200dp"
         android:layout_marginLeft="300dp"
+        android:layout_marginTop="200dp"
         app:srcCompat="@drawable/like" />
 
     <ImageView

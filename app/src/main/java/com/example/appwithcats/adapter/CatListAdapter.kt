@@ -2,6 +2,7 @@ package com.example.appwithcats.adapter
 
 import android.app.Application
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -63,15 +64,15 @@ class CatListAdapter :
                 mainViewModel.updateLike()
                 Util.id = _id
                 mainViewModel.postRequest()
-                binding.dislike.setBackgroundColor(Color.BLACK)
-                binding.like.setBackgroundColor(Color.GREEN)
+                binding.dislike.setImageResource(R.drawable.dislike)
+                binding.like.setImageResource(R.drawable.like_click)
             }
             binding.dislike.setOnClickListener {
                 mainViewModel.updateDislike()
                 Util.id = _id
                 mainViewModel.postRequest()
-                binding.dislike.setBackgroundColor(Color.RED)
-                binding.like.setBackgroundColor(Color.BLACK)
+                binding.dislike.setImageResource(R.drawable.dislike_click)
+                binding.like.setImageResource(R.drawable.like)
             }
         }
 
