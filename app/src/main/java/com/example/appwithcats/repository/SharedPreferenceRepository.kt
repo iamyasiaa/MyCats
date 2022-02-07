@@ -29,7 +29,7 @@ class SharedPreferenceRepository(context: Context) : ISharPref {
     }
 
     private fun getBoolean(key: String, defaultValue: Boolean = false): Boolean {
-        return preference.getBoolean(key, defaultValue)?: defaultValue
+        return preference.getBoolean(key, defaultValue)
     }
 
     override var description: String

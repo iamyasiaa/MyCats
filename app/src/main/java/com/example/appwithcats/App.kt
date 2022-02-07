@@ -5,7 +5,7 @@ import com.example.appwithcats.module.Module
 import com.example.appwithcats.dagger.AppComponent
 import com.example.appwithcats.dagger.DaggerAppComponent
 import com.example.appwithcats.repository.SharedPreferenceRepository
-import timber.log.Timber
+
 
 class App : Application() {
     lateinit var appComponent: AppComponent
