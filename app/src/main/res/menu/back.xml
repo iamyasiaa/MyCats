@@ -6,6 +6,5 @@
         android:id="@+id/back"
         android:icon="?attr/actionModeCloseDrawable"
         android:title="Item"
-        android:background="@drawable/sign_in"
         app:showAsAction="ifRoom"/>
 </menu>
