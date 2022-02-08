@@ -13,7 +13,6 @@ import org.jetbrains.annotations.NotNull
 class CatRepository(private val api: Api) {
     var const = 20
 
-
     private val compositeDisposable = CompositeDisposable()
     val getCatLiveData: MutableLiveData<MutableList<CatModel>>
         get() {
@@ -33,6 +32,8 @@ class CatRepository(private val api: Api) {
 
             return data
         }
+
+
 
 
     fun postLoginIn(user: PersonalData): Observable<UserModel> {

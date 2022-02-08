@@ -6,6 +6,7 @@ import com.example.appwithcats.repository.SharedPreferenceRepository
 import com.example.appwithcats.ui.apiKey.ApiKeyViewModel
 import com.example.appwithcats.ui.authorization.AuthorizationViewModel
 import com.example.appwithcats.ui.cats.MainViewModel
+import com.example.appwithcats.ui.cats.VoteViewModel
 import dagger.Component
 import javax.inject.Singleton
 
@@ -17,5 +18,6 @@ interface AppComponent {
     fun inject(AuthorizationViewModel: AuthorizationViewModel)
     fun inject(SharedPreferenceRepository: SharedPreferenceRepository)
     fun inject(ApiKeyViewModel: ApiKeyViewModel)
+    fun inject(voteViewModel: VoteViewModel)
 
 }

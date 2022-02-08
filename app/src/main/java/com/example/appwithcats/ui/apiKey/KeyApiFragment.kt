@@ -1,6 +1,7 @@
 package com.example.appwithcats.ui.apiKey
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -43,7 +44,7 @@ class KeyApiFragment : Fragment() {
 
         backAuthorization.setOnClickListener {
             val action = KeyApiFragmentDirections.actionKeyApiToAuthorization()
-                Navigation.findNavController(view).navigate(action)
+            Navigation.findNavController(view).navigate(action)
 
         }
         keyButton.setOnClickListener {
@@ -55,16 +56,28 @@ class KeyApiFragment : Fragment() {
         }
     }
 
-    private fun checkOnError() {
-        apiKeyViewModel.errorApiKeyData.observe(viewLifecycleOwner) {
-            if (apiKeyViewModel.checkOnStatus()) {
-                showErrorWindow(it.message)
-            }
-        }
-        val action = KeyApiFragmentDirections.actionKeyApiToCatsFragment(idCat = String())
-        apiKeyViewModel.apiKeyLiveData.observe(viewLifecycleOwner) {
-            Navigation.findNavController(requireView()).navigate(action)
-        }
+     private fun checkOnError() {
+         apiKeyViewModel.errorApiKeyData.observe(viewLifecycleOwner) {
+             when (it.status) {
+                 401 -> showErrorWindow(it.message)
+             }
+         }
+         apiKeyViewModel.apiKeyLiveData.observe(viewLifecycleOwner) {
+             val action = KeyApiFragmentDirections.actionKeyApiToCatsFragment(idCat = String())
+              if (it == true) Navigation.findNavController(requireView()).navigate(action)
+         }
+
+//        apiKeyViewModel.errorApiKeyData.observe(viewLifecycleOwner) {
+//            if (apiKeyViewModel.checkOnStatus()) {
+//                apiKeyViewModel.updateApiKey("")
+//                showErrorWindow(it.message)
+//
+//            }
+//        }
+//        val action = KeyApiFragmentDirections.actionKeyApiToCatsFragment(idCat = String())
+//        apiKeyViewModel.apiKeyLiveData.observe(viewLifecycleOwner) {
+//            Navigation.findNavController(requireView()).navigate(action)
+//        }
     }
 
     override fun onCreateView(

@@ -4,14 +4,15 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.appwithcats.App
 import com.example.appwithcats.repository.SharedPreferenceRepository
 import com.example.appwithcats.model.UserModel
 import com.example.appwithcats.repository.CatRepository
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter
+import kotlinx.coroutines.launch
 import retrofit2.HttpException
-import timber.log.Timber
 import java.io.IOException
 import javax.inject.Inject
 
@@ -25,6 +26,8 @@ class ApiKeyViewModel(application: Application) : AndroidViewModel(application) 
 
     @Inject
     lateinit var sharedPreferenceRepository: SharedPreferenceRepository
+
+
 
     private var _apiKeyLiveData = MutableLiveData<Boolean>()
     val apiKeyLiveData: LiveData<Boolean>
@@ -57,14 +60,6 @@ class ApiKeyViewModel(application: Application) : AndroidViewModel(application) 
 
     fun updateApiKey(apiKey: String) {
         sharedPreferenceRepository.apikey = apiKey
-    }
-
-    fun checkOnStatus(): Boolean {
-        if (errorApiKeyData.value!!.status == 401) {
-            Timber.e("401")
-            return true
-        } else
-            return false
     }
 }
 

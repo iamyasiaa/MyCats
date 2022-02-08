@@ -1,6 +1,6 @@
 package com.example.appwithcats.adapter
 
-import android.app.Application
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.Navigation
@@ -12,9 +12,8 @@ import com.example.appwithcats.Util
 import com.example.appwithcats.model.CatModel
 import com.example.appwithcats.databinding.ItemBinding
 import com.example.appwithcats.ui.cats.CatsFragmentDirections
-import com.example.appwithcats.ui.cats.MainViewModel
+import com.example.appwithcats.ui.cats.VoteViewModel
 
-private val mainViewModel: MainViewModel = MainViewModel(application = Application())
 class CatListAdapter :
     androidx.recyclerview.widget.ListAdapter<CatModel, CatListAdapter.CatViewHolder>(CatDiffCallback()) {
 
@@ -33,6 +32,7 @@ class CatListAdapter :
 
     inner class CatViewHolder(private val binding: ItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        private val voteViewModel = VoteViewModel()
 
         fun bind(cat: CatModel) {
             binding.apply {
@@ -53,16 +53,16 @@ class CatListAdapter :
             }
 
             binding.like.setOnClickListener {
-                mainViewModel.updateLike()
+                voteViewModel.updateLike()
                 Util.id = _id
-                mainViewModel.postRequest()
+                voteViewModel.postRequest()
                 binding.dislike.setImageResource(R.drawable.dislike)
                 binding.like.setImageResource(R.drawable.like_click)
             }
             binding.dislike.setOnClickListener {
-                mainViewModel.updateDislike()
+                voteViewModel.updateDislike()
                 Util.id = _id
-                mainViewModel.postRequest()
+                voteViewModel.postRequest()
                 binding.dislike.setImageResource(R.drawable.dislike_click)
                 binding.like.setImageResource(R.drawable.like)
             }

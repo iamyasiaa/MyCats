@@ -8,6 +8,10 @@
     android:background="@color/white"
     app:cardBackgroundColor="@color/white">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
 
     <ImageView
         android:id="@+id/dislike"
@@ -25,13 +29,14 @@
         android:layout_marginTop="200dp"
         app:srcCompat="@drawable/like" />
 
-    <ImageView
+        <ImageView
             android:id="@+id/image"
             android:layout_width="400dp"
             android:layout_height="190dp"
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/ic_launcher_foreground" />
 
+    </RelativeLayout>
 
 
 </androidx.cardview.widget.CardView>
