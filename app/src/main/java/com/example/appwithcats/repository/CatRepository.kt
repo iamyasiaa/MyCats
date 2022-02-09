@@ -10,6 +10,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import org.jetbrains.annotations.NotNull
 
 
+
 class CatRepository(private val api: Api) {
     var const = 20
 
@@ -32,17 +33,14 @@ class CatRepository(private val api: Api) {
 
             return data
         }
-
-
-
-
+    
     fun postLoginIn(user: PersonalData): Observable<UserModel> {
         return api.loginUser(user)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun getApiKey(apiKey: String): @NotNull Observable<UserModel> {
+    fun getApiKey(apiKey: String): @NotNull Observable<List<UserModel>> {
         return api.getApiKey(apiKey)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

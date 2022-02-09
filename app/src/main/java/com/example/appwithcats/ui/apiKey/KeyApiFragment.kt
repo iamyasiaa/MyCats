@@ -1,7 +1,6 @@
 package com.example.appwithcats.ui.apiKey
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +13,7 @@ import com.example.appwithcats.textwatcher.CustomTextWatcherApiKey
 import com.example.appwithcats.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
+
 
 class KeyApiFragment : Fragment() {
     private lateinit var keyButton: Button
@@ -40,22 +40,24 @@ class KeyApiFragment : Fragment() {
         apiKey = view.findViewById(R.id.apiKey)
         val textWatcher1 = CustomTextWatcherApiKey(apiKey, keyButton)
         apiKey.addTextChangedListener(textWatcher1)
+        initUI()
+        checkOnError()
 
-
+    }
+    private fun initUI() {
         backAuthorization.setOnClickListener {
             val action = KeyApiFragmentDirections.actionKeyApiToAuthorization()
-            Navigation.findNavController(view).navigate(action)
+            Navigation.findNavController(requireView()).navigate(action)
 
         }
         keyButton.setOnClickListener {
             apiKeyViewModel.apply {
-                checkOnError()
                 updateApiKey(apiKey.text.toString())
                 getApiKey()
             }
         }
-    }
 
+    }
      private fun checkOnError() {
          apiKeyViewModel.errorApiKeyData.observe(viewLifecycleOwner) {
              when (it.status) {
@@ -64,20 +66,8 @@ class KeyApiFragment : Fragment() {
          }
          apiKeyViewModel.apiKeyLiveData.observe(viewLifecycleOwner) {
              val action = KeyApiFragmentDirections.actionKeyApiToCatsFragment(idCat = String())
-              if (it == true) Navigation.findNavController(requireView()).navigate(action)
+              if (it) Navigation.findNavController(requireView()).navigate(action)
          }
-
-//        apiKeyViewModel.errorApiKeyData.observe(viewLifecycleOwner) {
-//            if (apiKeyViewModel.checkOnStatus()) {
-//                apiKeyViewModel.updateApiKey("")
-//                showErrorWindow(it.message)
-//
-//            }
-//        }
-//        val action = KeyApiFragmentDirections.actionKeyApiToCatsFragment(idCat = String())
-//        apiKeyViewModel.apiKeyLiveData.observe(viewLifecycleOwner) {
-//            Navigation.findNavController(requireView()).navigate(action)
-//        }
     }
 
     override fun onCreateView(

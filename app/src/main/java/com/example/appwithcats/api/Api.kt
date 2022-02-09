@@ -19,7 +19,7 @@ interface Api {
     @GET("favourites")
     fun getApiKey(
         @Query("api_key") apiKey: String,
-    ): Observable<UserModel>
+    ): Observable<List<UserModel>>
 
     @POST("votes")
     fun voteCats(@Body body: VoteCatsModel): Observable<VoteModel>
