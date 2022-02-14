@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.appwithcats.App
-import com.example.appwithcats.repository.SharedPreferenceRepository
+import com.example.appwithcats.inresfaces.ISharPref
 import com.example.appwithcats.model.UserModel
 import com.example.appwithcats.repository.CatRepository
 import com.google.gson.Gson
@@ -14,7 +14,7 @@ import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
-class ApiKeyViewModel(application: Application) : AndroidViewModel(application) {
+class ApiKeyViewModel(application: Application) : AndroidViewModel(application){
     init {
         App.getInstance().appComponent.inject(this)
     }
@@ -22,8 +22,8 @@ class ApiKeyViewModel(application: Application) : AndroidViewModel(application) 
     @Inject
     lateinit var myRepository: CatRepository
 
-    @Inject
-    lateinit var sharedPreferenceRepository: SharedPreferenceRepository
+    var sharedPreference: ISharPref? = null
+        @Inject set
 
 
     private var _apiKeyLiveData = MutableLiveData<Boolean>()
@@ -35,7 +35,7 @@ class ApiKeyViewModel(application: Application) : AndroidViewModel(application) 
         get() = _errorApiKeyData
 
     fun getApiKey() {
-        myRepository.getApiKey(sharedPreferenceRepository.apikey)
+        myRepository.getApiKey(sharedPreference!!.apikey)
             .subscribe({
                 _apiKeyLiveData.postValue(true)
             }, {
@@ -56,7 +56,7 @@ class ApiKeyViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     fun updateApiKey(apiKey: String) {
-        sharedPreferenceRepository.apikey = apiKey
+        sharedPreference!!.apikey = apiKey
     }
 
 

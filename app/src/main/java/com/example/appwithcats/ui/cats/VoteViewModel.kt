@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.appwithcats.App
 import com.example.appwithcats.Util
+import com.example.appwithcats.inresfaces.ISharPref
 import com.example.appwithcats.model.VoteCatsModel
 import com.example.appwithcats.model.VoteModel
 import com.example.appwithcats.repository.CatRepository
-import com.example.appwithcats.repository.SharedPreferenceRepository
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter
 import retrofit2.HttpException
@@ -20,10 +20,8 @@ class VoteViewModel {
     init {
         App.getInstance().appComponent.inject(this)
     }
-
-    @Inject
-    lateinit var sharedPreferenceRepository: SharedPreferenceRepository
-
+    var sharedPreference: ISharPref? = null
+        @Inject set
 
     @Inject
     lateinit var catRepository: CatRepository
@@ -34,7 +32,7 @@ class VoteViewModel {
 
 
     fun postRequest() {
-        val vote = VoteCatsModel(Util.id, sharedPreferenceRepository.vote)
+        val vote = VoteCatsModel(Util.id, sharedPreference!!.vote)
         catRepository.postFavorites(vote)
             .subscribe({
                 _voteInLiveData.value = it
@@ -55,10 +53,10 @@ class VoteViewModel {
     }
 
     fun updateLike() {
-        sharedPreferenceRepository.vote = true
+        sharedPreference!!.vote = true
     }
 
     fun updateDislike() {
-        sharedPreferenceRepository.vote = false
+        sharedPreference!!.vote = false
     }
 }

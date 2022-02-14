@@ -4,6 +4,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="grey">#979797</color>
+    <color name="blue">#2D9CDB</color>
 
     <color name="green_200">#6FCF97</color>
     <color name="green_500">#1BB55C</color>

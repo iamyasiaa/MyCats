@@ -1,6 +1,6 @@
 package com.example.appwithcats.model
 
 data class VoteModel(
-    val id: String,
-    val status: Int,
+    val id: Int,
+    val message: String,
 )

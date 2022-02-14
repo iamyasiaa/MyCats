@@ -8,4 +8,5 @@
     <string name="email">E-mail</string>
     <string name="desc">Description</string>
     <string name="next_button">Next</string>
+    <string name="ErrorVote">Too many api key revisions have been issued for this email. Contact support for more help.</string>
 </resources>

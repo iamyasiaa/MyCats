@@ -12,6 +12,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.appwithcats.R
 import com.example.appwithcats.adapter.CatListAdapter
 import com.example.appwithcats.databinding.FragmentCatsBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 
 class CatsFragment : Fragment(R.layout.fragment_cats) {
@@ -22,9 +23,20 @@ class CatsFragment : Fragment(R.layout.fragment_cats) {
     private var isShow = true
 
 
+
     private val mainViewModel: MainViewModel by lazy {
         ViewModelProvider(this).get(MainViewModel::class.java)
 
+    }
+
+    fun showErrorWindow(message: String) {
+        context?.let {
+            MaterialAlertDialogBuilder(it)
+                .setTitle(getString(R.string.Error))
+                .setMessage(R.string.ErrorVote)
+                .setPositiveButton("ОК") { dialog, _ -> dialog.dismiss() }
+                .show()
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

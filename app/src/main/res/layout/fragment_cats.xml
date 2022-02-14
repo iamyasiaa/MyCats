@@ -13,11 +13,11 @@
   <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
       android:layout_width="match_parent"
       android:id="@+id/swipeRefreshLayout"
-      android:layout_height="675dp">
+      android:layout_height="655dp">
       <androidx.recyclerview.widget.RecyclerView
           android:id="@+id/recyclerCats"
           android:layout_width="match_parent"
-          android:layout_height="675dp"
+          android:layout_height="650dp"
           android:background="@color/white" />
   </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

@@ -33,7 +33,7 @@ class CatRepository(private val api: Api) {
 
             return data
         }
-    
+
     fun postLoginIn(user: PersonalData): Observable<UserModel> {
         return api.loginUser(user)
             .subscribeOn(Schedulers.io())

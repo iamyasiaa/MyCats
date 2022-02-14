@@ -1,6 +1,5 @@
 package com.example.appwithcats.adapter
 
-
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.Navigation
@@ -11,6 +10,7 @@ import com.example.appwithcats.R
 import com.example.appwithcats.Util
 import com.example.appwithcats.model.CatModel
 import com.example.appwithcats.databinding.ItemBinding
+import com.example.appwithcats.ui.cats.CatsFragment
 import com.example.appwithcats.ui.cats.CatsFragmentDirections
 import com.example.appwithcats.ui.cats.VoteViewModel
 
@@ -33,6 +33,8 @@ class CatListAdapter :
     inner class CatViewHolder(private val binding: ItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         private val voteViewModel = VoteViewModel()
+        private val catsFragment = CatsFragment()
+
 
         fun bind(cat: CatModel) {
             binding.apply {
@@ -56,16 +58,28 @@ class CatListAdapter :
                 voteViewModel.updateLike()
                 Util.id = _id
                 voteViewModel.postRequest()
-                binding.dislike.setImageResource(R.drawable.dislike)
-                binding.like.setImageResource(R.drawable.like_click)
+                if(voteViewModel.voteInLiveData.value?.message != "SUCCESS"){
+                    catsFragment.showErrorWindow("Ошибка")
+
+                }else {
+                    binding.dislike.setImageResource(R.drawable.dislike)
+                    binding.like.setImageResource(R.drawable.like_click)
+                }
+
             }
             binding.dislike.setOnClickListener {
                 voteViewModel.updateDislike()
                 Util.id = _id
                 voteViewModel.postRequest()
-                binding.dislike.setImageResource(R.drawable.dislike_click)
-                binding.like.setImageResource(R.drawable.like)
+                if(voteViewModel.voteInLiveData.value?.message != "SUCCESS"){
+                    catsFragment.showErrorWindow("Ошибка")
+                } else{
+                    binding.dislike.setImageResource(R.drawable.dislike_click)
+                    binding.like.setImageResource(R.drawable.like)
+                }
+
             }
+
         }
 
     }

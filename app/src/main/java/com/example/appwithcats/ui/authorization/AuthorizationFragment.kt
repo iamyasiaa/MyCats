@@ -42,7 +42,7 @@ class AuthorizationFragment : Fragment() {
         val textWatcher = CustomTextWatcher(edList = edList, loginButton)
         for (editText in edList) editText.addTextChangedListener(textWatcher)
         val action1 = AuthorizationFragmentDirections.actionAuthorizationToCatsFragment(idCat = String())
-        if (authorizationViewModel.sharedPreferenceRepository.email != "") {
+        if (authorizationViewModel.sharedPreference!!.email != "") {
             Navigation.findNavController(view).navigate(action1)
         }
 

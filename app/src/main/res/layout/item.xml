@@ -13,28 +13,29 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp">
 
-    <ImageView
-        android:id="@+id/dislike"
-        android:layout_width="43dp"
-        android:layout_height="35dp"
-        android:layout_marginLeft="350dp"
-        android:layout_marginTop="200dp"
-        app:srcCompat="@drawable/dislike" />
-
-    <ImageView
-        android:id="@+id/like"
-        android:layout_width="46dp"
-        android:layout_height="35dp"
-        android:layout_marginLeft="300dp"
-        android:layout_marginTop="200dp"
-        app:srcCompat="@drawable/like" />
-
         <ImageView
             android:id="@+id/image"
             android:layout_width="400dp"
             android:layout_height="190dp"
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/ic_launcher_foreground" />
+
+        <ImageView
+            android:id="@+id/dislike"
+            android:layout_width="72dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="300dp"
+            android:layout_marginTop="190dp"
+            app:srcCompat="@drawable/dislike" />
+
+        <ImageView
+            android:id="@+id/like"
+            android:layout_width="70dp"
+            android:layout_height="42dp"
+            android:layout_marginLeft="250dp"
+            android:layout_marginTop="190dp"
+            app:srcCompat="@drawable/like" />
+
 
     </RelativeLayout>
 
