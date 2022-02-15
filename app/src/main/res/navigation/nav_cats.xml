@@ -36,7 +36,7 @@
     <fragment
         android:id="@+id/catsFragment"
         android:name="com.example.appwithcats.ui.cats.CatsFragment"
-        android:label="CatsFragment"
+        android:label=""
         tools:layout="@layout/fragment_cats">
         <argument
             android:name="idCat"

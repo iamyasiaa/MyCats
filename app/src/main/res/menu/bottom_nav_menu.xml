@@ -2,23 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_feed"
+        android:id="@+id/catsFragment"
         android:icon="@drawable/ic_baseline_view_carousel_24"
-        android:enabled="true"
         android:title="Feed"/>
     <item
-        android:id="@+id/navigation_cat"
+        android:id="@+id/catsFragment1"
         android:icon="@drawable/ic_outline_playlist_add_24"
-        android:enabled="true"
         android:title="Cats"/>
     <item
-        android:id="@+id/navigation_favorites"
+        android:id="@+id/catsFragment2"
         android:icon="@drawable/ic_baseline_star_24"
-        android:enabled="true"
         android:title="Favorites"/>
     <item
-        android:id="@+id/navigation_more"
+        android:id="@+id/catsFragment3"
         android:icon="@drawable/ic_baseline_view_headline_24"
-        android:enabled="true"
         android:title="More"/>
 </menu>
