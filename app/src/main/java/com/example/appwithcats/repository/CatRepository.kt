@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull
 
 
 class CatRepository(private val api: Api) {
-    var const = 20
+    var const = 10
 
     private val compositeDisposable = CompositeDisposable()
     val getCatLiveData: MutableLiveData<MutableList<CatModel>>

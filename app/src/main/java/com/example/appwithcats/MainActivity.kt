@@ -20,10 +20,8 @@ class MainActivity : AppCompatActivity() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.nav_view)
         bottomNavigationView.setupWithNavController(navController)
         setupNav()
-
-
-
     }
+
     private fun setupNav() {
         val navController = findNavController(R.id.nav_host_fragment)
         findViewById<BottomNavigationView>(R.id.nav_view)
@@ -40,12 +38,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun showBottomNav() {
         binding.navView.visibility = View.VISIBLE
-
     }
 
     private fun hideBottomNav() {
         binding.navView.visibility = View.GONE
-
     }
 
 }

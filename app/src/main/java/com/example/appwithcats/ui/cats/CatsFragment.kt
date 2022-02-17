@@ -56,6 +56,8 @@ class CatsFragment : Fragment(R.layout.fragment_cats) {
                 adapter = catListAdapter
                 layoutManager = LinearLayoutManager(requireContext())
                 setHasFixedSize(true)
+
+
             }
         }
         mSwipeRefreshLayout!!.setOnRefreshListener {

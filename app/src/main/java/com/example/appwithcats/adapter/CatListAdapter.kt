@@ -2,14 +2,15 @@ package com.example.appwithcats.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageButton
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.appwithcats.R
 import com.example.appwithcats.Util
-import com.example.appwithcats.model.CatModel
 import com.example.appwithcats.databinding.ItemBinding
+import com.example.appwithcats.model.CatModel
 import com.example.appwithcats.ui.cats.CatsFragment
 import com.example.appwithcats.ui.cats.CatsFragmentDirections
 import com.example.appwithcats.ui.cats.VoteViewModel
@@ -25,9 +26,24 @@ class CatListAdapter :
     }
 
     override fun onBindViewHolder(holder: CatViewHolder, position: Int) {
+        val voteViewModel = VoteViewModel()
+        val catsFragment = CatsFragment()
         val currentItem = getItem(position)
         _id = currentItem.id
         holder.bind(currentItem)
+//        when {
+//            like.isPressed -> {
+//                dislike.setImageResource(R.drawable.dislike)
+//                like.setImageResource(R.drawable.like_click)
+//            }
+//            dislike.isClickable -> {
+//                dislike.setImageResource(R.drawable.dislike_click)
+//                like.setImageResource(R.drawable.like)
+//            }
+//            voteViewModel.voteInLiveData.value?.message != "SUCCESS" -> {
+//                catsFragment.showErrorWindow("Ошибка")
+//            }
+//        }
     }
 
     inner class CatViewHolder(private val binding: ItemBinding) :
@@ -42,6 +58,19 @@ class CatListAdapter :
                     .load(cat.url)
                     .placeholder(R.drawable.progress_animation)
                     .into(image)
+//        when {
+//            like.isPressed -> {
+//                dislike.setImageResource(R.drawable.dislike)
+//                like.setImageResource(R.drawable.like_click)
+//            }
+//            dislike.isClickable -> {
+//                dislike.setImageResource(R.drawable.dislike_click)
+//                like.setImageResource(R.drawable.like)
+//            }
+//            voteViewModel.voteInLiveData.value?.message != "SUCCESS" -> {
+//                catsFragment.showErrorWindow("Ошибка")
+//            }
+//        }
             }
             binding.image.apply {
                 setOnClickListener {
@@ -50,33 +79,31 @@ class CatListAdapter :
                     Navigation.findNavController(itemView).navigate(action)
                 }
             }
-            binding.like.setOnClickListener {
 
-            }
 
             binding.like.setOnClickListener {
                 voteViewModel.updateLike()
                 Util.id = _id
                 voteViewModel.postRequest()
-                if(voteViewModel.voteInLiveData.value?.message != "SUCCESS"){
-                    catsFragment.showErrorWindow("Ошибка")
-
-                }else {
-                    binding.dislike.setImageResource(R.drawable.dislike)
-                    binding.like.setImageResource(R.drawable.like_click)
-                }
+//                if(voteViewModel.voteInLiveData.value?.message != "SUCCESS"){
+//                    catsFragment.showErrorWindow("Ошибка")
+//
+//                }else {
+//                    binding.dislike.setImageResource(R.drawable.dislike)
+//                    binding.like.setImageResource(R.drawable.like_click)
+//                }
 
             }
             binding.dislike.setOnClickListener {
                 voteViewModel.updateDislike()
                 Util.id = _id
                 voteViewModel.postRequest()
-                if(voteViewModel.voteInLiveData.value?.message != "SUCCESS"){
-                    catsFragment.showErrorWindow("Ошибка")
-                } else{
-                    binding.dislike.setImageResource(R.drawable.dislike_click)
-                    binding.like.setImageResource(R.drawable.like)
-                }
+//                if(voteViewModel.voteInLiveData.value?.message != "SUCCESS"){
+//                    catsFragment.showErrorWindow("Ошибка")
+//                } else{
+//                    binding.dislike.setImageResource(R.drawable.dislike_click)
+//                    binding.like.setImageResource(R.drawable.like)
+//                }
 
             }
 
