@@ -11,7 +11,6 @@
         android:id="@+id/app_header"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="111dp"
         android:gravity="center"
         android:text="@string/app_name"
         android:textColor="@color/green_700"
@@ -19,39 +18,33 @@
         app:layout_constraintBottom_toTopOf="@+id/apikey_edit_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/back_authorization" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/apikey_edit_text"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginBottom="324dp"
+        android:layout_width="643dp"
+        android:layout_height="68dp"
+        android:layout_marginBottom="155dp"
         android:hint="@string/api_key"
         app:boxStrokeColor="@color/green_500"
         app:hintTextColor="@color/green_500"
-        app:layout_constraintBottom_toTopOf="@+id/loginButton1"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_header">
+        app:layout_constraintTop_toBottomOf="@+id/back_authorization">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/apiKey"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="632dp"
+            android:layout_height="50dp"
             android:inputType="text" />
-
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/loginButton1"
-        android:layout_width="328dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="37dp"
+        android:layout_width="601dp"
+        android:layout_height="48dp"
         android:text="@string/next_button"
         android:textColor="@color/black"
         android:textStyle="bold"
@@ -67,11 +60,10 @@
         android:id="@+id/back_authorization"
         android:layout_width="63dp"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="68dp"
+        android:layout_marginBottom="149dp"
         android:background="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/app_header"
+        android:src="@drawable/more"
+        app:layout_constraintBottom_toTopOf="@+id/apikey_edit_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />

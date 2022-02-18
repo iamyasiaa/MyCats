@@ -2,112 +2,66 @@ package com.example.appwithcats.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageButton
-import androidx.navigation.Navigation
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.appwithcats.R
-import com.example.appwithcats.Util
 import com.example.appwithcats.databinding.ItemBinding
 import com.example.appwithcats.model.CatModel
-import com.example.appwithcats.ui.cats.CatsFragment
-import com.example.appwithcats.ui.cats.CatsFragmentDirections
-import com.example.appwithcats.ui.cats.VoteViewModel
+import com.example.appwithcats.ui.cats.CatViewModel
 
-class CatListAdapter :
+class CatListAdapter(
+    private val fragmentLifecycleOwner: LifecycleOwner,
+    private val onNavigate: (CatModel) -> Unit
+) :
     androidx.recyclerview.widget.ListAdapter<CatModel, CatListAdapter.CatViewHolder>(CatDiffCallback()) {
 
-    var _id: String = ""
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatViewHolder {
-        val binding = ItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemBinding.inflate(LayoutInflater.from(parent.context), parent, false).apply {
+                this.lifecycleOwner = fragmentLifecycleOwner
+            }
         return CatViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: CatViewHolder, position: Int) {
-        val voteViewModel = VoteViewModel()
-        val catsFragment = CatsFragment()
-        val currentItem = getItem(position)
-        _id = currentItem.id
-        holder.bind(currentItem)
-//        when {
-//            like.isPressed -> {
-//                dislike.setImageResource(R.drawable.dislike)
-//                like.setImageResource(R.drawable.like_click)
-//            }
-//            dislike.isClickable -> {
-//                dislike.setImageResource(R.drawable.dislike_click)
-//                like.setImageResource(R.drawable.like)
-//            }
-//            voteViewModel.voteInLiveData.value?.message != "SUCCESS" -> {
-//                catsFragment.showErrorWindow("Ошибка")
-//            }
-//        }
+        holder.bind(getItem(position))
     }
 
     inner class CatViewHolder(private val binding: ItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        private val voteViewModel = VoteViewModel()
-        private val catsFragment = CatsFragment()
 
 
         fun bind(cat: CatModel) {
+            binding.viewModel = CatViewModel(onNavigate, cat).apply {
+                this.vote.observe(fragmentLifecycleOwner) {
+                    with(binding) {
+                        it?.let {
+                            if (it) {
+                                dislike.setImageResource(R.drawable.dislike)
+                                like.setImageResource(R.drawable.like_click)
+                            } else {
+                                dislike.setImageResource(R.drawable.dislike_click)
+                                like.setImageResource(R.drawable.like)
+                            }
+                        } ?: run {
+                            like.setImageResource(R.drawable.like)
+                            dislike.setImageResource(R.drawable.dislike)
+                        }
+                    }
+                }
+            }
             binding.apply {
                 Glide.with(itemView)
                     .load(cat.url)
                     .placeholder(R.drawable.progress_animation)
                     .into(image)
-//        when {
-//            like.isPressed -> {
-//                dislike.setImageResource(R.drawable.dislike)
-//                like.setImageResource(R.drawable.like_click)
-//            }
-//            dislike.isClickable -> {
-//                dislike.setImageResource(R.drawable.dislike_click)
-//                like.setImageResource(R.drawable.like)
-//            }
-//            voteViewModel.voteInLiveData.value?.message != "SUCCESS" -> {
-//                catsFragment.showErrorWindow("Ошибка")
-//            }
-//        }
-            }
-            binding.image.apply {
-                setOnClickListener {
-                    val action =
-                        CatsFragmentDirections.actionCatsFragmentToCatFragment(urlCat = cat.url)
-                    Navigation.findNavController(itemView).navigate(action)
-                }
-            }
-
-
-            binding.like.setOnClickListener {
-                voteViewModel.updateLike()
-                Util.id = _id
-                voteViewModel.postRequest()
-//                if(voteViewModel.voteInLiveData.value?.message != "SUCCESS"){
-//                    catsFragment.showErrorWindow("Ошибка")
-//
-//                }else {
-//                    binding.dislike.setImageResource(R.drawable.dislike)
-//                    binding.like.setImageResource(R.drawable.like_click)
-//                }
 
             }
-            binding.dislike.setOnClickListener {
-                voteViewModel.updateDislike()
-                Util.id = _id
-                voteViewModel.postRequest()
-//                if(voteViewModel.voteInLiveData.value?.message != "SUCCESS"){
-//                    catsFragment.showErrorWindow("Ошибка")
-//                } else{
-//                    binding.dislike.setImageResource(R.drawable.dislike_click)
-//                    binding.like.setImageResource(R.drawable.like)
-//                }
-
-            }
-
         }
+
 
     }
 

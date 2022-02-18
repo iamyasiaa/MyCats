@@ -7,37 +7,27 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.appwithcats.R
 import com.example.appwithcats.adapter.CatListAdapter
 import com.example.appwithcats.databinding.FragmentCatsBinding
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
+
 
 
 class CatsFragment : Fragment(R.layout.fragment_cats) {
 
 
-    private val catListAdapter = CatListAdapter()
+    private var catListAdapter: CatListAdapter? = null
     private var mSwipeRefreshLayout: SwipeRefreshLayout? = null
     private var isShow = true
 
 
-
     private val mainViewModel: MainViewModel by lazy {
         ViewModelProvider(this).get(MainViewModel::class.java)
-
     }
 
-    fun showErrorWindow(message: String) {
-        context?.let {
-            MaterialAlertDialogBuilder(it)
-                .setTitle(getString(R.string.Error))
-                .setMessage(R.string.ErrorVote)
-                .setPositiveButton("ОК") { dialog, _ -> dialog.dismiss() }
-                .show()
-        }
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -53,7 +43,11 @@ class CatsFragment : Fragment(R.layout.fragment_cats) {
 
         binding.apply {
             recyclerCats.apply {
-                adapter = catListAdapter
+                adapter = CatListAdapter(viewLifecycleOwner) {
+                    val action =
+                        CatsFragmentDirections.actionCatsFragmentToCatFragment(it.url)
+                    findNavController().navigate(action)
+                }.also { catListAdapter = it }
                 layoutManager = LinearLayoutManager(requireContext())
                 setHasFixedSize(true)
 
@@ -68,7 +62,7 @@ class CatsFragment : Fragment(R.layout.fragment_cats) {
 
     fun onInitVM() {
         mainViewModel.randomImage.observe(viewLifecycleOwner) {
-            catListAdapter.submitList(it)
+            catListAdapter?.submitList(it)
 
 
         }

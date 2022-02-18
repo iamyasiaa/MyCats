@@ -5,6 +5,7 @@ import com.example.appwithcats.module.Module
 import com.example.appwithcats.dagger.AppComponent
 import com.example.appwithcats.dagger.DaggerAppComponent
 import com.example.appwithcats.repository.SharedPreferenceRepository
+import timber.log.Timber
 
 
 class App : Application() {
@@ -19,6 +20,7 @@ class App : Application() {
         appComponent = DaggerAppComponent.builder()
             .module(Module(getString(R.string.BaseUrl), sharedPreferenceRepository.apikey, this))
             .build()
+        Timber.plant(Timber.DebugTree())
     }
 
     companion object {

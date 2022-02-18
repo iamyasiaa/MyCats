@@ -10,7 +10,6 @@ class SharedPreferenceRepository(context: Context): ISharPref {
         private const val EMAIL = "e-mail"
         private const val DESCRIPTION = "description"
         private const val APIKEY = "api-key"
-        private const val VOTE = "vote"
     }
 
     private var preference = context.getSharedPreferences("sp_dagger", Context.MODE_PRIVATE)
@@ -46,11 +45,6 @@ class SharedPreferenceRepository(context: Context): ISharPref {
         get() = getString(APIKEY)
         set(value) {
             setString(APIKEY, value)
-        }
-    override var vote: Boolean
-        get() = getBoolean(VOTE)
-        set(value) {
-            setBoolean(VOTE, value)
         }
 
 }

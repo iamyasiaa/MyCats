@@ -4,5 +4,4 @@ interface ISharPref {
     var email: String
     var description: String
     var apikey: String
-    var vote:Boolean
 }

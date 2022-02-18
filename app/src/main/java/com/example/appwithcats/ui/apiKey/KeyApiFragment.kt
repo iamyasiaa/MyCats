@@ -65,7 +65,7 @@ class KeyApiFragment : Fragment() {
              }
          }
          apiKeyViewModel.apiKeyLiveData.observe(viewLifecycleOwner) {
-             val action = KeyApiFragmentDirections.actionKeyApiToCatsFragment(idCat = String())
+             val action = KeyApiFragmentDirections.actionKeyApiToCatsFragment(String())
               if (it) Navigation.findNavController(requireView()).navigate(action)
          }
     }
