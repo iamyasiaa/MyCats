@@ -15,29 +15,24 @@ import com.example.appwithcats.adapter.CatListAdapter
 import com.example.appwithcats.databinding.FragmentCatsBinding
 
 
-
 class CatsFragment : Fragment(R.layout.fragment_cats) {
 
 
     private var catListAdapter: CatListAdapter? = null
     private var mSwipeRefreshLayout: SwipeRefreshLayout? = null
-    private var isShow = true
 
 
     private val mainViewModel: MainViewModel by lazy {
-        ViewModelProvider(this).get(MainViewModel::class.java)
+        ViewModelProvider(this)[MainViewModel::class.java]
     }
+
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentCatsBinding.bind(view)
         mSwipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout)
-
-        if (isShow) {
-            onInitVM()
-        }
-        isShow = false
 
 
 
@@ -50,21 +45,15 @@ class CatsFragment : Fragment(R.layout.fragment_cats) {
                 }.also { catListAdapter = it }
                 layoutManager = LinearLayoutManager(requireContext())
                 setHasFixedSize(true)
-
-
             }
         }
-        mSwipeRefreshLayout!!.setOnRefreshListener {
-            onInitVM()
+        mainViewModel.catsLiveData.observe(viewLifecycleOwner){
             mSwipeRefreshLayout!!.isRefreshing = false
-        }
-    }
-
-    fun onInitVM() {
-        mainViewModel.randomImage.observe(viewLifecycleOwner) {
             catListAdapter?.submitList(it)
-
-
+        }
+        mSwipeRefreshLayout!!.setOnRefreshListener {
+            mSwipeRefreshLayout!!.isRefreshing = false
+            mainViewModel.postRequest()
         }
     }
 

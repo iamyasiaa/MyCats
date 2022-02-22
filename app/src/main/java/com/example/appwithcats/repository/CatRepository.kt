@@ -8,7 +8,7 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import org.jetbrains.annotations.NotNull
-
+import retrofit2.http.Query
 
 
 class CatRepository(private val api: Api) {
@@ -33,6 +33,13 @@ class CatRepository(private val api: Api) {
 
             return data
         }
+
+    fun getCatList(count: Int): Observable<MutableList<CatModel>>{
+        return api.getRandomImage(count)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+
+    }
 
     fun postLoginIn(user: PersonalData): Observable<UserModel> {
         return api.loginUser(user)
