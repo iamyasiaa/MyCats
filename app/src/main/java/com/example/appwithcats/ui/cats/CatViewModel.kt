@@ -4,17 +4,9 @@ package com.example.appwithcats.ui.cats
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.appwithcats.App
-import com.example.appwithcats.Util
-import com.example.appwithcats.inresfaces.ISharPref
 import com.example.appwithcats.model.CatModel
 import com.example.appwithcats.model.VoteCatsModel
-import com.example.appwithcats.model.VoteModel
 import com.example.appwithcats.repository.CatRepository
-import com.google.gson.Gson
-import com.google.gson.TypeAdapter
-import retrofit2.HttpException
-import timber.log.Timber
-import java.io.IOException
 import javax.inject.Inject
 
 class CatViewModel(private val onNavigate: (CatModel) -> Unit, private val cat: CatModel) {
@@ -47,11 +39,15 @@ class CatViewModel(private val onNavigate: (CatModel) -> Unit, private val cat: 
     }
 
     fun onLikeClicked() {
+        cat.like = "like"
         postRequest(true)
+
     }
 
     fun onDislikeClicked() {
+        cat.like = "dislike"
         postRequest(false)
+
     }
 
     fun onImageClicked() {

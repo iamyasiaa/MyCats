@@ -1,5 +1,6 @@
 package com.example.appwithcats.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
@@ -39,10 +40,10 @@ class CatListAdapter(
                 this.vote.observe(fragmentLifecycleOwner) {
                     with(binding) {
                         it?.let {
-                            if (it) {
+                            if (cat.like == "like") {
                                 dislike.setImageResource(R.drawable.dislike)
                                 like.setImageResource(R.drawable.like_click)
-                            } else {
+                            } else if (cat.like == "dislike") {
                                 dislike.setImageResource(R.drawable.dislike_click)
                                 like.setImageResource(R.drawable.like)
                             }
