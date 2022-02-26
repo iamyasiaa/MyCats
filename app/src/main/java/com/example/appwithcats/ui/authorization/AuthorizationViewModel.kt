@@ -62,11 +62,11 @@ class AuthorizationViewModel(application: Application) : AndroidViewModel(applic
     }
 
     fun checkOnStatus(): Boolean {
-        if (loginInLiveData.value!!.status == 400) {
+        return if (loginInLiveData.value!!.status == 400) {
             Timber.e("400")
-            return true
+            true
         } else {
-            return false
+            false
         }
     }
 

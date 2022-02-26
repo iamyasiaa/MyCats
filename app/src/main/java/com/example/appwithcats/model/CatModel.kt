@@ -7,5 +7,5 @@ data class CatModel(
     val id: String,
     val url: String,
     val width: Int,
-    var like: String? = null
+    var like: Boolean? = null
 )

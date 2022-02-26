@@ -40,10 +40,11 @@ class CatListAdapter(
                 this.vote.observe(fragmentLifecycleOwner) {
                     with(binding) {
                         it?.let {
-                            if (cat.like == "like") {
+                            if (cat.like == true) {
                                 dislike.setImageResource(R.drawable.dislike)
                                 like.setImageResource(R.drawable.like_click)
-                            } else if (cat.like == "dislike") {
+                            }
+                            if(cat.like == false){
                                 dislike.setImageResource(R.drawable.dislike_click)
                                 like.setImageResource(R.drawable.like)
                             }

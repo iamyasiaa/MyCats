@@ -1,6 +1,7 @@
 package com.example.appwithcats.ui.cats
 
 
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.appwithcats.App
@@ -25,11 +26,14 @@ class CatViewModel(private val onNavigate: (CatModel) -> Unit, private val cat: 
         get() = _vote
 
 
+
+
     private fun postRequest(vote: Boolean) {
         catRepository.postFavorites(VoteCatsModel(cat.id, vote))
             .subscribe({
                 if (it.message.lowercase() == "success") {
                     _vote.value = vote
+
                 } else {
                     _vote.value = null
                 }
@@ -39,15 +43,13 @@ class CatViewModel(private val onNavigate: (CatModel) -> Unit, private val cat: 
     }
 
     fun onLikeClicked() {
-        cat.like = "like"
+        cat.like = true
         postRequest(true)
-
     }
 
     fun onDislikeClicked() {
-        cat.like = "dislike"
+        cat.like = false
         postRequest(false)
-
     }
 
     fun onImageClicked() {
