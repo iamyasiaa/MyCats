@@ -37,15 +37,19 @@ class CatListAdapter(
 
         fun bind(cat: CatModel) {
             binding.viewModel = CatViewModel(onNavigate, cat).apply {
-                if(cat.like == true){
-                    binding.dislike.setImageResource(R.drawable.dislike)
-                    binding.like.setImageResource(R.drawable.like_click)
-                } else if(cat.like == false){
-                    binding.dislike.setImageResource(R.drawable.dislike_click)
-                    binding.like.setImageResource(R.drawable.like)
-                } else{
-                    binding.dislike.setImageResource(R.drawable.dislike)
-                    binding.like.setImageResource(R.drawable.like)
+                when (cat.like) {
+                    true -> {
+                        binding.dislike.setImageResource(R.drawable.dislike)
+                        binding.like.setImageResource(R.drawable.like_click)
+                    }
+                    false -> {
+                        binding.dislike.setImageResource(R.drawable.dislike_click)
+                        binding.like.setImageResource(R.drawable.like)
+                    }
+                    else -> {
+                        binding.dislike.setImageResource(R.drawable.dislike)
+                        binding.like.setImageResource(R.drawable.like)
+                    }
                 }
                 this.vote.observe(fragmentLifecycleOwner) {
                     with(binding) {
@@ -53,7 +57,7 @@ class CatListAdapter(
                             if (it) {
                                 dislike.setImageResource(R.drawable.dislike)
                                 like.setImageResource(R.drawable.like_click)
-                            } else if(!it){
+                            } else if (!it) {
                                 dislike.setImageResource(R.drawable.dislike_click)
                                 like.setImageResource(R.drawable.like)
                             }

@@ -1,7 +1,6 @@
 package com.example.appwithcats.ui.cats
 
 
-
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.appwithcats.App
@@ -24,8 +23,6 @@ class CatViewModel(private val onNavigate: (CatModel) -> Unit, private val cat: 
     private val _vote = MutableLiveData<Boolean?>()
     val vote: LiveData<Boolean?>
         get() = _vote
-
-
 
 
     private fun postRequest(vote: Boolean) {
