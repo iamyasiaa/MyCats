@@ -3,15 +3,15 @@
 
     <item
         android:id="@+id/catsFragment"
-        android:icon="@drawable/ic_baseline_view_carousel_24"
+        android:icon="@drawable/feed"
         android:title="Feed"/>
     <item
         android:id="@+id/catsFragment1"
-        android:icon="@drawable/ic_outline_playlist_add_24"
+        android:icon="@drawable/add"
         android:title="Cats"/>
     <item
         android:id="@+id/catsFragment2"
-        android:icon="@drawable/ic_baseline_star_24"
+        android:icon="@drawable/favorites"
         android:title="Favorites"/>
     <item
         android:id="@+id/catsFragment3"

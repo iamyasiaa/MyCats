@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -8,8 +9,7 @@
             type="com.example.appwithcats.ui.cats.CatViewModel" />
     </data>
 
-    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="250dp"
@@ -24,11 +24,10 @@
 
             <ImageView
                 android:id="@+id/image"
-                android:layout_width="391dp"
-                android:layout_height="217dp"
+                android:layout_width="714dp"
+                android:layout_height="203dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:onClick="@{() -> viewModel.onImageClicked()}"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

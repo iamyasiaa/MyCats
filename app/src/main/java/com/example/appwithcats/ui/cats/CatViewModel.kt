@@ -19,11 +19,9 @@ class CatViewModel(private val onNavigate: (CatModel) -> Unit, private val cat: 
     @Inject
     lateinit var catRepository: CatRepository
 
-
     private val _vote = MutableLiveData<Boolean?>()
     val vote: LiveData<Boolean?>
         get() = _vote
-
 
     private fun postRequest(vote: Boolean) {
         catRepository.postFavorites(VoteCatsModel(cat.id, vote))
@@ -39,6 +37,7 @@ class CatViewModel(private val onNavigate: (CatModel) -> Unit, private val cat: 
             })
     }
 
+
     fun onLikeClicked() {
         cat.like = true
         postRequest(true)
@@ -52,6 +51,8 @@ class CatViewModel(private val onNavigate: (CatModel) -> Unit, private val cat: 
     fun onImageClicked() {
         onNavigate(cat)
     }
+
+
 
 
 }

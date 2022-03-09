@@ -17,7 +17,6 @@ class CatFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val view = inflater.inflate(R.layout.fragment_cat, container, false)
-
         image2 = view!!.findViewById(R.id.showCat)
         val url = args.urlCat
         Glide.with(this)

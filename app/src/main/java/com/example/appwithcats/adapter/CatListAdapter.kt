@@ -1,9 +1,11 @@
 package com.example.appwithcats.adapter
 
+
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -11,13 +13,16 @@ import com.example.appwithcats.R
 import com.example.appwithcats.databinding.ItemBinding
 import com.example.appwithcats.model.CatModel
 import com.example.appwithcats.ui.cats.CatViewModel
+import com.example.appwithcats.ui.cats.CatsFragment
+import com.example.appwithcats.ui.cats.CatsFragmentDirections
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class CatListAdapter(
     private val fragmentLifecycleOwner: LifecycleOwner,
-    private val onNavigate: (CatModel) -> Unit
+    private val onNavigate: (CatModel) -> Unit,
+
 ) :
     androidx.recyclerview.widget.ListAdapter<CatModel, CatListAdapter.CatViewHolder>(CatDiffCallback()) {
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatViewHolder {
         val binding =
@@ -36,36 +41,11 @@ class CatListAdapter(
 
 
         fun bind(cat: CatModel) {
+
             binding.viewModel = CatViewModel(onNavigate, cat).apply {
-                when (cat.like) {
-                    true -> {
-                        binding.dislike.setImageResource(R.drawable.dislike)
-                        binding.like.setImageResource(R.drawable.like_click)
-                    }
-                    false -> {
-                        binding.dislike.setImageResource(R.drawable.dislike_click)
-                        binding.like.setImageResource(R.drawable.like)
-                    }
-                    else -> {
-                        binding.dislike.setImageResource(R.drawable.dislike)
-                        binding.like.setImageResource(R.drawable.like)
-                    }
-                }
+                renderingVote(cat)
                 this.vote.observe(fragmentLifecycleOwner) {
-                    with(binding) {
-                        it?.let {
-                            if (it) {
-                                dislike.setImageResource(R.drawable.dislike)
-                                like.setImageResource(R.drawable.like_click)
-                            } else if (!it) {
-                                dislike.setImageResource(R.drawable.dislike_click)
-                                like.setImageResource(R.drawable.like)
-                            }
-                        } ?: run {
-                            like.setImageResource(R.drawable.like)
-                            dislike.setImageResource(R.drawable.dislike)
-                        }
-                    }
+                    renderingVote(cat)
                 }
             }
             binding.apply {
@@ -73,11 +53,25 @@ class CatListAdapter(
                     .load(cat.url)
                     .placeholder(R.drawable.progress_animation)
                     .into(image)
-
             }
         }
 
-
+        private fun renderingVote(cat: CatModel) {
+            when (cat.like) {
+                true -> {
+                    binding.dislike.setImageResource(R.drawable.dislike)
+                    binding.like.setImageResource(R.drawable.like_click)
+                }
+                false -> {
+                    binding.dislike.setImageResource(R.drawable.dislike_click)
+                    binding.like.setImageResource(R.drawable.like)
+                }
+                else -> {
+                    binding.dislike.setImageResource(R.drawable.dislike)
+                    binding.like.setImageResource(R.drawable.like)
+                }
+            }
+        }
     }
 
     class CatDiffCallback : DiffUtil.ItemCallback<CatModel>() {

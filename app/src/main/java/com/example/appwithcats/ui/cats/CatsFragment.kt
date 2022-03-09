@@ -5,49 +5,44 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.bumptech.glide.Glide
 import com.example.appwithcats.R
 import com.example.appwithcats.adapter.CatListAdapter
 import com.example.appwithcats.databinding.FragmentCatsBinding
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
 
-class CatsFragment : Fragment(R.layout.fragment_cats) {
+class CatsFragment : Fragment() {
 
 
     private var catListAdapter: CatListAdapter? = null
     private var mSwipeRefreshLayout: SwipeRefreshLayout? = null
+    private lateinit var image2: ImageView
 
 
     private val mainViewModel: MainViewModel by lazy {
         ViewModelProvider(this)[MainViewModel::class.java]
     }
 
-
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentCatsBinding.bind(view)
         mSwipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout)
-
-
-
         binding.apply {
             recyclerCats.apply {
                 adapter = CatListAdapter(viewLifecycleOwner) {
-                    val action =
-                        CatsFragmentDirections.actionCatsFragmentToCatFragment(it.url)
-                    findNavController().navigate(action)
+                    onClickImageItem(it.url)
                 }.also { catListAdapter = it }
                 layoutManager = LinearLayoutManager(requireContext())
                 setHasFixedSize(true)
             }
         }
-        mainViewModel.catsLiveData.observe(viewLifecycleOwner){
+        mainViewModel.catsLiveData.observe(viewLifecycleOwner) {
             mSwipeRefreshLayout!!.isRefreshing = false
             catListAdapter?.submitList(it)
         }
@@ -55,6 +50,18 @@ class CatsFragment : Fragment(R.layout.fragment_cats) {
             mSwipeRefreshLayout!!.isRefreshing = false
             mainViewModel.postRequest()
         }
+    }
+
+    fun onClickImageItem(url: String) {
+        val view: View = layoutInflater.inflate(R.layout.bottom_sheet_dialog, null)
+        val dialog = BottomSheetDialog(this.requireContext())
+        image2 = view!!.findViewById(R.id.showCats)
+        Glide.with(this)
+            .load(url)
+            .placeholder(R.drawable.progress_animation)
+            .into(image2)
+        dialog.setContentView(view)
+        dialog.show()
     }
 
     override fun onCreateView(
