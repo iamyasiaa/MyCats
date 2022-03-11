@@ -5,7 +5,7 @@
     android:id="@+id/apiKeyFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.apiKey.KeyApiFragment">
+    tools:context=".view.apikey.fragments.KeyApiFragment">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/app_header"

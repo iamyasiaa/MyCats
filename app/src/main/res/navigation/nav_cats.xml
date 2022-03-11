@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/authorization"
-        android:name="com.example.appwithcats.ui.authorization.AuthorizationFragment"
+        android:name="com.example.appwithcats.view.authrization.fragment.AuthorizationFragment"
         android:label="Authorization"
         tools:layout="@layout/fragment_autorization">
         <action
@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/keyApi"
-        android:name="com.example.appwithcats.ui.apiKey.KeyApiFragment"
+        android:name="com.example.appwithcats.view.apikey.fragments.KeyApiFragment"
         android:label="KeyApi"
         tools:layout="@layout/fragment_key_api">
         <action
@@ -35,7 +35,7 @@
     </fragment>
     <fragment
         android:id="@+id/catsFragment"
-        android:name="com.example.appwithcats.ui.cats.CatsFragment"
+        android:name="com.example.appwithcats.view.cats.fragments.CatsFragment"
         android:label=""
         tools:layout="@layout/fragment_cats">
         <argument
@@ -48,7 +48,7 @@
     </fragment>
     <fragment
         android:id="@+id/catFragment"
-        android:name="com.example.appwithcats.ui.cats.CatFragment"
+        android:name="com.example.appwithcats.view.cats.fragments.CatFragment"
         android:label="fragment_cat"
         tools:layout="@layout/fragment_cat" >
         <argument

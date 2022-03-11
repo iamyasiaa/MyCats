@@ -8,7 +8,7 @@ class KeyInterseptor(private val keyApi: String) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val original = chain.request()
         val requestBuilder = original.newBuilder()
-            .header("Authorization", keyApi)
+            .header("x-api-key", keyApi)
             .method(original.method(), original.body())
             .build()
         return chain.proceed(requestBuilder)

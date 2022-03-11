@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.appwithcats.ui.cats.CatViewModel" />
+            type="com.example.appwithcats.view.cats.viemodel.CatViewModel" />
     </data>
 
     <androidx.cardview.widget.CardView

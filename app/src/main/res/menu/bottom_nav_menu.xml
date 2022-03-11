@@ -6,11 +6,11 @@
         android:icon="@drawable/feed"
         android:title="Feed"/>
     <item
-        android:id="@+id/catsFragment1"
+        android:id="@+id/catsFragment2"
         android:icon="@drawable/add"
         android:title="Cats"/>
     <item
-        android:id="@+id/catsFragment2"
+        android:id="@+id/catsFragment1"
         android:icon="@drawable/favorites"
         android:title="Favorites"/>
     <item
