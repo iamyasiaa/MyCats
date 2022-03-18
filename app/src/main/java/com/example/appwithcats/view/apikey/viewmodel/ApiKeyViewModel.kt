@@ -35,7 +35,7 @@ class ApiKeyViewModel(application: Application) : AndroidViewModel(application){
         get() = _errorApiKeyData
 
     fun getApiKey() {
-        myRepository.getApiKey(sharedPreference!!.apikey)
+        myRepository.getApiKey(sharedPreference?.apikey.toString())
             .subscribe({
                 _apiKeyLiveData.postValue(true)
             }, {
@@ -56,7 +56,7 @@ class ApiKeyViewModel(application: Application) : AndroidViewModel(application){
     }
 
     fun updateApiKey(apiKey: String) {
-        sharedPreference!!.apikey = apiKey
+        sharedPreference?.apikey = apiKey
     }
 
 

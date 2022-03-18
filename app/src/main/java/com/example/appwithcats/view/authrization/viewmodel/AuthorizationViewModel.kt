@@ -8,6 +8,7 @@ import com.example.appwithcats.*
 import com.example.appwithcats.data.CatRepository
 import com.example.appwithcats.domain.PersonalData
 import com.example.appwithcats.domain.UserModel
+import com.example.appwithcats.view.authrization.fragment.AuthorizationFragment
 import com.example.appwithcats.view.interfaces.ISharPref
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter
@@ -21,6 +22,8 @@ class AuthorizationViewModel(application: Application) : AndroidViewModel(applic
         App.getInstance().appComponent.inject(this)
     }
 
+    lateinit var authorizationFragment: AuthorizationFragment
+
     @Inject
     lateinit var myRepository: CatRepository
     var sharedPreference: ISharPref? = null
@@ -32,7 +35,7 @@ class AuthorizationViewModel(application: Application) : AndroidViewModel(applic
 
     fun postRequest() {
         val user =
-            PersonalData(sharedPreference!!.email, sharedPreference!!.description)
+            PersonalData(sharedPreference?.email.toString(), sharedPreference?.description.toString())
         myRepository.postLoginIn(user)
             .subscribe({
                 _loginInLiveData.value = it
@@ -59,6 +62,12 @@ class AuthorizationViewModel(application: Application) : AndroidViewModel(applic
 
     fun updateDescription(description: String) {
         sharedPreference!!.description = description
+    }
+
+    fun onLoginClick() {
+        updateEmail(authorizationFragment.email.text.toString())
+        updateDescription(authorizationFragment.description.text.toString())
+        postRequest()
     }
 
     fun checkOnStatus(): Boolean {

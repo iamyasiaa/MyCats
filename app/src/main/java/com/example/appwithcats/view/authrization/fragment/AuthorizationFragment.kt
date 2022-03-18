@@ -17,8 +17,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class AuthorizationFragment : Fragment() {
     private lateinit var loginButton: Button
-    private lateinit var email: TextInputEditText
-    private lateinit var description: TextInputEditText
+    public lateinit var email: TextInputEditText
+    public lateinit var description: TextInputEditText
 
 
     private val authorizationViewModel: AuthorizationViewModel by viewModels()
@@ -41,24 +41,28 @@ class AuthorizationFragment : Fragment() {
         description = view.findViewById(R.id.description)
         val edList = arrayOf(email, description)
         val textWatcher = CustomTextWatcher(edList = edList, loginButton)
-        for (editText in edList) editText.addTextChangedListener(textWatcher)
+        for (editText in edList) {
+            editText.addTextChangedListener(textWatcher)
+        }
+
+        checkOnError()
+
         val action1 =
             com.example.appwithcats.view.authrization.fragment.AuthorizationFragmentDirections.actionAuthorizationToCatsFragment(
                 String()
             )
-        if (authorizationViewModel.sharedPreference!!.email != "") {
+        if (authorizationViewModel.sharedPreference?.email != "") {
             Navigation.findNavController(view).navigate(action1)
         }
 
-        loginButton.setOnClickListener {
-            checkOnError()
-            authorizationViewModel.apply {
-                updateEmail(email.text.toString())
-                updateDescription(description.text.toString())
-                postRequest()
-            }
 
-        }
+//        loginButton.setOnClickListener {
+//            authorizationViewModel.apply {
+//                updateEmail(email.text.toString())
+//                updateDescription(description.text.toString())
+//                postRequest()
+//            }
+//        }
     }
 
     private fun checkOnError() {

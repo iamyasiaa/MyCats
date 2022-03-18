@@ -26,7 +26,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
 
     fun postRequest() {
-        val count = 10
+        val count = 30
         catRepository.getCatList(count)
             .subscribe({
                 _catsLiveData.value = it

@@ -44,11 +44,11 @@ class CatsFragment : Fragment() {
             }
         }
         mainViewModel.catsLiveData.observe(viewLifecycleOwner) {
-            mSwipeRefreshLayout!!.isRefreshing = false
+            mSwipeRefreshLayout?.isRefreshing = false
             catListAdapter?.submitList(it)
         }
-        mSwipeRefreshLayout!!.setOnRefreshListener {
-            mSwipeRefreshLayout!!.isRefreshing = false
+        mSwipeRefreshLayout?.setOnRefreshListener {
+            mSwipeRefreshLayout?.isRefreshing = false
             mainViewModel.postRequest()
         }
     }
