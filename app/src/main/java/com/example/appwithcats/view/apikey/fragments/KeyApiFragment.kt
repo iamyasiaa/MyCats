@@ -7,10 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.example.appwithcats.utils.validator.CustomTextWatcherApiKey
 import com.example.appwithcats.R
+import com.example.appwithcats.databinding.FragmentAutorizationBinding
+import com.example.appwithcats.databinding.FragmentKeyApiBinding
 import com.example.appwithcats.view.apikey.viewmodel.ApiKeyViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
@@ -48,7 +51,7 @@ class KeyApiFragment : Fragment() {
     private fun initUI() {
         backAuthorization.setOnClickListener {
             val action =
-                com.example.appwithcats.view.apikey.fragments.KeyApiFragmentDirections.actionKeyApiToAuthorization()
+                KeyApiFragmentDirections.actionKeyApiToAuthorization()
             Navigation.findNavController(requireView()).navigate(action)
 
         }
@@ -68,7 +71,7 @@ class KeyApiFragment : Fragment() {
          }
          apiKeyViewModel.apiKeyLiveData.observe(viewLifecycleOwner) {
              val action =
-                 com.example.appwithcats.view.apikey.fragments.KeyApiFragmentDirections.actionKeyApiToCatsFragment(
+                 KeyApiFragmentDirections.actionKeyApiToCatsFragment(
                      String()
                  )
               if (it){
@@ -77,11 +80,12 @@ class KeyApiFragment : Fragment() {
          }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_key_api, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        val binding: FragmentKeyApiBinding = DataBindingUtil.inflate(inflater,
+            R.layout.fragment_key_api, container, false)
+
+        return binding.root
     }
 }
 

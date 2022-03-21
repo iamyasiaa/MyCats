@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout >
 
     <data>
 
         <variable
-            name="viewModel"
+            name="viewModelAuth"
             type="com.example.appwithcats.view.authrization.viewmodel.AuthorizationViewModel" />
     </data>
 
@@ -14,7 +14,7 @@
         android:id="@+id/loginFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.authrization.fragment.AuthorizationFragment">
+        tools:context="com.example.appwithcats.view.authrization.fragment.AuthorizationFragment">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/app_header"
@@ -82,8 +82,8 @@
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
             android:layout_marginBottom="39dp"
-            android:onClick="@{() -> viewModel.onLoginClick()}"
             android:text="@string/next_button"
+            android:onClick="@{() -> viewModelAuth.onLoginClick()}"
             android:textColor="@color/black"
             android:textStyle="bold"
             app:cornerRadius="8dp"

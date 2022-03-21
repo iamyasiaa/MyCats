@@ -6,19 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.databinding.DataBindingUtil
 import com.google.android.material.textfield.TextInputEditText
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.example.appwithcats.utils.validator.CustomTextWatcher
 import com.example.appwithcats.R
+import com.example.appwithcats.databinding.FragmentAutorizationBinding
 import com.example.appwithcats.view.authrization.viewmodel.AuthorizationViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 
 class AuthorizationFragment : Fragment() {
     private lateinit var loginButton: Button
-    public lateinit var email: TextInputEditText
-    public lateinit var description: TextInputEditText
+    lateinit var email: TextInputEditText
+    lateinit var description: TextInputEditText
 
 
     private val authorizationViewModel: AuthorizationViewModel by viewModels()
@@ -45,29 +47,22 @@ class AuthorizationFragment : Fragment() {
             editText.addTextChangedListener(textWatcher)
         }
 
+
         checkOnError()
 
         val action1 =
-            com.example.appwithcats.view.authrization.fragment.AuthorizationFragmentDirections.actionAuthorizationToCatsFragment(
+            AuthorizationFragmentDirections.actionAuthorizationToCatsFragment(
                 String()
             )
         if (authorizationViewModel.sharedPreference?.email != "") {
             Navigation.findNavController(view).navigate(action1)
         }
 
-
-//        loginButton.setOnClickListener {
-//            authorizationViewModel.apply {
-//                updateEmail(email.text.toString())
-//                updateDescription(description.text.toString())
-//                postRequest()
-//            }
-//        }
     }
 
-    private fun checkOnError() {
+    fun checkOnError() {
         val action =
-            com.example.appwithcats.view.authrization.fragment.AuthorizationFragmentDirections.actionAuthorizationToKeyApi()
+            AuthorizationFragmentDirections.actionAuthorizationToKeyApi()
         authorizationViewModel.loginInLiveData.observe(viewLifecycleOwner) {
             if (authorizationViewModel.checkOnStatus()) {
                 showErrorWindow(it.message)
@@ -79,14 +74,16 @@ class AuthorizationFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        return inflater.inflate(R.layout.fragment_autorization, container, false)
+    ): View? {
+        val binding: FragmentAutorizationBinding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_autorization, container, false
+        )
+
+        return binding.root
     }
-
-
 }
 
 

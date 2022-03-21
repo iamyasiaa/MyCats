@@ -10,7 +10,7 @@ import com.example.appwithcats.R
 
 class CatFragment : Fragment() {
     private lateinit var image2: ImageView
-    private val args: com.example.appwithcats.view.cats.fragments.CatFragmentArgs by navArgs()
+    private val args: CatFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

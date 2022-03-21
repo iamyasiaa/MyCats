@@ -11,9 +11,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
-import com.example.appwithcats.view.CatListAdapter
 import com.example.appwithcats.R
 import com.example.appwithcats.databinding.FragmentCatsBinding
+import com.example.appwithcats.view.CatListAdapter
 import com.example.appwithcats.view.cats.viemodel.MainViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
