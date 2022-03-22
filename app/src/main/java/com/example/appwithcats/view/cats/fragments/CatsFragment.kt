@@ -6,12 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.example.appwithcats.R
+import com.example.appwithcats.databinding.FragmentAutorizationBinding
 import com.example.appwithcats.databinding.FragmentCatsBinding
 import com.example.appwithcats.view.CatListAdapter
 import com.example.appwithcats.view.cats.viemodel.MainViewModel
@@ -24,6 +27,7 @@ class CatsFragment : Fragment() {
     private var catListAdapter: CatListAdapter? = null
     private var mSwipeRefreshLayout: SwipeRefreshLayout? = null
     private lateinit var image2: ImageView
+    private lateinit var recyclerCats: RecyclerView
 
 
     private val mainViewModel: MainViewModel by lazy {
@@ -32,9 +36,8 @@ class CatsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val binding = FragmentCatsBinding.bind(view)
         mSwipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout)
-        binding.apply {
+        recyclerCats = view.findViewById(R.id.recyclerCats)
             recyclerCats.apply {
                 adapter = CatListAdapter(viewLifecycleOwner) {
                     onClickImageItem(it.url)
@@ -42,7 +45,7 @@ class CatsFragment : Fragment() {
                 layoutManager = LinearLayoutManager(requireContext())
                 setHasFixedSize(true)
             }
-        }
+
         mainViewModel.catsLiveData.observe(viewLifecycleOwner) {
             mSwipeRefreshLayout?.isRefreshing = false
             catListAdapter?.submitList(it)
@@ -69,6 +72,11 @@ class CatsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_cats, container, false)
+        val binding: FragmentCatsBinding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_cats, container, false
+        )
+
+        return binding.root
     }
 }

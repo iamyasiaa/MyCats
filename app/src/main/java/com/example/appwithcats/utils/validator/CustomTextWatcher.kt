@@ -5,6 +5,8 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import androidx.lifecycle.ViewModelProviders
+import com.example.appwithcats.view.authrization.viewmodel.AuthorizationViewModel
 import com.google.android.material.textfield.TextInputEditText
 
 

@@ -1,6 +1,7 @@
 package com.example.appwithcats.view.cats.viemodel
 
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.appwithcats.App

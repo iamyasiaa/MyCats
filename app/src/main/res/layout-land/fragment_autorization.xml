@@ -85,7 +85,6 @@
             android:layout_marginBottom="44dp"
             android:text="@string/next_button"
             android:textColor="@color/black"
-            android:onClick="@{() -> viewModelAuth.onLoginClick()}"
             android:textStyle="bold"
             app:cornerRadius="8dp"
             app:icon="@drawable/ic_arrow"

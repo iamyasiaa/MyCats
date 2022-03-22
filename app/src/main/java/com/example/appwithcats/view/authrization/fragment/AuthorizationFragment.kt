@@ -1,18 +1,26 @@
 package com.example.appwithcats.view.authrization.fragment
 
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
+import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import com.google.android.material.textfield.TextInputEditText
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.example.appwithcats.utils.validator.CustomTextWatcher
 import com.example.appwithcats.R
 import com.example.appwithcats.databinding.FragmentAutorizationBinding
+import com.example.appwithcats.domain.CatModel
+import com.example.appwithcats.domain.PersonalData
 import com.example.appwithcats.view.authrization.viewmodel.AuthorizationViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -23,7 +31,7 @@ class AuthorizationFragment : Fragment() {
     lateinit var description: TextInputEditText
 
 
-    private val authorizationViewModel: AuthorizationViewModel by viewModels()
+    private val authorizationViewModel by lazy { ViewModelProviders.of(this)[AuthorizationViewModel::class.java] }
     private fun showErrorWindow(message: String) {
         context?.let {
             MaterialAlertDialogBuilder(it)
@@ -46,10 +54,7 @@ class AuthorizationFragment : Fragment() {
         for (editText in edList) {
             editText.addTextChangedListener(textWatcher)
         }
-
-
         checkOnError()
-
         val action1 =
             AuthorizationFragmentDirections.actionAuthorizationToCatsFragment(
                 String()
@@ -58,9 +63,16 @@ class AuthorizationFragment : Fragment() {
             Navigation.findNavController(view).navigate(action1)
         }
 
+        authorizationViewModel.emailInLiveData.observe(viewLifecycleOwner) {
+            email.text.toString()
+            description.text.toString()
+        }
+
+
     }
 
-    fun checkOnError() {
+
+    private fun checkOnError() {
         val action =
             AuthorizationFragmentDirections.actionAuthorizationToKeyApi()
         authorizationViewModel.loginInLiveData.observe(viewLifecycleOwner) {
@@ -81,6 +93,9 @@ class AuthorizationFragment : Fragment() {
             inflater,
             R.layout.fragment_autorization, container, false
         )
+        binding.lifecycleOwner = this
+
+        binding.viewModelAuth = authorizationViewModel
 
         return binding.root
     }
