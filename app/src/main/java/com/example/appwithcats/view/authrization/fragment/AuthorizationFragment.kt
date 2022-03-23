@@ -1,26 +1,20 @@
 package com.example.appwithcats.view.authrization.fragment
 
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.KeyEvent
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageButton
-import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import com.google.android.material.textfield.TextInputEditText
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.example.appwithcats.utils.validator.CustomTextWatcher
 import com.example.appwithcats.R
 import com.example.appwithcats.databinding.FragmentAutorizationBinding
-import com.example.appwithcats.domain.CatModel
-import com.example.appwithcats.domain.PersonalData
 import com.example.appwithcats.view.authrization.viewmodel.AuthorizationViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -51,6 +45,25 @@ class AuthorizationFragment : Fragment() {
         description = view.findViewById(R.id.description)
         val edList = arrayOf(email, description)
         val textWatcher = CustomTextWatcher(edList = edList, loginButton)
+
+        email.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {
+                authorizationViewModel.updateEmail(email.text.toString())
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+        })
+
+        description.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {
+                authorizationViewModel.updateDescription(description.text.toString())
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+        })
+
         for (editText in edList) {
             editText.addTextChangedListener(textWatcher)
         }

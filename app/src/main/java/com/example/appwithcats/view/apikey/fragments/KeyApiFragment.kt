@@ -1,6 +1,8 @@
 package com.example.appwithcats.view.apikey.fragments
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,11 +10,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.example.appwithcats.utils.validator.CustomTextWatcherApiKey
 import com.example.appwithcats.R
-import com.example.appwithcats.databinding.FragmentAutorizationBinding
 import com.example.appwithcats.databinding.FragmentKeyApiBinding
 import com.example.appwithcats.view.apikey.viewmodel.ApiKeyViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -24,7 +25,7 @@ class KeyApiFragment : Fragment() {
     private lateinit var apiKey: TextInputEditText
     private lateinit var backAuthorization: ImageButton
 
-    private val apiKeyViewModel: ApiKeyViewModel by viewModels()
+    private val apiKeyViewModel by lazy { ViewModelProviders.of(this)[ApiKeyViewModel::class.java] }
     private fun showErrorWindow(message: String) {
         context?.let {
             MaterialAlertDialogBuilder(it)
@@ -46,6 +47,15 @@ class KeyApiFragment : Fragment() {
         apiKey.addTextChangedListener(textWatcher1)
         initUI()
         checkOnError()
+
+        apiKey.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {
+                apiKeyViewModel.updateApiKey(apiKey.text.toString())
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+        })
 
     }
     private fun initUI() {
@@ -84,6 +94,9 @@ class KeyApiFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val binding: FragmentKeyApiBinding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_key_api, container, false)
+
+        binding.lifecycleOwner = this
+        binding.viewModelApi = apiKeyViewModel
 
         return binding.root
     }

@@ -55,6 +55,10 @@ class ApiKeyViewModel(application: Application) : AndroidViewModel(application){
             })
     }
 
+    fun onClickApiKey() {
+        getApiKey()
+    }
+
     fun updateApiKey(apiKey: String) {
         sharedPreference?.apikey = apiKey
     }

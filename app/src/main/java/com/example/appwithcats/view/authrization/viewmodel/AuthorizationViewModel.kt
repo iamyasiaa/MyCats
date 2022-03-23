@@ -1,17 +1,13 @@
 package com.example.appwithcats.view.authrization.viewmodel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.appwithcats.*
 import com.example.appwithcats.data.CatRepository
-import com.example.appwithcats.domain.CatModel
 import com.example.appwithcats.domain.PersonalData
 import com.example.appwithcats.domain.UserModel
-import com.example.appwithcats.view.authrization.fragment.AuthorizationFragment
 import com.example.appwithcats.view.interfaces.ISharPref
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter
@@ -66,7 +62,7 @@ class AuthorizationViewModel(application: Application) : AndroidViewModel(applic
 
      fun updateEmail(email: String) {
         sharedPreference?.email = email
-    }
+     }
 
      fun updateDescription(description: String) {
         sharedPreference?.description = description

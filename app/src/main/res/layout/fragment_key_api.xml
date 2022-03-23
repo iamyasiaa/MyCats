@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+    <data>
+        <variable
+            name="viewModelApi"
+            type="com.example.appwithcats.view.apikey.viewmodel.ApiKeyViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -55,6 +60,7 @@
             android:layout_marginEnd="40dp"
             android:layout_marginBottom="37dp"
             android:text="@string/next_button"
+            android:onClick="@{() -> viewModelApi.onClickApiKey()}"
             android:textColor="@color/black"
             android:textStyle="bold"
             app:icon="@drawable/ic_arrow"
