@@ -9,14 +9,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.android.material.textfield.TextInputEditText
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.example.appwithcats.utils.validator.CustomTextWatcher
 import com.example.appwithcats.R
 import com.example.appwithcats.databinding.FragmentAutorizationBinding
+import com.example.appwithcats.domain.PersonalData
 import com.example.appwithcats.view.authrization.viewmodel.AuthorizationViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import java.nio.file.Paths.get
 
 
 class AuthorizationFragment : Fragment() {
@@ -46,24 +50,6 @@ class AuthorizationFragment : Fragment() {
         val edList = arrayOf(email, description)
         val textWatcher = CustomTextWatcher(edList = edList, loginButton)
 
-        email.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {
-                authorizationViewModel.updateEmail(email.text.toString())
-            }
-
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
-        })
-
-        description.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {
-                authorizationViewModel.updateDescription(description.text.toString())
-            }
-
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
-        })
-
         for (editText in edList) {
             editText.addTextChangedListener(textWatcher)
         }
@@ -75,13 +61,6 @@ class AuthorizationFragment : Fragment() {
         if (authorizationViewModel.sharedPreference?.email != "") {
             Navigation.findNavController(view).navigate(action1)
         }
-
-        authorizationViewModel.emailInLiveData.observe(viewLifecycleOwner) {
-            email.text.toString()
-            description.text.toString()
-        }
-
-
     }
 
 
@@ -91,8 +70,9 @@ class AuthorizationFragment : Fragment() {
         authorizationViewModel.loginInLiveData.observe(viewLifecycleOwner) {
             if (authorizationViewModel.checkOnStatus()) {
                 showErrorWindow(it.message)
-                authorizationViewModel.checkOnEmpty()
             } else {
+
+                authorizationViewModel.setEmail()
                 Navigation.findNavController(requireView()).navigate(action)
             }
         }

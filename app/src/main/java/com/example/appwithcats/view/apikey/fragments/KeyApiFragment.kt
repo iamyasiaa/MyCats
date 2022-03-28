@@ -48,14 +48,6 @@ class KeyApiFragment : Fragment() {
         initUI()
         checkOnError()
 
-        apiKey.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {
-                apiKeyViewModel.updateApiKey(apiKey.text.toString())
-            }
-
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
-        })
 
     }
     private fun initUI() {
@@ -64,12 +56,6 @@ class KeyApiFragment : Fragment() {
                 KeyApiFragmentDirections.actionKeyApiToAuthorization()
             Navigation.findNavController(requireView()).navigate(action)
 
-        }
-        keyButton.setOnClickListener {
-            apiKeyViewModel.apply {
-                updateApiKey(apiKey.text.toString())
-                getApiKey()
-            }
         }
 
     }
@@ -85,6 +71,7 @@ class KeyApiFragment : Fragment() {
                      String()
                  )
               if (it){
+                  apiKeyViewModel.setApiKey()
                   Navigation.findNavController(requireView()).navigate(action)
               }
          }
