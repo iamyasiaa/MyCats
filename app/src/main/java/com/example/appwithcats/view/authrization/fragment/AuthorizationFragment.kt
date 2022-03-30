@@ -1,41 +1,31 @@
 package com.example.appwithcats.view.authrization.fragment
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.google.android.material.textfield.TextInputEditText
-import androidx.lifecycle.ViewModelProviders
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
-import com.example.appwithcats.utils.validator.CustomTextWatcher
 import com.example.appwithcats.R
 import com.example.appwithcats.databinding.FragmentAutorizationBinding
-import com.example.appwithcats.domain.PersonalData
 import com.example.appwithcats.view.authrization.viewmodel.AuthorizationViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.nio.file.Paths.get
 
 
 class AuthorizationFragment : Fragment() {
     private lateinit var loginButton: Button
-    lateinit var email: TextInputEditText
-    lateinit var description: TextInputEditText
 
 
-    private val authorizationViewModel by lazy { ViewModelProviders.of(this)[AuthorizationViewModel::class.java] }
+    private val authorizationViewModel : AuthorizationViewModel by viewModels()
     private fun showErrorWindow(message: String) {
         context?.let {
             MaterialAlertDialogBuilder(it)
                 .setTitle(getString(R.string.Error))
                 .setMessage(message)
-                .setPositiveButton("ОК") { dialog, _ -> dialog.dismiss() }
+                .setPositiveButton(getString(R.string.ok)) { dialog, _ -> dialog.dismiss() }
                 .show()
         }
     }
@@ -44,15 +34,9 @@ class AuthorizationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loginButton = view.findViewById(R.id.loginButton)
-        loginButton.isEnabled = false
-        email = view.findViewById(R.id.email)
-        description = view.findViewById(R.id.description)
-        val edList = arrayOf(email, description)
-        val textWatcher = CustomTextWatcher(edList = edList, loginButton)
 
-        for (editText in edList) {
-            editText.addTextChangedListener(textWatcher)
-        }
+        authorizationViewModel.onActive(loginButton)
+
         checkOnError()
         val action1 =
             AuthorizationFragmentDirections.actionAuthorizationToCatsFragment(

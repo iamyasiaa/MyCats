@@ -3,9 +3,8 @@ package com.example.appwithcats
 import android.app.Application
 import com.example.appwithcats.dagger.modules.AppComponent
 import com.example.appwithcats.dagger.modules.DaggerAppComponent
-import com.example.appwithcats.module.Module
-
 import com.example.appwithcats.data.SharedPreferenceRepository
+import com.example.appwithcats.module.Module
 import timber.log.Timber
 
 
@@ -23,6 +22,7 @@ class App : Application() {
             .build()
         Timber.plant(Timber.DebugTree())
     }
+
 
     companion object {
         private lateinit var app: App

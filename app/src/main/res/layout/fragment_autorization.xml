@@ -45,6 +45,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/email"
+                android:text="@{viewModelAuth.email}"
                 android:afterTextChanged="@{viewModelAuth.afterEmailChanged}"
                 app:error="@{viewModelAuth.emailError}"
                 android:layout_width="match_parent"
@@ -70,6 +71,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/description"
+                android:text="@{viewModelAuth.description}"
                 android:afterTextChanged="@{viewModelAuth.afterDescriptionChanged}"
                 app:error="@{viewModelAuth.descriptionError}"
                 android:layout_width="match_parent"

@@ -2,10 +2,12 @@ package com.example.appwithcats.view.apikey.viewmodel
 
 import android.app.Application
 import android.text.Editable
+import android.widget.Button
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.appwithcats.App
+import com.example.appwithcats.R
 import com.example.appwithcats.data.CatRepository
 import com.example.appwithcats.view.interfaces.ISharPref
 import com.example.appwithcats.domain.UserModel
@@ -35,13 +37,21 @@ class ApiKeyViewModel(application: Application) : AndroidViewModel(application){
     val errorApiKeyData: LiveData<UserModel>
         get() = _errorApiKeyData
 
+    private var button: Button? = null
 
-    val apiKey = MutableLiveData("")
+    private val apiKey = MutableLiveData("")
     val apiKeyError = MutableLiveData<String>(null)
 
     fun afterApiKeyChanged(s: Editable){
         apiKey.value = s.toString()
-        apiKeyError.value = if (s.toString().isNotEmpty()) null else "Invalid api key"
+        apiKeyError.value = if (s.toString().isNotEmpty()){
+            button?.isEnabled = true
+            null
+        } else {
+            button?.isEnabled = false
+            getApplication<Application>().resources.getString(
+            R.string.error_api_key)
+        }
     }
 
     fun getApiKey() {
@@ -71,6 +81,11 @@ class ApiKeyViewModel(application: Application) : AndroidViewModel(application){
 
     fun setApiKey() {
         sharedPreference?.apikey = apiKey.value.toString()
+    }
+
+    fun onActive(v: Button) {
+        button = v
+        button?.isEnabled = false
     }
 }
 

@@ -43,6 +43,8 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/apiKey"
+                android:afterTextChanged="@{viewModelApi.afterApiKeyChanged}"
+                app:error="@{viewModelApi.apiKeyError}"
                 android:layout_width="632dp"
                 android:layout_height="50dp"
                 android:inputType="text" />
