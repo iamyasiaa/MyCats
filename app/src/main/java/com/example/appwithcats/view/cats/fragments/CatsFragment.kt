@@ -48,7 +48,7 @@ class CatsFragment : Fragment() {
 
         mainViewModel.catsLiveData.observe(viewLifecycleOwner) {
             mSwipeRefreshLayout?.isRefreshing = false
-            catListAdapter?.submitList(it)
+            catListAdapter?.submitData(viewLifecycleOwner.lifecycle, it)
         }
         mSwipeRefreshLayout?.setOnRefreshListener {
             mSwipeRefreshLayout?.isRefreshing = false

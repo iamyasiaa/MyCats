@@ -4,6 +4,7 @@ package com.example.appwithcats.view
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -18,7 +19,17 @@ class CatListAdapter(
     private val onNavigate: (CatModel) -> Unit,
 
     ) :
-    androidx.recyclerview.widget.ListAdapter<CatModel, CatListAdapter.CatViewHolder>(CatDiffCallback()) {
+    PagingDataAdapter<CatModel, CatListAdapter.CatViewHolder>(COMPARATOR)  {
+
+    companion object {
+        private val COMPARATOR = object : DiffUtil.ItemCallback<CatModel>() {
+            override fun areItemsTheSame(oldItem: CatModel, newItem: CatModel): Boolean =
+                oldItem.id == newItem.id
+
+            override fun areContentsTheSame(oldItem: CatModel, newItem: CatModel): Boolean =
+                oldItem == newItem
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatViewHolder {
         val binding =
@@ -29,7 +40,10 @@ class CatListAdapter(
     }
 
     override fun onBindViewHolder(holder: CatViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val currentItem = getItem(position)
+        if (currentItem != null) {
+            holder.bind(currentItem)
+        }
     }
 
     inner class CatViewHolder(private val binding: ItemBinding) :
@@ -70,11 +84,4 @@ class CatListAdapter(
         }
     }
 
-    class CatDiffCallback : DiffUtil.ItemCallback<CatModel>() {
-        override fun areItemsTheSame(oldItem: CatModel, newItem: CatModel) =
-            oldItem.url == newItem.url
-
-        override fun areContentsTheSame(oldItem: CatModel, newItem: CatModel) =
-            oldItem == newItem
-    }
 }

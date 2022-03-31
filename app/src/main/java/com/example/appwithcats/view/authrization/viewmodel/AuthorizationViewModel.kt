@@ -2,8 +2,6 @@ package com.example.appwithcats.view.authrization.viewmodel
 
 import android.app.Application
 import android.text.Editable
-import android.util.Log
-import android.view.View
 import android.widget.Button
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -23,7 +21,6 @@ import javax.inject.Inject
 class AuthorizationViewModel(application: Application) : AndroidViewModel(application) {
     init {
         App.getInstance().appComponent.inject(this)
-
     }
 
 
@@ -37,26 +34,41 @@ class AuthorizationViewModel(application: Application) : AndroidViewModel(applic
         get() = _loginInLiveData
 
 
-
-    var emailPattern = Regex("[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.+[a-z]+")
+    private var button: Button? = null
+    private var emailPattern = Regex("[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.+[a-z]+")
     val email = MutableLiveData("")
     val emailError = MutableLiveData<String>(null)
 
-    fun afterEmailChanged(s: Editable){
+    fun afterEmailChanged(s: Editable) {
         email.value = s.toString()
-        emailError.value = if (s.toString().matches(emailPattern)) null else "Invalid email"
+        emailError.value = if (s.toString()
+                .matches(emailPattern)
+        ) {
+            if(description.value.toString().isNotEmpty()){
+                button?.isEnabled = true
+            }
+            null
+        } else {
+            button?.isEnabled = false
+            getApplication<Application>().resources.getString(R.string.error_email)
+        }
     }
-    var descriptionPattern = Regex("[a-zA-Z0-9._-]")
 
     val description = MutableLiveData("")
     val descriptionError = MutableLiveData<String>(null)
 
-    fun afterDescriptionChanged(s: Editable){
+    fun afterDescriptionChanged(s: Editable) {
         description.value = s.toString()
-        description.value = if (s.toString().matches(descriptionPattern)) null else "Invalid email"
+        descriptionError.value = if (s.toString().isNotEmpty()) {
+            if(email.value.toString().matches(emailPattern)){
+                button?.isEnabled = true
+            }
+            null
+        } else {
+            button?.isEnabled = false
+            getApplication<Application>().resources.getString(R.string.error_description)
+        }
     }
-
-
 
     private fun postRequest() {
         val user =
@@ -96,6 +108,11 @@ class AuthorizationViewModel(application: Application) : AndroidViewModel(applic
         } else {
             false
         }
+    }
+
+    fun onActive(v: Button) {
+        button = v
+        button?.isEnabled = false
     }
 
 }

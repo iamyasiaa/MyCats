@@ -7,5 +7,9 @@
     <string name="email">E-mail</string>
     <string name="desc">Description</string>
     <string name="next_button">Next</string>
+    <string name="error_email">Invalid email</string>
+    <string name="error_description">Invalid description</string>
+    <string name="error_api_key">Invalid api key</string>
+    <string name="ok">OK</string>м
     <string name="ErrorVote">Too many api key revisions have been issued for this email. Contact support for more help.</string>
 </resources>

@@ -5,9 +5,13 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.rxjava3.cachedIn
 import com.example.appwithcats.App
 import com.example.appwithcats.domain.CatModel
 import com.example.appwithcats.data.CatRepository
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
@@ -20,19 +24,19 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     @Inject
     lateinit var catRepository: CatRepository
 
-    private var _catsLiveData = MutableLiveData<MutableList<CatModel>>()
-    val catsLiveData: LiveData<MutableList<CatModel>>
+    private var _catsLiveData = MutableLiveData<PagingData<CatModel>>()
+    val catsLiveData: LiveData<PagingData<CatModel>>
         get() = _catsLiveData
 
 
     fun postRequest() {
-        val count = 30
-        catRepository.getCatList(count)
-            .subscribe({
+        catRepository.getCatList()
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { it }
+            .cachedIn(viewModelScope)
+            .subscribe {
                 _catsLiveData.value = it
-            }, {
-                Log.e("Ошибка", "Error")
-            })
+            }
     }
 
 

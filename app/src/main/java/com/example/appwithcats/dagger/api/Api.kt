@@ -2,6 +2,7 @@ package com.example.appwithcats.dagger.api
 
 import com.example.appwithcats.domain.*
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -11,7 +12,8 @@ interface Api {
     @GET("images/search")
     fun getRandomImage(
         @Query("limit") amountOfCats: Int,
-    ): Observable<MutableList<CatModel>>
+        @Query("page") page: Int
+    ): Single<MutableList<CatModel>>
 
     @POST("user/passwordlesssignup")
     fun loginUser(@Body body: PersonalData): Observable<UserModel>
