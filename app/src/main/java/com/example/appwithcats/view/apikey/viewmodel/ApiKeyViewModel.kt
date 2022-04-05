@@ -37,7 +37,7 @@ class ApiKeyViewModel(application: Application) : AndroidViewModel(application){
     val errorApiKeyData: LiveData<UserModel>
         get() = _errorApiKeyData
 
-    private var button: Button? = null
+    var isActive =  MutableLiveData(false)
 
     private val apiKey = MutableLiveData("")
     val apiKeyError = MutableLiveData<String>(null)
@@ -45,10 +45,10 @@ class ApiKeyViewModel(application: Application) : AndroidViewModel(application){
     fun afterApiKeyChanged(s: Editable){
         apiKey.value = s.toString()
         apiKeyError.value = if (s.toString().isNotEmpty()){
-            button?.isEnabled = true
+            isActive.value = true
             null
         } else {
-            button?.isEnabled = false
+            isActive.value = false
             getApplication<Application>().resources.getString(
             R.string.error_api_key)
         }
@@ -81,11 +81,6 @@ class ApiKeyViewModel(application: Application) : AndroidViewModel(application){
 
     fun setApiKey() {
         sharedPreference?.apikey = apiKey.value.toString()
-    }
-
-    fun onActive(v: Button) {
-        button = v
-        button?.isEnabled = false
     }
 }
 

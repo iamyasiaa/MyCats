@@ -2,6 +2,7 @@ package com.example.appwithcats.view.authrization.viewmodel
 
 import android.app.Application
 import android.text.Editable
+import android.util.Log
 import android.widget.Button
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -34,22 +35,23 @@ class AuthorizationViewModel(application: Application) : AndroidViewModel(applic
         get() = _loginInLiveData
 
 
-    private var button: Button? = null
     private var emailPattern = Regex("[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.+[a-z]+")
     val email = MutableLiveData("")
     val emailError = MutableLiveData<String>(null)
+
+    var isActive =  MutableLiveData(false)
 
     fun afterEmailChanged(s: Editable) {
         email.value = s.toString()
         emailError.value = if (s.toString()
                 .matches(emailPattern)
         ) {
-            if(description.value.toString().isNotEmpty()){
-                button?.isEnabled = true
+            if (description.value.toString().isNotEmpty()) {
+                isActive.value = true
             }
             null
         } else {
-            button?.isEnabled = false
+            isActive.value = false
             getApplication<Application>().resources.getString(R.string.error_email)
         }
     }
@@ -60,12 +62,12 @@ class AuthorizationViewModel(application: Application) : AndroidViewModel(applic
     fun afterDescriptionChanged(s: Editable) {
         description.value = s.toString()
         descriptionError.value = if (s.toString().isNotEmpty()) {
-            if(email.value.toString().matches(emailPattern)){
-                button?.isEnabled = true
+            if (email.value.toString().matches(emailPattern)) {
+                isActive.value = true
             }
             null
         } else {
-            button?.isEnabled = false
+            isActive.value = false
             getApplication<Application>().resources.getString(R.string.error_description)
         }
     }
@@ -110,9 +112,5 @@ class AuthorizationViewModel(application: Application) : AndroidViewModel(applic
         }
     }
 
-    fun onActive(v: Button) {
-        button = v
-        button?.isEnabled = false
-    }
 
 }

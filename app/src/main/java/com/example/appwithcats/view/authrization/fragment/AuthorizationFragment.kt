@@ -16,7 +16,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 
 class AuthorizationFragment : Fragment() {
-    private lateinit var loginButton: Button
 
 
     private val authorizationViewModel : AuthorizationViewModel by viewModels()
@@ -33,9 +32,7 @@ class AuthorizationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loginButton = view.findViewById(R.id.loginButton)
 
-        authorizationViewModel.onActive(loginButton)
 
         checkOnError()
         val action1 =

@@ -17,7 +17,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 
 class KeyApiFragment : Fragment() {
-    private lateinit var keyButton: Button
     private lateinit var backAuthorization: ImageButton
 
     private val apiKeyViewModel : ApiKeyViewModel by viewModels()
@@ -35,8 +34,6 @@ class KeyApiFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         backAuthorization = view.findViewById(R.id.back_authorization)
-        keyButton = view.findViewById(R.id.loginButton1)
-        apiKeyViewModel.onActive(keyButton)
         initUI()
         checkOnError()
 
