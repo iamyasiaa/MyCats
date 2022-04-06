@@ -63,7 +63,7 @@
             android:layout_marginBottom="37dp"
             android:text="@string/next_button"
             android:onClick="@{() -> viewModelApi.onClickApiKey()}"
-            android:clickable="@{viewModelApi.isActive}"
+            app:error="@{viewModelApi.isActive}"
             android:textColor="@color/black"
             android:textStyle="bold"
             app:icon="@drawable/ic_arrow"

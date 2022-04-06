@@ -59,9 +59,11 @@ class CatsFragment : Fragment() {
     fun onClickImageItem(url: String) {
         val view: View = layoutInflater.inflate(R.layout.bottom_sheet_dialog, null)
         val dialog = BottomSheetDialog(this.requireContext())
-        image2 = view!!.findViewById(R.id.showCats)
+        image2 = view.findViewById(R.id.showCats)
         Glide.with(this)
             .load(url)
+            .fitCenter()
+            .centerCrop()
             .placeholder(R.drawable.progress_animation)
             .into(image2)
         dialog.setContentView(view)
