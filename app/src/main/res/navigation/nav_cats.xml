@@ -12,7 +12,9 @@
         tools:layout="@layout/fragment_autorization">
         <action
             android:id="@+id/action_authorization_to_keyApi"
-            app:destination="@id/keyApi" />
+            app:destination="@id/keyApi"
+            app:popUpTo="@id/authorization"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_authorization_to_catsFragment"
             app:destination="@id/catsFragment"

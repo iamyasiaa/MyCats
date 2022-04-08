@@ -13,6 +13,7 @@ import androidx.navigation.Navigation
 import com.example.appwithcats.R
 import com.example.appwithcats.databinding.FragmentKeyApiBinding
 import com.example.appwithcats.view.apikey.viewmodel.ApiKeyViewModel
+import com.example.appwithcats.view.authrization.fragment.AuthorizationFragmentDirections
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 
@@ -36,6 +37,13 @@ class KeyApiFragment : Fragment() {
         backAuthorization = view.findViewById(R.id.back_authorization)
         initUI()
         checkOnError()
+        val action1 =
+            AuthorizationFragmentDirections.actionAuthorizationToCatsFragment(
+                String()
+            )
+        if (apiKeyViewModel.sharedPreference?.apikey != "") {
+            Navigation.findNavController(view).navigate(action1)
+        }
 
 
     }

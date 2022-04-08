@@ -8,7 +8,7 @@ import com.google.android.material.textfield.TextInputEditText
 fun TextInputEditText.error(error: String?) {
     error.let { this.error = error} ?: run {this.error = null}
 }
-@BindingAdapter("error")
+@BindingAdapter("isActive")
 fun MaterialButton.error(error: Boolean){
     this.isEnabled = error
 }

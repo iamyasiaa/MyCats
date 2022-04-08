@@ -58,7 +58,7 @@
             android:textColor="@color/black"
             android:textStyle="bold"
             android:onClick="@{() -> viewModelApi.onClickApiKey()}"
-            app:error="@{viewModelApi.isActive}"
+            app:isActive="@{viewModelApi.isActive}"
             app:icon="@drawable/ic_arrow"
             app:iconGravity="end"
             app:layout_constraintBottom_toBottomOf="parent"

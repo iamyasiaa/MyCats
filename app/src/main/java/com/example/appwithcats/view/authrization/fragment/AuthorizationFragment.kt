@@ -38,7 +38,7 @@ class AuthorizationFragment : Fragment() {
             AuthorizationFragmentDirections.actionAuthorizationToCatsFragment(
                 String()
             )
-        if (authorizationViewModel.sharedPreference?.email != "") {
+        if (authorizationViewModel.sharedPreference?.apikey != "") {
             Navigation.findNavController(view).navigate(action1)
         }
     }
