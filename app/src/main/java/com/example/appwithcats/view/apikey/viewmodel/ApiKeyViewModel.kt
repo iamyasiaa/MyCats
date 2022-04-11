@@ -60,18 +60,9 @@ class ApiKeyViewModel(application: Application) : AndroidViewModel(application){
                 _apiKeyLiveData.postValue(true)
             }, {
                 _apiKeyLiveData.postValue(false)
-                if (it is HttpException) {
-                    val body = it.response()?.errorBody()
-                    val gson = Gson()
-                    val adapter: TypeAdapter<UserModel> =
-                        gson.getAdapter(UserModel::class.java)
-                    try {
-                        val error: UserModel =
-                            adapter.fromJson(body?.string())
-                        _errorApiKeyData.value = error
-                    } catch (e: IOException) {
-                    }
-                }
+                val error = myRepository.helperRequest(it)
+                _errorApiKeyData.value = error!!
+
             })
     }
 

@@ -30,6 +30,7 @@ class AuthorizationViewModel(application: Application) : AndroidViewModel(applic
     var sharedPreference: ISharPref? = null
         @Inject set
 
+
     private var _loginInLiveData = MutableLiveData<UserModel>()
     val loginInLiveData: LiveData<UserModel>
         get() = _loginInLiveData
@@ -79,19 +80,8 @@ class AuthorizationViewModel(application: Application) : AndroidViewModel(applic
             .subscribe({
                 _loginInLiveData.value = it
             }, {
-                if (it is HttpException) {
-                    val body = it.response()?.errorBody()
-                    val gson = Gson()
-                    val adapter: TypeAdapter<UserModel> =
-                        gson.getAdapter(UserModel::class.java)
-                    try {
-                        val error: UserModel =
-                            adapter.fromJson(body?.string())
-                        _loginInLiveData.value = error
-                    } catch (e: IOException) {
-                        Timber.d(e.toString())
-                    }
-                }
+                val error = myRepository.helperRequest(it)
+                _loginInLiveData.value = error!!
             })
     }
 

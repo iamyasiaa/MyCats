@@ -1,5 +1,6 @@
 package com.example.appwithcats.data
 
+import androidx.lifecycle.LiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
@@ -7,11 +8,16 @@ import androidx.paging.rxjava3.flowable
 import com.example.appwithcats.dagger.api.Api
 import com.example.appwithcats.domain.*
 import com.example.appwithcats.view.cats.fragments.CatsPagingSource
+import com.google.gson.Gson
+import com.google.gson.TypeAdapter
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import org.jetbrains.annotations.NotNull
+import retrofit2.HttpException
+import timber.log.Timber
+import java.io.IOException
 
 
 class CatRepository(private val api: Api) {
@@ -48,5 +54,19 @@ class CatRepository(private val api: Api) {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
+    fun helperRequest(it: Throwable): UserModel?{
+        if (it is HttpException) {
+            val body = it.response()?.errorBody()
+            val gson = Gson()
+            val adapter: TypeAdapter<UserModel> = gson.getAdapter(UserModel::class.java)
+            val error: UserModel =
+                adapter.fromJson(body?.string())
+
+            return error
+        } else{
+            return null
+        }
+    }
+
 
 }
