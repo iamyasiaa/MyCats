@@ -67,14 +67,14 @@
                 android:id="@+id/favorites"
                 android:layout_width="22dp"
                 android:layout_height="20dp"
-                android:onClick="@{() -> viewModel.onFavoritesClick()}"
+                android:onClick="@{() -> viewModel.onLikeClicked()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/like"
                 app:layout_constraintHorizontal_bias="0.946"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image"
                 app:layout_constraintVertical_bias="0.466"
-                app:srcCompat="@drawable/favorites_star"
+                app:srcCompat="@drawable/favorites_click"
                 />
 
             <ImageView

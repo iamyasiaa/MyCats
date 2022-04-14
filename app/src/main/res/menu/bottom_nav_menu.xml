@@ -10,8 +10,8 @@
         android:icon="@drawable/add"
         android:title="Cats"/>
     <item
-        android:id="@+id/catsFragment1"
-        android:icon="@drawable/favorites"
+        android:id="@+id/favoritesFragment"
+        android:icon="@drawable/favorite"
         android:title="Favorites"/>
     <item
         android:id="@+id/catsFragment3"

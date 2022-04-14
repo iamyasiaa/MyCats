@@ -7,6 +7,7 @@ import androidx.paging.PagingData
 import androidx.paging.rxjava3.flowable
 import com.example.appwithcats.dagger.api.Api
 import com.example.appwithcats.domain.*
+import com.example.appwithcats.view.FavoritesPagingSource
 import com.example.appwithcats.view.cats.fragments.CatsPagingSource
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter
@@ -51,6 +52,18 @@ class CatRepository(private val api: Api) {
 
     fun postFavorites(vote: VoteCatsModel): Observable<VoteModel> {
         return api.voteCats(vote)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+    fun getFavoritesList(pageConfig: PagingConfig = getDefaultPageConfig()): Flowable<PagingData<FavoritesModel>> {
+        return Pager(
+            config = pageConfig,
+            pagingSourceFactory = { FavoritesPagingSource(api) }
+        ).flowable
+    }
+
+    fun postFavoritesCats(fav: PostFavorites): Observable<PostFavoritesModel> {
+        return api.favoritesCats(fav)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }

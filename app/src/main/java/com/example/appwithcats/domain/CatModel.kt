@@ -1,6 +1,5 @@
 package com.example.appwithcats.domain
 
-
 data class CatModel(
     val breeds: List<Any>,
     val height: Int,
@@ -9,3 +8,4 @@ data class CatModel(
     val width: Int,
     var like: Boolean? = null
 )
+

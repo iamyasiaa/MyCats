@@ -26,5 +26,14 @@ interface Api {
     @POST("votes")
     fun voteCats(@Body body: VoteCatsModel): Observable<VoteModel>
 
+    @GET("v1/favourites")
+    fun getFavoritesImage(
+        @Query("limit") amountOfCats: Int,
+        @Query("page") page: Int
+    ): Single<MutableList<FavoritesModel>>
+
+    @POST("favourites")
+    fun favoritesCats(@Body body: PostFavorites): Observable<PostFavoritesModel>
+
 }
 

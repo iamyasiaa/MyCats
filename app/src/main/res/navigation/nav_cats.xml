@@ -58,4 +58,9 @@
             app:argType="string"
             app:nullable="false"/>
     </fragment>
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.example.appwithcats.view.favorites.FavoritesFragment"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_favorites" />
 </navigation>
