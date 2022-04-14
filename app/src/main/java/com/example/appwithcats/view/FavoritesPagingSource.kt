@@ -8,17 +8,17 @@ import com.example.appwithcats.domain.FavoritesModel
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 
-class FavoritesPagingSource(private val api: Api) : RxPagingSource<Int, FavoritesModel>() {
-    override fun getRefreshKey(state: PagingState<Int, FavoritesModel>): Int? {
+class FavoritesPagingSource(private val api: Api) : RxPagingSource<Int, FavoritesModel.Image>() {
+    override fun getRefreshKey(state: PagingState<Int, FavoritesModel.Image>): Int? {
         return state.anchorPosition
     }
 
-    override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, FavoritesModel>> {
+    override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, FavoritesModel.Image>> {
         val page = params.key ?: 1
         return api
-            .getFavoritesImage(10, page)
+            .getFavoritesImage()
             .subscribeOn(Schedulers.io())
-            .map<LoadResult<Int, FavoritesModel>> {
+            .map<LoadResult<Int, FavoritesModel.Image>> {
                 LoadResult.Page(
                     data = it,
                     prevKey = if (page == 1) null else page - 1,

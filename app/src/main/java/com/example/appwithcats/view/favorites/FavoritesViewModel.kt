@@ -23,8 +23,8 @@ class FavoritesViewModel (application: Application) : AndroidViewModel(applicati
     @Inject
     lateinit var catRepository: CatRepository
 
-    private var _favLiveData = MutableLiveData<PagingData<FavoritesModel>>()
-    val favLiveData: LiveData<PagingData<FavoritesModel>>
+    private var _favLiveData = MutableLiveData<PagingData<FavoritesModel.Image>>()
+    val favLiveData: LiveData<PagingData<FavoritesModel.Image>>
         get() = _favLiveData
 
 

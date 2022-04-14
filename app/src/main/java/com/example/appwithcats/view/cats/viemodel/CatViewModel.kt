@@ -44,7 +44,7 @@ class CatViewModel(private val onNavigate: (CatModel) -> Unit, private val cat: 
     }
 
     private fun postFavorites(fav:Boolean) {
-        catRepository.postFavoritesCats(PostFavorites(cat.id, "10", "1"))
+        catRepository.postFavoritesCats(PostFavorites(cat.id))
             .subscribe({
                 if (it.message.lowercase() == "success") {
                     _fav.value = fav

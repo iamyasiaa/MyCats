@@ -7,8 +7,14 @@ data class FavoritesModel(
     val image_id: String,
     val sub_id: String,
     val created_at: String,
-    val id_image: String,
-    val url: String
+    val image: List<Image>
 
-)
+
+){
+    data class Image(
+        val id: String,
+        val url: String
+    )
+}
+
 

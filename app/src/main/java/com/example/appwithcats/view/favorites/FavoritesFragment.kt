@@ -5,56 +5,78 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.bumptech.glide.Glide
 import com.example.appwithcats.R
+import com.example.appwithcats.databinding.FragmentCatsBinding
+import com.example.appwithcats.databinding.FragmentFavoritesBinding
+import com.example.appwithcats.domain.FavoritesModel
+import com.example.appwithcats.view.CatListAdapter
+import com.example.appwithcats.view.FavoritesAdapter
+import com.example.appwithcats.view.cats.viemodel.MainViewModel
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [FavoritesFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class FavoritesFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var favoritesAdapter: FavoritesAdapter? = null
+    private var mSwipeRefreshLayout: SwipeRefreshLayout? = null
+    private lateinit var image2: ImageView
+    private lateinit var recyclerFavorites: RecyclerView
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+
+    private val favoritesViewModel: FavoritesViewModel by lazy {
+        ViewModelProvider(this)[FavoritesViewModel::class.java]
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        mSwipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayoutFav)
+        recyclerFavorites = view.findViewById(R.id.recyclerFavorites)
+        recyclerFavorites.apply {
+            adapter = FavoritesAdapter(viewLifecycleOwner) {
+                onClickImageItem(it.url)
+            }.also { favoritesAdapter = it }
+            layoutManager = LinearLayoutManager(requireContext())
+            setHasFixedSize(true)
         }
+
+        favoritesViewModel.favLiveData.observe(viewLifecycleOwner) {
+            mSwipeRefreshLayout?.isRefreshing = false
+            favoritesAdapter?.submitData(viewLifecycleOwner.lifecycle, it)
+        }
+        mSwipeRefreshLayout?.setOnRefreshListener {
+            mSwipeRefreshLayout?.isRefreshing = false
+            favoritesViewModel.postRequest()
+        }
+    }
+
+    fun onClickImageItem(url: String) {
+        val view: View = layoutInflater.inflate(R.layout.bottom_sheet_dialog, null)
+        val dialog = BottomSheetDialog(this.requireContext())
+        image2 = view.findViewById(R.id.showCats)
+        Glide.with(this)
+            .load(url)
+            .fitCenter()
+            .centerCrop()
+            .placeholder(R.drawable.progress_animation)
+            .into(image2)
+        dialog.setContentView(view)
+        dialog.show()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favorites, container, false)
-    }
+        val binding: FragmentFavoritesBinding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_favorites, container, false
+        )
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FavoritesFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FavoritesFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        return binding.root
     }
 }

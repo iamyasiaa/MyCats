@@ -15,17 +15,17 @@ import com.example.appwithcats.domain.FavoritesModel
 
 class FavoritesAdapter(
 private val fragmentLifecycleOwner: LifecycleOwner,
-private val onNavigate: (FavoritesModel) -> Unit,
+private val onNavigate: (FavoritesModel.Image) -> Unit,
 
 ) :
-PagingDataAdapter<FavoritesModel, FavoritesAdapter.FavoritesViewHolder>(COMPARATOR)  {
+PagingDataAdapter<FavoritesModel.Image, FavoritesAdapter.FavoritesViewHolder>(COMPARATOR)  {
 
     companion object {
-        private val COMPARATOR = object : DiffUtil.ItemCallback<FavoritesModel>() {
-            override fun areItemsTheSame(oldItem: FavoritesModel, newItem: FavoritesModel): Boolean =
+        private val COMPARATOR = object : DiffUtil.ItemCallback<FavoritesModel.Image>() {
+            override fun areItemsTheSame(oldItem: FavoritesModel.Image, newItem: FavoritesModel.Image): Boolean =
                 oldItem.id == newItem.id
 
-            override fun areContentsTheSame(oldItem: FavoritesModel, newItem: FavoritesModel): Boolean =
+            override fun areContentsTheSame(oldItem: FavoritesModel.Image, newItem: FavoritesModel.Image): Boolean =
                 oldItem == newItem
         }
     }
@@ -49,7 +49,7 @@ PagingDataAdapter<FavoritesModel, FavoritesAdapter.FavoritesViewHolder>(COMPARAT
         RecyclerView.ViewHolder(binding.root) {
 
 
-        fun bind(fav: FavoritesModel) {
+        fun bind(fav: FavoritesModel.Image) {
 
 //            binding.viewModel = CatViewModel(onNavigate, cat).apply {
 //                renderingVote(cat)
@@ -61,7 +61,7 @@ PagingDataAdapter<FavoritesModel, FavoritesAdapter.FavoritesViewHolder>(COMPARAT
                 Glide.with(itemView)
                     .load(fav.url)
                     .placeholder(R.drawable.progress_animation)
-                    .into(image)
+                    .into(image3)
             }
         }
 

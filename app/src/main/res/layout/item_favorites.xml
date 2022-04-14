@@ -3,7 +3,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.appwithcats.view.cats.viemodel.CatViewModel" />
+            type="com.example.appwithcats.view.favorites.FavoritesViewModel" />
     </data>
 
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -21,13 +21,12 @@
             android:layout_margin="0dp">
 
             <ImageView
-                android:id="@+id/image"
+                android:id="@+id/image3"
                 android:layout_width="391dp"
                 android:layout_height="217dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:scaleType="centerCrop"
-                android:onClick="@{() -> viewModel.onImageClicked()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -43,10 +42,9 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="16dp"
-                android:onClick="@{() -> viewModel.onDislikeClicked()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/more"
-                app:layout_constraintTop_toBottomOf="@+id/image"
+                app:layout_constraintTop_toBottomOf="@+id/image3"
                 app:layout_constraintVertical_bias="0.466"
                 app:srcCompat="@drawable/dislike" />
 
@@ -54,12 +52,11 @@
                 android:id="@+id/like"
                 android:layout_width="22dp"
                 android:layout_height="20dp"
-                android:onClick="@{() -> viewModel.onLikeClicked()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/dislike"
                 app:layout_constraintHorizontal_bias="0.946"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image"
+                app:layout_constraintTop_toBottomOf="@+id/image3"
                 app:layout_constraintVertical_bias="0.466"
                 app:srcCompat="@drawable/like"
                 />
@@ -67,12 +64,11 @@
                 android:id="@+id/favorites"
                 android:layout_width="22dp"
                 android:layout_height="20dp"
-                android:onClick="@{() -> viewModel.onLikeClicked()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/like"
                 app:layout_constraintHorizontal_bias="0.946"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image"
+                app:layout_constraintTop_toBottomOf="@+id/image3"
                 app:layout_constraintVertical_bias="0.466"
                 app:srcCompat="@drawable/favorites_click"
                 />
@@ -83,7 +79,7 @@
                 android:layout_height="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image"
+                app:layout_constraintTop_toBottomOf="@+id/image3"
                 app:srcCompat="@drawable/more" />
 
 

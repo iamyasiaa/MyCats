@@ -55,7 +55,7 @@ class CatRepository(private val api: Api) {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
-    fun getFavoritesList(pageConfig: PagingConfig = getDefaultPageConfig()): Flowable<PagingData<FavoritesModel>> {
+    fun getFavoritesList(pageConfig: PagingConfig = getDefaultPageConfig()): Flowable<PagingData<FavoritesModel.Image>> {
         return Pager(
             config = pageConfig,
             pagingSourceFactory = { FavoritesPagingSource(api) }
