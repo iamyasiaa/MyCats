@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.appwithcats.R
 import com.example.appwithcats.databinding.ItemBinding
+import com.example.appwithcats.databinding.ItemFavoritesBinding
 import com.example.appwithcats.domain.FavoritesModel
 
 
@@ -32,7 +33,7 @@ PagingDataAdapter<FavoritesModel.Image, FavoritesAdapter.FavoritesViewHolder>(CO
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoritesViewHolder {
         val binding =
-            ItemBinding.inflate(LayoutInflater.from(parent.context), parent, false).apply {
+            ItemFavoritesBinding.inflate(LayoutInflater.from(parent.context), parent, false).apply {
                 this.lifecycleOwner = fragmentLifecycleOwner
             }
         return FavoritesViewHolder(binding)
@@ -45,7 +46,7 @@ PagingDataAdapter<FavoritesModel.Image, FavoritesAdapter.FavoritesViewHolder>(CO
         }
     }
 
-    inner class FavoritesViewHolder(private val binding: ItemBinding) :
+    inner class FavoritesViewHolder(private val binding: ItemFavoritesBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
 
