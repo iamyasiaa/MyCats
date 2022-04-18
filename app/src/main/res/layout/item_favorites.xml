@@ -3,7 +3,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.appwithcats.view.favorites.FavoritesViewModel" />
+            type="com.example.appwithcats.view.favorites.ItemFavViewModel" />
     </data>
 
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -25,6 +25,7 @@
                 android:layout_width="391dp"
                 android:layout_height="217dp"
                 android:layout_alignParentLeft="true"
+
                 android:layout_alignParentTop="true"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -40,6 +41,7 @@
                 android:layout_width="22dp"
                 android:layout_height="20dp"
                 android:layout_centerHorizontal="true"
+
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -53,6 +55,7 @@
                 android:layout_width="22dp"
                 android:layout_height="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
+
                 app:layout_constraintEnd_toStartOf="@+id/dislike"
                 app:layout_constraintHorizontal_bias="0.946"
                 app:layout_constraintStart_toStartOf="parent"
@@ -64,6 +67,7 @@
                 android:id="@+id/favorites"
                 android:layout_width="22dp"
                 android:layout_height="20dp"
+                android:onClick="@{() -> viewModel.onDeleteClick()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/like"
                 app:layout_constraintHorizontal_bias="0.946"
@@ -71,6 +75,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/image3"
                 app:layout_constraintVertical_bias="0.466"
                 app:srcCompat="@drawable/favorites_click"
+
                 />
 
             <ImageView

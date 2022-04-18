@@ -19,7 +19,7 @@ class CatListAdapter(
     private val onNavigate: (CatModel) -> Unit,
 
     ) :
-    PagingDataAdapter<CatModel, CatListAdapter.CatViewHolder>(COMPARATOR)  {
+    PagingDataAdapter<CatModel, CatListAdapter.CatViewHolder>(COMPARATOR) {
 
     companion object {
         private val COMPARATOR = object : DiffUtil.ItemCallback<CatModel>() {
@@ -52,10 +52,14 @@ class CatListAdapter(
 
         fun bind(cat: CatModel) {
 
+
             binding.viewModel = CatViewModel(onNavigate, cat).apply {
                 renderingVote(cat)
                 this.vote.observe(fragmentLifecycleOwner) {
                     renderingVote(cat)
+                }
+                this.fav.observe(fragmentLifecycleOwner) {
+                    clickFavorites(cat)
                 }
             }
             binding.apply {
@@ -63,6 +67,17 @@ class CatListAdapter(
                     .load(cat.url)
                     .placeholder(R.drawable.progress_animation)
                     .into(image)
+            }
+        }
+
+        private fun clickFavorites(cat: CatModel) {
+            when (cat.favorites) {
+                false -> {
+                    binding.favorites?.setImageResource(R.drawable.favorites_star)
+                }
+                true -> {
+                    binding.favorites?.setImageResource(R.drawable.favorites_click)
+                }
             }
         }
 

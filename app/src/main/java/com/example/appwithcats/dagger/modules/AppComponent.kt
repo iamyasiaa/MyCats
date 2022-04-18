@@ -7,6 +7,7 @@ import com.example.appwithcats.view.authrization.viewmodel.AuthorizationViewMode
 import com.example.appwithcats.view.cats.viemodel.CatViewModel
 import com.example.appwithcats.view.cats.viemodel.MainViewModel
 import com.example.appwithcats.view.favorites.FavoritesViewModel
+import com.example.appwithcats.view.favorites.ItemFavViewModel
 import dagger.Component
 import javax.inject.Singleton
 
@@ -19,4 +20,5 @@ interface AppComponent {
     fun inject(ApiKeyViewModel: ApiKeyViewModel)
     fun inject(catViewModel: CatViewModel)
     fun inject(favoritesViewModel: FavoritesViewModel)
+    fun inject(deleteFavViewModel: ItemFavViewModel)
 }

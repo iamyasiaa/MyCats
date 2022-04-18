@@ -73,6 +73,7 @@ class CatViewModel(private val onNavigate: (CatModel) -> Unit, private val cat: 
     }
 
     fun onFavoritesClick(){
+        cat.favorites = true
         postFavorites(true)
     }
 

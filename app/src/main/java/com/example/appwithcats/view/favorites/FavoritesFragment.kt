@@ -7,16 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.example.appwithcats.R
-import com.example.appwithcats.databinding.FragmentCatsBinding
 import com.example.appwithcats.databinding.FragmentFavoritesBinding
 import com.example.appwithcats.domain.FavoritesModel
-import com.example.appwithcats.view.CatListAdapter
 import com.example.appwithcats.view.FavoritesAdapter
 import com.example.appwithcats.view.cats.viemodel.MainViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -46,13 +45,14 @@ class FavoritesFragment : Fragment() {
 
         favoritesViewModel.favLiveData.observe(viewLifecycleOwner) {
             mSwipeRefreshLayout?.isRefreshing = false
-            favoritesAdapter?.submitData(viewLifecycleOwner.lifecycle, it)
+            favoritesAdapter?.submitList(it)
         }
         mSwipeRefreshLayout?.setOnRefreshListener {
             mSwipeRefreshLayout?.isRefreshing = false
             favoritesViewModel.postRequest()
         }
     }
+
 
     fun onClickImageItem(url: String) {
         val view: View = layoutInflater.inflate(R.layout.bottom_sheet_dialog, null)

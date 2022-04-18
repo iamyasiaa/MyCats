@@ -1,13 +1,11 @@
 package com.example.appwithcats.data
 
-import androidx.lifecycle.LiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.rxjava3.flowable
 import com.example.appwithcats.dagger.api.Api
 import com.example.appwithcats.domain.*
-import com.example.appwithcats.view.FavoritesPagingSource
 import com.example.appwithcats.view.cats.fragments.CatsPagingSource
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter
@@ -17,8 +15,6 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import org.jetbrains.annotations.NotNull
 import retrofit2.HttpException
-import timber.log.Timber
-import java.io.IOException
 
 
 class CatRepository(private val api: Api) {
@@ -55,15 +51,21 @@ class CatRepository(private val api: Api) {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
-    fun getFavoritesList(pageConfig: PagingConfig = getDefaultPageConfig()): Flowable<PagingData<FavoritesModel.Image>> {
-        return Pager(
-            config = pageConfig,
-            pagingSourceFactory = { FavoritesPagingSource(api) }
-        ).flowable
+    fun getFavoritesCats(count: Int): Observable<MutableList<FavoritesModel>> {
+        return api.getFavoritesImage(count)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+
     }
 
     fun postFavoritesCats(fav: PostFavorites): Observable<PostFavoritesModel> {
         return api.favoritesCats(fav)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun deleteFavorites(id:String): Observable<DeleteFavorites> {
+        return api.deleteFavorites(id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }

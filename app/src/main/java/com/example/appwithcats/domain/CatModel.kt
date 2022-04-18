@@ -6,6 +6,7 @@ data class CatModel(
     val id: String,
     val url: String,
     val width: Int,
-    var like: Boolean? = null
+    var like: Boolean? = null,
+    var favorites: Boolean? = null
 )
 

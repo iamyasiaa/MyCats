@@ -3,10 +3,7 @@ package com.example.appwithcats.dagger.api
 import com.example.appwithcats.domain.*
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface Api {
     @GET("images/search")
@@ -28,12 +25,16 @@ interface Api {
 
     @GET("favourites")
     fun getFavoritesImage(
-//        @Query("limit") amountOfFavorites: Int,
-//        @Query("page") page: Int
-    ): Single<MutableList<FavoritesModel.Image>>
+        @Query("limit") amountOfFavorites: Int,
+    ): Observable<MutableList<FavoritesModel>>
 
     @POST("favourites")
     fun favoritesCats(@Body body: PostFavorites): Observable<PostFavoritesModel>
+
+    @DELETE("favourites/{favourite_id}")
+    fun deleteFavorites(
+        @Query ("id") id: String,
+    ) : Observable<DeleteFavorites>
 
 }
 
