@@ -42,7 +42,7 @@ ListAdapter<FavoritesModel, FavoritesAdapter.FavoritesViewHolder>(COMPARATOR)  {
     override fun onBindViewHolder(holder: FavoritesViewHolder, position: Int) {
         val currentItem = getItem(position)
         if (currentItem != null) {
-            holder.bind(currentItem.image)
+            holder.bind(currentItem)
         }
     }
 
@@ -50,7 +50,7 @@ ListAdapter<FavoritesModel, FavoritesAdapter.FavoritesViewHolder>(COMPARATOR)  {
         RecyclerView.ViewHolder(binding.root) {
 
 
-        fun bind(fav: FavoritesModel.Image) {
+        fun bind(fav: FavoritesModel) {
 
             binding.viewModel = ItemFavViewModel(fav).apply {
                 this.deleteFavoriteLiveData.observe(fragmentLifecycleOwner) {
@@ -58,22 +58,15 @@ ListAdapter<FavoritesModel, FavoritesAdapter.FavoritesViewHolder>(COMPARATOR)  {
                 }
             }
 
-//            binding.viewModel = FavoritesViewModel(fav, application = Application()).apply {
-//                renderingVote(fav)
-//                this.vote.observe(fragmentLifecycleOwner) {
-//                    renderingVote(fav)
-//                }
-//            }
-
             binding.apply {
                 Glide.with(itemView)
-                    .load(fav.url)
+                    .load(fav.image.url)
                     .placeholder(R.drawable.progress_animation)
                     .into(image3)
             }
         }
 
-        private fun clickFavorites(fav: FavoritesModel.Image) {
+        private fun clickFavorites(fav: FavoritesModel) {
             when (fav.favorites) {
                 false -> {
                     binding.favorites?.setImageResource(R.drawable.favorites_click)

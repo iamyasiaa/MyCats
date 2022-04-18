@@ -14,7 +14,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import retrofit2.HttpException
 import javax.inject.Inject
 
-class ItemFavViewModel(private val favorite: FavoritesModel.Image) : ViewModel() {
+class ItemFavViewModel(private val favorite: FavoritesModel) : ViewModel() {
     init {
         App.getInstance().appComponent.inject(this)
 
@@ -32,7 +32,7 @@ class ItemFavViewModel(private val favorite: FavoritesModel.Image) : ViewModel()
         get() = _deleteFavoriteLiveData
 
     fun deleteFavorite() {
-        catRepository.deleteFavorites(sharedPreferenceRepository.image_id)
+        catRepository.deleteFavorites(favorite.id)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 _deleteFavoriteLiveData.value = it

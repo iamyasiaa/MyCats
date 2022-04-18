@@ -38,7 +38,7 @@ class FavoritesViewModel (application: Application) : AndroidViewModel(applicati
 
 
 fun postRequest() {
-    val count = 30
+    val count = 100
     catRepository.getFavoritesCats(count)
         .subscribe({
             _favLiveData.value = it
