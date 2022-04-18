@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.example.appwithcats.R
 import com.example.appwithcats.databinding.ItemFavoritesBinding
 import com.example.appwithcats.domain.FavoritesModel
+import com.example.appwithcats.view.favorites.FavoritesViewModel
 import com.example.appwithcats.view.favorites.ItemFavViewModel
 
 

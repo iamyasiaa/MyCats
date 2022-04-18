@@ -31,9 +31,9 @@ interface Api {
     @POST("favourites")
     fun favoritesCats(@Body body: PostFavorites): Observable<PostFavoritesModel>
 
-    @DELETE("favourites/")
+    @DELETE("favourites/{id}")
     fun deleteFavorites(
-        @Query ("") id: String,
+        @Path ("id") id: String,
     ) : Observable<DeleteFavorites>
 
 }
