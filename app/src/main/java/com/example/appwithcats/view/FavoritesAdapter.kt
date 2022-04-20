@@ -17,7 +17,7 @@ import com.example.appwithcats.view.favorites.ItemFavViewModel
 
 class FavoritesAdapter(
 private val fragmentLifecycleOwner: LifecycleOwner,
-private val onNavigate: (FavoritesModel.Image) -> Unit,
+private val onNavigate: (FavoritesModel) -> Unit,
 
 ) :
 ListAdapter<FavoritesModel, FavoritesAdapter.FavoritesViewHolder>(COMPARATOR)  {
@@ -53,9 +53,13 @@ ListAdapter<FavoritesModel, FavoritesAdapter.FavoritesViewHolder>(COMPARATOR)  {
 
         fun bind(fav: FavoritesModel) {
 
-            binding.viewModel = ItemFavViewModel(fav).apply {
+            binding.viewModel = ItemFavViewModel(onNavigate,fav).apply {
+                renderingVote(fav)
                 this.deleteFavoriteLiveData.observe(fragmentLifecycleOwner) {
                     clickFavorites(fav)
+                }
+                this.vote.observe(fragmentLifecycleOwner){
+                    renderingVote(fav)
                 }
             }
 
@@ -79,22 +83,24 @@ ListAdapter<FavoritesModel, FavoritesAdapter.FavoritesViewHolder>(COMPARATOR)  {
         }
 
 
-//        private fun renderingVote(fav: FavoritesModel.Image) {
-//            when (fav.like) {
-//                true -> {
-//                    binding.dislike.setImageResource(R.drawable.dislike)
-//                    binding.like.setImageResource(R.drawable.like_click)
-//                }
-//                false -> {
-//                    binding.dislike.setImageResource(R.drawable.dislike_click)
-//                    binding.like.setImageResource(R.drawable.like)
-//                }
-//                else -> {
-//                    binding.dislike.setImageResource(R.drawable.dislike)
-//                    binding.like.setImageResource(R.drawable.like)
-//                }
-//            }
-//        }
+
+
+        private fun renderingVote(fav: FavoritesModel) {
+            when (fav.image.like) {
+                true -> {
+                    binding.dislike.setImageResource(R.drawable.dislike)
+                    binding.like.setImageResource(R.drawable.like_click)
+                }
+                false -> {
+                    binding.dislike.setImageResource(R.drawable.dislike_click)
+                    binding.like.setImageResource(R.drawable.like)
+                }
+                else -> {
+                    binding.dislike.setImageResource(R.drawable.dislike)
+                    binding.like.setImageResource(R.drawable.like)
+                }
+            }
+        }
     }
 }
 

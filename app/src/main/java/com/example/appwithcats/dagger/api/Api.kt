@@ -36,5 +36,9 @@ interface Api {
         @Path ("id") id: String,
     ) : Observable<DeleteFavorites>
 
+    @GET("votes")
+    fun getVotesImage(
+    ): Observable<GetVotes>
+
 }
 

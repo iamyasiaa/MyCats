@@ -19,10 +19,11 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import retrofit2.HttpException
 import javax.inject.Inject
 
-class FavoritesViewModel (application: Application) : AndroidViewModel(application) {
+class FavoritesViewModel(application: Application) : AndroidViewModel(application) {
     init {
         App.getInstance().appComponent.inject(this)
         postRequest()
+        postRequestVotes()
     }
 
 
@@ -35,18 +36,29 @@ class FavoritesViewModel (application: Application) : AndroidViewModel(applicati
     private var _favLiveData = MutableLiveData<MutableList<FavoritesModel>>()
     val favLiveData: LiveData<MutableList<FavoritesModel>>
         get() = _favLiveData
+    private val _votes = MutableLiveData<GetVotes>()
+    val votes: LiveData<GetVotes>
+        get() = _votes
 
 
-fun postRequest() {
-    val count = 100
-    catRepository.getFavoritesCats(count)
-        .subscribe({
-            _favLiveData.value = it
-        }, {
-            Log.e("Ошибка", "Error")
-        })
-}
+    fun postRequest() {
+        val count = 100
+        catRepository.getFavoritesCats(count)
+            .subscribe({
+                _favLiveData.value = it
+            }, {
+                Log.e("Ошибка", "Error")
+            })
+    }
 
+    fun postRequestVotes() {
+        catRepository.getVotesCats()
+            .subscribe({
+                _votes.value = it
+            }, {
+                Log.e("Ошибка", "Error")
+            })
+    }
 
 
 }

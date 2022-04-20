@@ -23,7 +23,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 class FavoritesFragment : Fragment() {
     private var favoritesAdapter: FavoritesAdapter? = null
     private var mSwipeRefreshLayout: SwipeRefreshLayout? = null
-    private lateinit var image2: ImageView
+    private lateinit var image3: ImageView
     private lateinit var recyclerFavorites: RecyclerView
 
 
@@ -37,7 +37,7 @@ class FavoritesFragment : Fragment() {
         recyclerFavorites = view.findViewById(R.id.recyclerFavorites)
         recyclerFavorites.apply {
             adapter = FavoritesAdapter(viewLifecycleOwner) {
-                onClickImageItem(it.url)
+                onClickImageItem(it.image.url)
             }.also { favoritesAdapter = it }
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
@@ -45,25 +45,27 @@ class FavoritesFragment : Fragment() {
 
         favoritesViewModel.favLiveData.observe(viewLifecycleOwner) {
             mSwipeRefreshLayout?.isRefreshing = false
+            favoritesViewModel.postRequest()
             favoritesAdapter?.submitList(it)
         }
         mSwipeRefreshLayout?.setOnRefreshListener {
             mSwipeRefreshLayout?.isRefreshing = false
             favoritesViewModel.postRequest()
+            favoritesViewModel.postRequestVotes()
         }
     }
 
 
     fun onClickImageItem(url: String) {
-        val view: View = layoutInflater.inflate(R.layout.bottom_sheet_dialog, null)
+        val view: View = layoutInflater.inflate(R.layout.bottom_sheet_dialog_favorites, null)
         val dialog = BottomSheetDialog(this.requireContext())
-        image2 = view.findViewById(R.id.showCats)
+        image3 = view.findViewById(R.id.showCatsFavorites)
         Glide.with(this)
             .load(url)
             .fitCenter()
             .centerCrop()
             .placeholder(R.drawable.progress_animation)
-            .into(image2)
+            .into(image3)
         dialog.setContentView(view)
         dialog.show()
     }

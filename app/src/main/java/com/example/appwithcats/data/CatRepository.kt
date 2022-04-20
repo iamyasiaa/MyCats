@@ -69,6 +69,11 @@ class CatRepository(private val api: Api) {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
+    fun getVotesCats(): Observable<GetVotes>{
+        return api.getVotesImage()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
     fun helperRequest(it: Throwable): UserModel?{
         if (it is HttpException) {
             val body = it.response()?.errorBody()

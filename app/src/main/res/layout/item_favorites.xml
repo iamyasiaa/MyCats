@@ -25,9 +25,9 @@
                 android:layout_width="391dp"
                 android:layout_height="217dp"
                 android:layout_alignParentLeft="true"
-
                 android:layout_alignParentTop="true"
                 android:scaleType="centerCrop"
+                android:onClick="@{() -> viewModel.onImageClicked()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -41,7 +41,7 @@
                 android:layout_width="22dp"
                 android:layout_height="20dp"
                 android:layout_centerHorizontal="true"
-
+                android:onClick="@{() -> viewModel.onClickDislike()}"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -54,6 +54,7 @@
                 android:id="@+id/like"
                 android:layout_width="22dp"
                 android:layout_height="20dp"
+                android:onClick="@{() -> viewModel.onClickLike()}"
                 app:layout_constraintBottom_toBottomOf="parent"
 
                 app:layout_constraintEnd_toStartOf="@+id/dislike"

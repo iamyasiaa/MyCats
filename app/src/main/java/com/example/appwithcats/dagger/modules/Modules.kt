@@ -7,6 +7,7 @@ import com.example.appwithcats.dagger.api.Api
 import com.example.appwithcats.view.interfaces.ISharPref
 import com.example.appwithcats.interseptor.KeyInterseptor
 import com.example.appwithcats.data.CatRepository
+import com.example.appwithcats.view.favorites.FavoritesViewModel
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -41,6 +42,11 @@ class Module(
     @Singleton
     fun providesRepository(api: Api): CatRepository {
         return CatRepository(api)
+    }
+    @Provides
+    @Singleton
+    fun providesFavoriteViewModel(): FavoritesViewModel {
+        return FavoritesViewModel(Application())
     }
 
     @Provides
