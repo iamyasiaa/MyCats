@@ -18,7 +18,7 @@ class ItemFavViewModel(
     private val onNavigate: (FavoritesModel) -> Unit,
     private val favorite: FavoritesModel,
 
-) : ViewModel() {
+    ) : ViewModel() {
     init {
         App.getInstance().appComponent.inject(this)
 
@@ -34,18 +34,11 @@ class ItemFavViewModel(
     val vote: LiveData<Boolean?>
         get() = _vote
 
-    private var _favLiveData = MutableLiveData<MutableList<FavoritesModel>>()
-    val favLiveData: LiveData<MutableList<FavoritesModel>>
-        get() = _favLiveData
-
 
     private var _deleteFavoriteLiveData = MutableLiveData<DeleteFavorites>()
     val deleteFavoriteLiveData: LiveData<DeleteFavorites>
         get() = _deleteFavoriteLiveData
 
-    private val _fav = MutableLiveData<Boolean?>()
-    val fav: LiveData<Boolean?>
-        get() = _fav
 
 
     fun deleteFavorite() {
@@ -79,24 +72,13 @@ class ItemFavViewModel(
             })
     }
 
-   fun postFavorites(fav:Boolean) {
-        catRepository.postFavoritesCats(PostFavorites(favorite.image.id))
-            .subscribe({
-                if (it.message.lowercase() == "success") {
-                    _fav.value = fav
-
-                } else {
-                    _fav.value = null
-                }
-            }, {
-                _fav.value = null
-            })
-    }
 
 
     fun onDeleteClick() {
         favorite.favorites = true
         deleteFavorite()
+
+
     }
 
     fun onClickLike() {

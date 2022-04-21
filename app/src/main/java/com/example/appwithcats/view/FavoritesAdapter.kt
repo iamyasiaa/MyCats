@@ -78,14 +78,12 @@ class FavoritesAdapter(
 
         private fun clickFavorites(fav: FavoritesModel) {
             when (fav.favorites) {
-                false -> {
-                    binding.favorites?.setImageResource(R.drawable.favorites_click)
-
-                }
                 true -> {
                     binding.favorites?.setImageResource(R.drawable.favorites_star)
-                    binding.viewModel?.postFavorites(true)
-                    fav.favorites = false
+
+                }
+                false -> {
+                    binding.favorites?.setImageResource(R.drawable.favorites_click)
 
                 }
             }
