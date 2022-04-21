@@ -16,18 +16,24 @@ import com.example.appwithcats.view.favorites.ItemFavViewModel
 
 
 class FavoritesAdapter(
-private val fragmentLifecycleOwner: LifecycleOwner,
-private val onNavigate: (FavoritesModel) -> Unit,
+    private val fragmentLifecycleOwner: LifecycleOwner,
+    private val onNavigate: (FavoritesModel) -> Unit,
 
-) :
-ListAdapter<FavoritesModel, FavoritesAdapter.FavoritesViewHolder>(COMPARATOR)  {
+    ) :
+    ListAdapter<FavoritesModel, FavoritesAdapter.FavoritesViewHolder>(COMPARATOR) {
 
     companion object {
         private val COMPARATOR = object : DiffUtil.ItemCallback<FavoritesModel>() {
-            override fun areItemsTheSame(oldItem: FavoritesModel, newItem: FavoritesModel): Boolean =
+            override fun areItemsTheSame(
+                oldItem: FavoritesModel,
+                newItem: FavoritesModel
+            ): Boolean =
                 oldItem.id == newItem.id
 
-            override fun areContentsTheSame(oldItem: FavoritesModel, newItem: FavoritesModel): Boolean =
+            override fun areContentsTheSame(
+                oldItem: FavoritesModel,
+                newItem: FavoritesModel
+            ): Boolean =
                 oldItem == newItem
         }
     }
@@ -52,16 +58,15 @@ ListAdapter<FavoritesModel, FavoritesAdapter.FavoritesViewHolder>(COMPARATOR)  {
 
 
         fun bind(fav: FavoritesModel) {
-
-            binding.viewModel = ItemFavViewModel(onNavigate,fav).apply {
-                renderingVote(fav)
-                this.deleteFavoriteLiveData.observe(fragmentLifecycleOwner) {
-                    clickFavorites(fav)
-                }
-                this.vote.observe(fragmentLifecycleOwner){
+                binding.viewModel = ItemFavViewModel(onNavigate, fav).apply {
                     renderingVote(fav)
+                    this.deleteFavoriteLiveData.observe(fragmentLifecycleOwner) {
+                        showDislikes(fav)
+                    }
+                    this.vote.observe(fragmentLifecycleOwner) {
+                        renderingVote(fav)
+                    }
                 }
-            }
 
             binding.apply {
                 Glide.with(itemView)
@@ -71,18 +76,25 @@ ListAdapter<FavoritesModel, FavoritesAdapter.FavoritesViewHolder>(COMPARATOR)  {
             }
         }
 
-        private fun clickFavorites(fav: FavoritesModel) {
-            when (fav.favorites) {
-                false -> {
-                    binding.favorites?.setImageResource(R.drawable.favorites_click)
-                }
-                true -> {
-                    binding.favorites?.setImageResource(R.drawable.favorites_star)
-                }
-            }
+//        private fun clickFavorites(fav: FavoritesModel) {
+//            when (fav.favorites) {
+//                false -> {
+//                    binding.favorites?.setImageResource(R.drawable.favorites_click)
+//
+//                }
+//                true -> {
+//                    binding.favorites?.setImageResource(R.drawable.favorites_star)
+//
+//                }
+//            }
+//        }
+        private fun showDislikes(favorite: FavoritesModel) {
+            if (favorite.favorites) {
+                binding.favorites?.setImageResource(R.drawable.favorites_click)
+                notifyItemRemoved(position)
+                notifyItemRangeChanged (position, itemCount)
+            } else binding.favorites?.setImageResource(R.drawable.favorites_star)
         }
-
-
 
 
         private fun renderingVote(fav: FavoritesModel) {

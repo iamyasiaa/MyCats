@@ -8,7 +8,7 @@ data class FavoritesModel(
     val sub_id: String,
     val created_at: String,
     val image: Image,
-    var favorites: Boolean?=null
+    var favorites: Boolean=false
 
 ){
     data class Image(

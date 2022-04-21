@@ -25,6 +25,7 @@ class FavoritesFragment : Fragment() {
     private var mSwipeRefreshLayout: SwipeRefreshLayout? = null
     private lateinit var image3: ImageView
     private lateinit var recyclerFavorites: RecyclerView
+    private lateinit var favoritesModel: FavoritesModel
 
 
     private val favoritesViewModel: FavoritesViewModel by lazy {
@@ -45,7 +46,7 @@ class FavoritesFragment : Fragment() {
 
         favoritesViewModel.favLiveData.observe(viewLifecycleOwner) {
             mSwipeRefreshLayout?.isRefreshing = false
-            favoritesViewModel.postRequest()
+//            favoritesViewModel.postRequest()
             favoritesAdapter?.submitList(it)
         }
         mSwipeRefreshLayout?.setOnRefreshListener {
@@ -54,6 +55,8 @@ class FavoritesFragment : Fragment() {
             favoritesViewModel.postRequestVotes()
         }
     }
+
+
 
 
     fun onClickImageItem(url: String) {

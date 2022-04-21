@@ -26,7 +26,7 @@ class ItemFavViewModel(
 
     @Inject
     lateinit var catRepository: CatRepository
-    
+
     @Inject
     lateinit var favoritesViewModel: FavoritesViewModel
 
@@ -37,10 +37,24 @@ class ItemFavViewModel(
     val vote: LiveData<Boolean?>
         get() = _vote
 
+    private var _favLiveData = MutableLiveData<MutableList<FavoritesModel>>()
+    val favLiveData: LiveData<MutableList<FavoritesModel>>
+        get() = _favLiveData
+
 
     private var _deleteFavoriteLiveData = MutableLiveData<DeleteFavorites>()
     val deleteFavoriteLiveData: LiveData<DeleteFavorites>
         get() = _deleteFavoriteLiveData
+
+    fun postRequest() {
+        val count = 100
+        catRepository.getFavoritesCats(count)
+            .subscribe({
+                _favLiveData.value = it
+            }, {
+                Log.e("Ошибка", "Error")
+            })
+    }
 
     fun deleteFavorite() {
         catRepository.deleteFavorites(favorite.id)
@@ -76,7 +90,7 @@ class ItemFavViewModel(
 
     fun onDeleteClick() {
         favorite.favorites = true
-        favoritesViewModel.postRequest()
+//        favoritesViewModel.postRequest()
         deleteFavorite()
     }
 

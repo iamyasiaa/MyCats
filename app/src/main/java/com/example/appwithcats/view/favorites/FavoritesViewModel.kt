@@ -23,7 +23,6 @@ class FavoritesViewModel(application: Application) : AndroidViewModel(applicatio
     init {
         App.getInstance().appComponent.inject(this)
         postRequest()
-        postRequestVotes()
     }
 
 
