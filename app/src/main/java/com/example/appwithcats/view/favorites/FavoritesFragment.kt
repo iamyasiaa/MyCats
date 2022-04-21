@@ -46,8 +46,10 @@ class FavoritesFragment : Fragment() {
 
         favoritesViewModel.favLiveData.observe(viewLifecycleOwner) {
             mSwipeRefreshLayout?.isRefreshing = false
-//            favoritesViewModel.postRequest()
             favoritesAdapter?.submitList(it)
+
+
+
         }
         mSwipeRefreshLayout?.setOnRefreshListener {
             mSwipeRefreshLayout?.isRefreshing = false
@@ -55,8 +57,6 @@ class FavoritesFragment : Fragment() {
             favoritesViewModel.postRequestVotes()
         }
     }
-
-
 
 
     fun onClickImageItem(url: String) {

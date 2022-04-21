@@ -43,11 +43,6 @@ class Module(
     fun providesRepository(api: Api): CatRepository {
         return CatRepository(api)
     }
-    @Provides
-    @Singleton
-    fun providesFavoriteViewModel(): FavoritesViewModel {
-        return FavoritesViewModel(Application())
-    }
 
     @Provides
     @Singleton

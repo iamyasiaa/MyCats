@@ -61,7 +61,7 @@ class FavoritesAdapter(
                 binding.viewModel = ItemFavViewModel(onNavigate, fav).apply {
                     renderingVote(fav)
                     this.deleteFavoriteLiveData.observe(fragmentLifecycleOwner) {
-                        showDislikes(fav)
+                        clickFavorites(fav)
                     }
                     this.vote.observe(fragmentLifecycleOwner) {
                         renderingVote(fav)
@@ -76,25 +76,21 @@ class FavoritesAdapter(
             }
         }
 
-//        private fun clickFavorites(fav: FavoritesModel) {
-//            when (fav.favorites) {
-//                false -> {
-//                    binding.favorites?.setImageResource(R.drawable.favorites_click)
-//
-//                }
-//                true -> {
-//                    binding.favorites?.setImageResource(R.drawable.favorites_star)
-//
-//                }
-//            }
-//        }
-        private fun showDislikes(favorite: FavoritesModel) {
-            if (favorite.favorites) {
-                binding.favorites?.setImageResource(R.drawable.favorites_click)
-                notifyItemRemoved(position)
-                notifyItemRangeChanged (position, itemCount)
-            } else binding.favorites?.setImageResource(R.drawable.favorites_star)
+        private fun clickFavorites(fav: FavoritesModel) {
+            when (fav.favorites) {
+                false -> {
+                    binding.favorites?.setImageResource(R.drawable.favorites_click)
+
+                }
+                true -> {
+                    binding.favorites?.setImageResource(R.drawable.favorites_star)
+                    binding.viewModel?.postFavorites(true)
+                    fav.favorites = false
+
+                }
+            }
         }
+
 
 
         private fun renderingVote(fav: FavoritesModel) {
