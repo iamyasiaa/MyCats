@@ -2,6 +2,7 @@ package com.example.appwithcats.view
 
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.DiffUtil
@@ -53,20 +54,21 @@ class FavoritesAdapter(
         }
     }
 
-    inner class FavoritesViewHolder(private val binding: ItemFavoritesBinding) :
+    open inner class FavoritesViewHolder(private val binding: ItemFavoritesBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-
         fun bind(fav: FavoritesModel) {
-                binding.viewModel = ItemFavViewModel(onNavigate, fav).apply {
-                    renderingVote(fav)
-                    this.deleteFavoriteLiveData.observe(fragmentLifecycleOwner) {
-                        clickFavorites(fav)
-                    }
-                    this.vote.observe(fragmentLifecycleOwner) {
-                        renderingVote(fav)
-                    }
+            binding.viewModel = ItemFavViewModel(onNavigate, fav).apply {
+                renderingVote(fav)
+                this.deleteFavoriteLiveData.observe(fragmentLifecycleOwner) {
+                    clickFavorites(fav)
+                    removeItem(position)
+
                 }
+                this.vote.observe(fragmentLifecycleOwner) {
+                    renderingVote(fav)
+                }
+            }
 
             binding.apply {
                 Glide.with(itemView)
@@ -76,6 +78,7 @@ class FavoritesAdapter(
             }
         }
 
+
         private fun clickFavorites(fav: FavoritesModel) {
             when (fav.favorites) {
                 true -> {
@@ -84,12 +87,9 @@ class FavoritesAdapter(
                 }
                 false -> {
                     binding.favorites?.setImageResource(R.drawable.favorites_click)
-
                 }
             }
         }
-
-
 
         private fun renderingVote(fav: FavoritesModel) {
             when (fav.image.like) {
@@ -106,6 +106,12 @@ class FavoritesAdapter(
                     binding.like.setImageResource(R.drawable.like)
                 }
             }
+        }
+        fun removeItem(position: Int){
+            val currentList = currentList.toMutableList()
+            currentList.removeAt(position)
+            submitList(currentList)
+
         }
     }
 }

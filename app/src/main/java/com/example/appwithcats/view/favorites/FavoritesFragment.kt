@@ -25,7 +25,6 @@ class FavoritesFragment : Fragment() {
     private var mSwipeRefreshLayout: SwipeRefreshLayout? = null
     private lateinit var image3: ImageView
     private lateinit var recyclerFavorites: RecyclerView
-    private lateinit var favoritesModel: FavoritesModel
 
 
     private val favoritesViewModel: FavoritesViewModel by lazy {

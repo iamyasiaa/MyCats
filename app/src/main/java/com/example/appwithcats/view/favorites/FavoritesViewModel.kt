@@ -17,12 +17,16 @@ import com.google.gson.TypeAdapter
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import retrofit2.HttpException
+import java.util.*
 import javax.inject.Inject
 
 class FavoritesViewModel(application: Application) : AndroidViewModel(application) {
     init {
         App.getInstance().appComponent.inject(this)
         postRequest()
+    }
+    interface Callbacks {
+        fun postRequestFavorites(fav: FavoritesModel)
     }
 
 
