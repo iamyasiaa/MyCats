@@ -1,7 +1,7 @@
 package com.example.appwithcats.dagger.modules
 
+import com.example.appwithcats.App
 import com.example.appwithcats.view.interfaces.ISharPref
-import com.example.appwithcats.module.Module
 import com.example.appwithcats.view.apikey.viewmodel.ApiKeyViewModel
 import com.example.appwithcats.view.authrization.viewmodel.AuthorizationViewModel
 import com.example.appwithcats.view.cats.viemodel.CatViewModel
@@ -21,4 +21,5 @@ interface AppComponent {
     fun inject(catViewModel: CatViewModel)
     fun inject(favoritesViewModel: FavoritesViewModel)
     fun inject(deleteFavViewModel: ItemFavViewModel)
+    fun inject(app: App)
 }

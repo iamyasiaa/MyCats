@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">AppWithCats</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="BaseUrl" translatable="false">"https://api.thecatapi.com/v1/"</string>
+    <string name="Base_url" translatable="false">"https://api.thecatapi.com/v1/"</string>
     <string name="Error" translatable="false">"Error"</string>
     <string name="api_key">put your api key here</string>
     <string name="email">E-mail</string>

@@ -4,7 +4,7 @@ import android.app.Application
 import com.example.appwithcats.dagger.modules.AppComponent
 import com.example.appwithcats.dagger.modules.DaggerAppComponent
 import com.example.appwithcats.data.SharedPreferenceRepository
-import com.example.appwithcats.module.Module
+import com.example.appwithcats.dagger.modules.Module
 import timber.log.Timber
 
 
@@ -18,7 +18,7 @@ class App : Application() {
 
 
         appComponent = DaggerAppComponent.builder()
-            .module(Module(getString(R.string.BaseUrl), sharedPreferenceRepository.apikey, this))
+            .module(Module(getString(R.string.Base_url), sharedPreferenceRepository.apikey, this))
             .build()
         Timber.plant(Timber.DebugTree())
     }

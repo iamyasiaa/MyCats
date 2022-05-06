@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -25,35 +27,47 @@ class CatsFragment : Fragment() {
 
 
     private var catListAdapter: CatListAdapter? = null
-    private var mSwipeRefreshLayout: SwipeRefreshLayout? = null
     private lateinit var image2: ImageView
-    private lateinit var recyclerCats: RecyclerView
+
 
 
     private val mainViewModel: MainViewModel by lazy {
         ViewModelProvider(this)[MainViewModel::class.java]
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        mSwipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout)
-        recyclerCats = view.findViewById(R.id.recyclerCats)
-            recyclerCats.apply {
-                adapter = CatListAdapter(viewLifecycleOwner) {
-                    onClickImageItem(it.url)
-                }.also { catListAdapter = it }
-                layoutManager = LinearLayoutManager(requireContext())
-                setHasFixedSize(true)
-            }
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val binding: FragmentCatsBinding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_cats, container, false
+        )
+        binding.recyclerCats.apply {
+            adapter = CatListAdapter(viewLifecycleOwner) {
+                onClickImageItem(it.url)
+            }.also { catListAdapter = it }
+            layoutManager = LinearLayoutManager(requireContext())
+            setHasFixedSize(true)
+        }
 
         mainViewModel.catsLiveData.observe(viewLifecycleOwner) {
-            mSwipeRefreshLayout?.isRefreshing = false
+            binding.swipeRefreshLayout.isRefreshing = false
             catListAdapter?.submitData(viewLifecycleOwner.lifecycle, it)
         }
-        mSwipeRefreshLayout?.setOnRefreshListener {
-            mSwipeRefreshLayout?.isRefreshing = false
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            binding.swipeRefreshLayout.isRefreshing = false
             mainViewModel.postRequest()
         }
+        catListAdapter?.addLoadStateListener { loadState ->
+            if (loadState.refresh is LoadState.Loading) {
+                binding.catsBar?.visibility = View.VISIBLE
+            } else {
+                binding.catsBar?.visibility = View.GONE
+            }
+        }
+
+        return binding.root
     }
 
     fun onClickImageItem(url: String) {
@@ -68,17 +82,5 @@ class CatsFragment : Fragment() {
             .into(image2)
         dialog.setContentView(view)
         dialog.show()
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val binding: FragmentCatsBinding = DataBindingUtil.inflate(
-            inflater,
-            R.layout.fragment_cats, container, false
-        )
-
-        return binding.root
     }
 }
