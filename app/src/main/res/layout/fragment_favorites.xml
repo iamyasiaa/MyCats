@@ -12,7 +12,7 @@
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefreshLayoutFav"
-            android:layout_width="match_parent"
+            android:layout_width="401dp"
             android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
@@ -21,17 +21,19 @@
                 android:layout_height="match_parent"
                 android:background="@color/white" />
 
-            <TextView
-                android:id="@+id/smile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="¯\_(ツ)_/¯" />
-            <TextView
-                android:id="@+id/text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nothing here... Add something!" />
+
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        <TextView
+            android:id="@+id/smile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¯\_(ツ)_/¯" />
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nothing here... Add something!" />
 
     </LinearLayout>
 </layout>

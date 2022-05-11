@@ -9,8 +9,10 @@
         <ProgressBar
             android:id="@+id/catsBar"
             style="?android:attr/progressBarStyle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_width="80dp"
+            android:layout_height="77dp"
+            android:layout_marginLeft="160dp"
+            android:layout_marginTop="290dp" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefreshLayout"

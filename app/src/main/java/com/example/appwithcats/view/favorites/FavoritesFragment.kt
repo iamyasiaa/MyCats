@@ -27,7 +27,6 @@ class FavoritesFragment : Fragment() {
         ViewModelProvider(this)[FavoritesViewModel::class.java]
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,6 +35,8 @@ class FavoritesFragment : Fragment() {
             inflater,
             R.layout.fragment_favorites, container, false
         )
+
+
         binding.recyclerFavorites.apply {
             adapter = FavoritesAdapter(viewLifecycleOwner) {
                 onClickImageItem(it.image.url)
@@ -43,6 +44,17 @@ class FavoritesFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
         }
+//        favoritesAdapter?.apply {
+//            if (itemCount ==0) {
+//                binding.smile?.visibility = View.VISIBLE
+//                binding.recyclerFavorites.visibility = View.GONE
+//            } else {
+//                binding.text?.visibility = View.GONE
+//                binding.recyclerFavorites.visibility = View.VISIBLE
+//            }
+//        }
+
+
 
         favoritesViewModel.favLiveData.observe(viewLifecycleOwner) {
             binding.swipeRefreshLayoutFav.isRefreshing = false
@@ -59,7 +71,6 @@ class FavoritesFragment : Fragment() {
         val view: View = layoutInflater.inflate(R.layout.bottom_sheet_dialog_favorites, null)
 
         val dialog = BottomSheetDialog(this.requireContext())
-
         image3 = view.findViewById(R.id.showCatsFavorites)
         Glide.with(this)
             .load(url)
