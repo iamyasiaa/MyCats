@@ -29,6 +29,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:scaleType="centerCrop"
+                android:onClick="@{() -> viewModel.onImageClicked()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -63,6 +64,19 @@
                 app:layout_constraintTop_toBottomOf="@+id/image"
                 app:layout_constraintVertical_bias="0.466"
                 app:srcCompat="@drawable/like" />
+            <ImageView
+                android:id="@+id/favorites"
+                android:layout_width="22dp"
+                android:layout_height="20dp"
+                android:onClick="@{() -> viewModel.onFavoritesClick()}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/like"
+                app:layout_constraintHorizontal_bias="0.946"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image"
+                app:layout_constraintVertical_bias="0.466"
+                app:srcCompat="@drawable/favorites_star"
+                />
 
             <ImageView
                 android:id="@+id/more"
