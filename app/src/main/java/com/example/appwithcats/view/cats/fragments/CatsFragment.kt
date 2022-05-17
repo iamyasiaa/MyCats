@@ -6,22 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.ProgressBar
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.bumptech.glide.Glide
 import com.example.appwithcats.R
-import com.example.appwithcats.databinding.FragmentAutorizationBinding
 import com.example.appwithcats.databinding.FragmentCatsBinding
 import com.example.appwithcats.view.CatListAdapter
 import com.example.appwithcats.view.cats.viemodel.MainViewModel
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
 
 
 class CatsFragment : Fragment() {
@@ -45,7 +39,9 @@ class CatsFragment : Fragment() {
         )
         binding.recyclerCats.apply {
             adapter = CatListAdapter(viewLifecycleOwner) {
-                onClickImageItem(it.url)
+                val action =
+                    CatsFragmentDirections.actionCatsFragmentToBottomSheetDialogCats(it.url)
+                findNavController().navigate(action)
             }.also { catListAdapter = it }
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
@@ -70,21 +66,5 @@ class CatsFragment : Fragment() {
         }
 
         return binding.root
-    }
-
-
-    private fun onClickImageItem(url: String) {
-        val view: View = layoutInflater.inflate(R.layout.bottom_sheet_dialog, null)
-        val dialog = BottomSheetDialog(this.requireContext())
-        dialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
-        image2 = view.findViewById(R.id.showCats)
-        Glide.with(this)
-            .load(url)
-            .fitCenter()
-            .centerCrop()
-            .placeholder(R.drawable.progress_animation)
-            .into(image2)
-        dialog.setContentView(view)
-        dialog.show()
     }
 }

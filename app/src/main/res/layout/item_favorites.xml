@@ -3,7 +3,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.appwithcats.view.favorites.ItemFavViewModel" />
+            type="com.example.appwithcats.view.favorites.viewmodel.ItemFavViewModel" />
     </data>
 
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"

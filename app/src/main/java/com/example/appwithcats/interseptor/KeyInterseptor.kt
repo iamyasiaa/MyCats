@@ -1,16 +1,22 @@
 package com.example.appwithcats.interseptor
 
 
+import com.example.appwithcats.data.SharedPreferenceRepository
 import okhttp3.Interceptor
 import okhttp3.Response
 
-class KeyInterseptor(private val keyApi: String) : Interceptor {
+class KeyInterceptor(private val sharedPreference: SharedPreferenceRepository) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
-        val original = chain.request()
-        val requestBuilder = original.newBuilder()
-            .header("x-api-key", keyApi)
-            .method(original.method(), original.body())
-            .build()
-        return chain.proceed(requestBuilder)
+
+        val request = chain.request()
+        val builder = request.newBuilder()
+
+        val apikey = sharedPreference.apikey
+
+        if(apikey.isNotBlank()) {
+            builder.addHeader("x-api-key", apikey)
+        }
+
+        return chain.proceed(builder.build())
     }
 }

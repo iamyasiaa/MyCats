@@ -5,8 +5,8 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.rxjava3.flowable
 import com.example.appwithcats.dagger.api.Api
+import com.example.appwithcats.data.paging.CatsPagingSource
 import com.example.appwithcats.domain.*
-import com.example.appwithcats.paging.CatsPagingSource
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers

@@ -1,4 +1,4 @@
-package com.example.appwithcats.view.favorites
+package com.example.appwithcats.view.favorites.viewmodel
 
 import android.app.Application
 import android.util.Log

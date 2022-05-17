@@ -2,7 +2,6 @@ package com.example.appwithcats.view
 
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.DiffUtil
@@ -12,8 +11,7 @@ import com.bumptech.glide.Glide
 import com.example.appwithcats.R
 import com.example.appwithcats.databinding.ItemFavoritesBinding
 import com.example.appwithcats.domain.FavoritesModel
-import com.example.appwithcats.view.favorites.FavoritesViewModel
-import com.example.appwithcats.view.favorites.ItemFavViewModel
+import com.example.appwithcats.view.favorites.viewmodel.ItemFavViewModel
 
 
 class FavoritesAdapter(

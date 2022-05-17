@@ -45,22 +45,24 @@
             app:argType="string"
             app:nullable="false" />
         <action
-            android:id="@+id/action_catsFragment_to_catFragment"
-            app:destination="@id/catFragment" />
+            android:id="@+id/action_catsFragment_to_bottomSheetDialogCats"
+            app:destination="@id/bottomSheetDialogCats" />
+
     </fragment>
-    <fragment
-        android:id="@+id/catFragment"
-        android:name="com.example.appwithcats.view.cats.fragments.CatFragment"
-        android:label="fragment_cat"
-        tools:layout="@layout/fragment_cat">
+    <dialog
+        android:id="@+id/bottomSheetDialogCats"
+        android:name="com.example.appwithcats.view.cats.fragments.BottomSheetDialogCats"
+        android:label=""
+        tools:layout="@layout/bottom_sheet_dialog">
         <argument
             android:name="urlCat"
             app:argType="string"
             app:nullable="false" />
-    </fragment>
+
+    </dialog>
     <fragment
         android:id="@+id/favoritesFragment"
-        android:name="com.example.appwithcats.view.favorites.FavoritesFragment"
+        android:name="com.example.appwithcats.view.favorites.fragments.FavoritesFragment"
         android:label="fragment_favorites"
         tools:layout="@layout/fragment_favorites">
         <argument
@@ -68,18 +70,20 @@
             app:argType="string"
             app:nullable="false" />
         <action
-            android:id="@+id/action_favoritesFragment_to_favoritesCatFragment"
-            app:destination="@id/favoritesCatFragment" />
+            android:id="@+id/action_favoritesFragment_to_bottomSheetDialogFavorites"
+            app:destination="@id/bottomSheetDialogFavorites" />
+
     </fragment>
-    <fragment
-        android:id="@+id/favoritesCatFragment"
-        android:name="com.example.appwithcats.view.favorites.FavoritesCatFragment"
-        android:label="fragment_favorites_cat"
-        tools:layout="@layout/fragment_favorites_cat">
-        <argument
-            android:name="urlCatFav"
-            app:argType="string"
-            app:nullable="false" />
-    </fragment>
+    <dialog
+        android:id="@+id/bottomSheetDialogFavorites"
+        android:name="com.example.appwithcats.view.favorites.fragments.BottomSheetDialogFavorites"
+        android:label=""
+        tools:layout="@layout/bottom_sheet_dialog_favorites">
+    <argument
+        android:name="urlFavorites"
+        app:argType="string"
+        app:nullable="false" />
+    </dialog>
+
 
 </navigation>

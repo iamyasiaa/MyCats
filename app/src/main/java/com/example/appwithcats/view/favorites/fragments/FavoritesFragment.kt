@@ -1,7 +1,6 @@
-package com.example.appwithcats.view.favorites
+package com.example.appwithcats.view.favorites.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,13 +8,12 @@ import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import com.example.appwithcats.R
 import com.example.appwithcats.databinding.FragmentFavoritesBinding
 import com.example.appwithcats.view.FavoritesAdapter
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.example.appwithcats.view.favorites.viewmodel.FavoritesViewModel
 
 
 class FavoritesFragment : Fragment() {
@@ -39,7 +37,11 @@ class FavoritesFragment : Fragment() {
 
         binding.recyclerFavorites.apply {
             adapter = FavoritesAdapter(viewLifecycleOwner) {
-                onClickImageItem(it.image.url)
+                val action =
+                    FavoritesFragmentDirections.actionFavoritesFragmentToBottomSheetDialogFavorites(
+                        it.image.url
+                    )
+                findNavController().navigate(action)
             }.also { favoritesAdapter = it }.apply {
 
             }
@@ -69,18 +71,4 @@ class FavoritesFragment : Fragment() {
         return binding.root
     }
 
-    private fun onClickImageItem(url: String) {
-        val view: View = layoutInflater.inflate(R.layout.bottom_sheet_dialog_favorites, null)
-        val dialog = BottomSheetDialog(this.requireContext())
-        dialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
-        image3 = view.findViewById(R.id.showCatsFavorites)
-        Glide.with(this)
-            .load(url)
-            .fitCenter()
-            .centerCrop()
-            .placeholder(R.drawable.progress_animation)
-            .into(image3)
-        dialog.setContentView(view)
-        dialog.show()
-    }
 }

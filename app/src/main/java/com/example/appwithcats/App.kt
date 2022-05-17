@@ -18,7 +18,7 @@ class App : Application() {
 
 
         appComponent = DaggerAppComponent.builder()
-            .module(Module(getString(R.string.Base_url), sharedPreferenceRepository.apikey, this))
+            .module(Module(getString(R.string.Base_url), sharedPreferenceRepository.apikey, this, sharedPreference = SharedPreferenceRepository(context = applicationContext)))
             .build()
         Timber.plant(Timber.DebugTree())
     }

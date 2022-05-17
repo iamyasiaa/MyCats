@@ -54,12 +54,15 @@ class CatListAdapter(
 
 
             binding.viewModel = CatViewModel(onNavigate, cat).apply {
+
                 renderingVote(cat)
+
                 this.vote.observe(fragmentLifecycleOwner) {
                     renderingVote(cat)
                 }
                 this.fav.observe(fragmentLifecycleOwner) {
                     clickFavorites(cat)
+                    binding.favorites.isClickable = false
                 }
             }
             binding.apply {

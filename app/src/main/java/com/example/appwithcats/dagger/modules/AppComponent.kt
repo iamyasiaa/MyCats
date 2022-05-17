@@ -6,8 +6,8 @@ import com.example.appwithcats.view.apikey.viewmodel.ApiKeyViewModel
 import com.example.appwithcats.view.authrization.viewmodel.AuthorizationViewModel
 import com.example.appwithcats.view.cats.viemodel.CatViewModel
 import com.example.appwithcats.view.cats.viemodel.MainViewModel
-import com.example.appwithcats.view.favorites.FavoritesViewModel
-import com.example.appwithcats.view.favorites.ItemFavViewModel
+import com.example.appwithcats.view.favorites.viewmodel.FavoritesViewModel
+import com.example.appwithcats.view.favorites.viewmodel.ItemFavViewModel
 import dagger.Component
 import javax.inject.Singleton
 
