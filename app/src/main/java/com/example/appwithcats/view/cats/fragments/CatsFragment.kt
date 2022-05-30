@@ -22,7 +22,6 @@ class CatsFragment : Fragment() {
 
 
     private var catListAdapter: CatListAdapter? = null
-    private lateinit var image2: ImageView
 
 
     private val mainViewModel: MainViewModel by lazy {

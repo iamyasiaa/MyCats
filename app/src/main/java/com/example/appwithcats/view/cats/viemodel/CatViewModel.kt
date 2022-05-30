@@ -9,6 +9,8 @@ import com.example.appwithcats.domain.CatModel
 import com.example.appwithcats.data.CatRepository
 import com.example.appwithcats.domain.PostFavorites
 import com.example.appwithcats.domain.VoteCatsModel
+import com.example.appwithcats.view.interfaces.ICatRepo
+import com.example.appwithcats.view.interfaces.ISharPref
 import javax.inject.Inject
 
 class CatViewModel(private val onNavigate: (CatModel) -> Unit, private val cat: CatModel) {
@@ -19,7 +21,8 @@ class CatViewModel(private val onNavigate: (CatModel) -> Unit, private val cat: 
 
 
     @Inject
-    lateinit var catRepository: CatRepository
+    lateinit var catRepository: ICatRepo
+
 
     private val _vote = MutableLiveData<Boolean?>()
     val vote: LiveData<Boolean?>
@@ -30,7 +33,7 @@ class CatViewModel(private val onNavigate: (CatModel) -> Unit, private val cat: 
         get() = _fav
 
     private fun postRequest(vote: Boolean) {
-        catRepository.postFavorites(VoteCatsModel(cat.id, vote))
+        catRepository!!.postFavorites(VoteCatsModel(cat.id, vote))
             .subscribe({
                 if (it.message.lowercase() == "success") {
                     _vote.value = vote
@@ -44,7 +47,7 @@ class CatViewModel(private val onNavigate: (CatModel) -> Unit, private val cat: 
     }
 
     private fun postFavorites(fav:Boolean) {
-        catRepository.postFavoritesCats(PostFavorites(cat.id))
+        catRepository!!.postFavoritesCats(PostFavorites(cat.id))
             .subscribe({
                 if (it.message.lowercase() == "success") {
                     _fav.value = fav

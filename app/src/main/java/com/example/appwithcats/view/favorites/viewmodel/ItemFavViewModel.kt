@@ -7,6 +7,8 @@ import com.example.appwithcats.App
 import com.example.appwithcats.data.CatRepository
 import com.example.appwithcats.data.SharedPreferenceRepository
 import com.example.appwithcats.domain.*
+import com.example.appwithcats.view.interfaces.ICatRepo
+import com.example.appwithcats.view.interfaces.ISharPref
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -24,7 +26,8 @@ class ItemFavViewModel(
     }
 
     @Inject
-    lateinit var catRepository: CatRepository
+    lateinit var catRepository: ICatRepo
+
 
     @Inject
     lateinit var sharedPreferenceRepository: SharedPreferenceRepository
@@ -41,7 +44,7 @@ class ItemFavViewModel(
 
 
     fun deleteFavorite() {
-        catRepository.deleteFavorites(favorite.id)
+        catRepository!!.deleteFavorites(favorite.id)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 _deleteFavoriteLiveData.value = it
@@ -58,7 +61,7 @@ class ItemFavViewModel(
     }
 
     private fun postRequest(vote: Boolean) {
-        catRepository.postFavorites(VoteCatsModel(favorite.image.id, vote))
+        catRepository!!.postFavorites(VoteCatsModel(favorite.image.id, vote))
             .subscribe({
                 if (it.message.lowercase() == "success") {
                     _vote.value = vote

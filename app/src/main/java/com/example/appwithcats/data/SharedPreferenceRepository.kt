@@ -47,7 +47,7 @@ class SharedPreferenceRepository(context: Context): ISharPref {
         set(value) {
             setString(APIKEY, value)
         }
-    override var image_id: String
+    override var imageId: String
         get() = getString(IMAGE_ID)
         set(value) {
             setString(IMAGE_ID, value)

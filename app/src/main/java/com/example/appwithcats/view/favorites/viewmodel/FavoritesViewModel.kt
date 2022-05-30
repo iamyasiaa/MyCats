@@ -12,6 +12,8 @@ import com.example.appwithcats.App
 import com.example.appwithcats.data.CatRepository
 import com.example.appwithcats.data.SharedPreferenceRepository
 import com.example.appwithcats.domain.*
+import com.example.appwithcats.view.interfaces.ICatRepo
+import com.example.appwithcats.view.interfaces.ISharPref
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter
 
@@ -25,13 +27,11 @@ class FavoritesViewModel(application: Application) : AndroidViewModel(applicatio
         App.getInstance().appComponent.inject(this)
         postRequest()
     }
-    interface Callbacks {
-        fun postRequestFavorites(fav: FavoritesModel)
-    }
 
 
     @Inject
-    lateinit var catRepository: CatRepository
+    lateinit var catRepository: ICatRepo
+
 
     @Inject
     lateinit var sharedPreferenceRepository: SharedPreferenceRepository
@@ -46,7 +46,7 @@ class FavoritesViewModel(application: Application) : AndroidViewModel(applicatio
 
     fun postRequest() {
         val count = 100
-        catRepository.getFavoritesCats(count)
+        catRepository!!.getFavoritesCats(count)
             .subscribe({
                 _favLiveData.value = it
             }, {
@@ -55,7 +55,7 @@ class FavoritesViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     fun postRequestVotes() {
-        catRepository.getVotesCats()
+        catRepository!!.getVotesCats()
             .subscribe({
                 _votes.value = it
             }, {

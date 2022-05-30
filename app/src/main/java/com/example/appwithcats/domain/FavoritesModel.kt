@@ -4,7 +4,7 @@ data class FavoritesModel(
 
     val id: String,
     val userId: String,
-    val imageId: String,
+    val image_id: String,
     val subId: String,
     val createdAt: String,
     val image: Image,

@@ -8,6 +8,7 @@ import com.example.appwithcats.view.cats.viemodel.CatViewModel
 import com.example.appwithcats.view.cats.viemodel.MainViewModel
 import com.example.appwithcats.view.favorites.viewmodel.FavoritesViewModel
 import com.example.appwithcats.view.favorites.viewmodel.ItemFavViewModel
+import com.example.appwithcats.view.interfaces.ICatRepo
 import dagger.Component
 import javax.inject.Singleton
 
@@ -22,4 +23,7 @@ interface AppComponent {
     fun inject(favoritesViewModel: FavoritesViewModel)
     fun inject(deleteFavViewModel: ItemFavViewModel)
     fun inject(app: App)
+    fun inject(catRepository: ICatRepo)
+
+
 }

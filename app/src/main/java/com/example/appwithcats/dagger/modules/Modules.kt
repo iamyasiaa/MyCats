@@ -8,6 +8,7 @@ import com.example.appwithcats.view.interfaces.ISharPref
 
 import com.example.appwithcats.data.CatRepository
 import com.example.appwithcats.interseptor.KeyInterceptor
+import com.example.appwithcats.view.interfaces.ICatRepo
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -42,7 +43,12 @@ class Module(
 
     @Provides
     @Singleton
-    fun providesRepository(api: Api): CatRepository {
+    fun providesRepository(api: Api): ICatRepo {
+        return CatRepository(api)
+    }
+    @Provides
+    @Singleton
+    fun providesCatRepository(api: Api): CatRepository {
         return CatRepository(api)
     }
 
@@ -60,6 +66,11 @@ class Module(
     fun provideSPI(context: Context): ISharPref {
         return SharedPreferenceRepository(context)
     }
+//    @Provides
+//    @Singleton
+//    fun provideSPCatRepository(context: Context): ICatRepo {
+//        return CatRepository
+//    }
 
 
     @Provides

@@ -11,6 +11,7 @@ import com.example.appwithcats.R
 import com.example.appwithcats.data.CatRepository
 import com.example.appwithcats.view.interfaces.ISharPref
 import com.example.appwithcats.domain.UserModel
+import com.example.appwithcats.view.interfaces.ICatRepo
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter
 import retrofit2.HttpException
@@ -22,11 +23,11 @@ class ApiKeyViewModel(application: Application) : AndroidViewModel(application){
         App.getInstance().appComponent.inject(this)
     }
 
-    @Inject
-    lateinit var myRepository: CatRepository
-
     var sharedPreference: ISharPref? = null
         @Inject set
+
+    @Inject
+    lateinit var catRepository: ICatRepo
 
 
     private var _apiKeyLiveData = MutableLiveData<Boolean>()
@@ -55,12 +56,12 @@ class ApiKeyViewModel(application: Application) : AndroidViewModel(application){
     }
 
     fun getApiKey() {
-        myRepository.getApiKey(apiKey.value.toString())
+        catRepository.getApiKey(apiKey.value.toString())
             .subscribe({
                 _apiKeyLiveData.postValue(true)
             }, {
                 _apiKeyLiveData.postValue(false)
-                val error = myRepository.helperRequest(it)
+                val error = catRepository.helperRequest(it)
                 _errorApiKeyData.value = error!!
 
             })
