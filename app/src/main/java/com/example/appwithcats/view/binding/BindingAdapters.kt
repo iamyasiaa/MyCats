@@ -1,4 +1,4 @@
-package com.example.appwithcats.view
+package com.example.appwithcats.view.binding
 
 import androidx.databinding.BindingAdapter
 import com.google.android.material.button.MaterialButton
