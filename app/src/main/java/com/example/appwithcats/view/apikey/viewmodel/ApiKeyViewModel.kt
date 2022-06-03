@@ -2,20 +2,14 @@ package com.example.appwithcats.view.apikey.viewmodel
 
 import android.app.Application
 import android.text.Editable
-import android.widget.Button
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.appwithcats.App
 import com.example.appwithcats.R
-import com.example.appwithcats.data.CatRepository
 import com.example.appwithcats.view.interfaces.ISharPref
-import com.example.appwithcats.domain.UserModel
+import com.example.appwithcats.domain.apikey.UserModel
 import com.example.appwithcats.view.interfaces.ICatRepo
-import com.google.gson.Gson
-import com.google.gson.TypeAdapter
-import retrofit2.HttpException
-import java.io.IOException
 import javax.inject.Inject
 
 class ApiKeyViewModel(application: Application) : AndroidViewModel(application){

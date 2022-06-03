@@ -2,22 +2,15 @@ package com.example.appwithcats.view.authrization.viewmodel
 
 import android.app.Application
 import android.text.Editable
-import android.util.Log
-import android.widget.Button
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.appwithcats.*
-import com.example.appwithcats.data.CatRepository
-import com.example.appwithcats.domain.PersonalData
-import com.example.appwithcats.domain.UserModel
+import com.example.appwithcats.domain.authorization.PersonalData
+import com.example.appwithcats.domain.apikey.UserModel
 import com.example.appwithcats.view.interfaces.ICatRepo
 import com.example.appwithcats.view.interfaces.ISharPref
-import com.google.gson.Gson
-import com.google.gson.TypeAdapter
-import retrofit2.HttpException
 import timber.log.Timber
-import java.io.IOException
 import javax.inject.Inject
 
 class AuthorizationViewModel(application: Application) : AndroidViewModel(application) {

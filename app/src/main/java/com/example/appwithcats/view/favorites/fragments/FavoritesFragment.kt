@@ -12,7 +12,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.appwithcats.R
 import com.example.appwithcats.databinding.FragmentFavoritesBinding
-import com.example.appwithcats.view.FavoritesAdapter
+import com.example.appwithcats.view.favorites.adapter.FavoritesAdapter
 import com.example.appwithcats.view.favorites.viewmodel.FavoritesViewModel
 
 

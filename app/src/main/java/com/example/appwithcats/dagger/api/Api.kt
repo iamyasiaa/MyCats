@@ -1,6 +1,15 @@
 package com.example.appwithcats.dagger.api
 
-import com.example.appwithcats.domain.*
+import com.example.appwithcats.domain.apikey.UserModel
+import com.example.appwithcats.domain.authorization.PersonalData
+import com.example.appwithcats.domain.cats.CatModel
+import com.example.appwithcats.domain.cats.votes.GetVotes
+import com.example.appwithcats.domain.cats.votes.VoteCatsModel
+import com.example.appwithcats.domain.cats.votes.VoteModel
+import com.example.appwithcats.domain.favorites.DeleteFavorites
+import com.example.appwithcats.domain.favorites.FavoritesModel
+import com.example.appwithcats.domain.favorites.PostFavorites
+import com.example.appwithcats.domain.favorites.PostFavoritesModel
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.*

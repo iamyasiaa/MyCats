@@ -1,4 +1,4 @@
-package com.example.appwithcats.domain
+package com.example.appwithcats.domain.favorites
 
 data class DeleteFavorites (
     val level: String,

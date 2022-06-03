@@ -1,15 +1,11 @@
 package com.example.appwithcats.data.paging
 
-import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import androidx.paging.rxjava3.RxPagingSource
 import com.example.appwithcats.dagger.api.Api
-import com.example.appwithcats.domain.CatModel
+import com.example.appwithcats.domain.cats.CatModel
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
-import retrofit2.HttpException
-import java.io.IOException
-
 
 
 class CatsPagingSource(private val api: Api) : RxPagingSource<Int, CatModel>(){

@@ -1,4 +1,4 @@
-package com.example.appwithcats.domain
+package com.example.appwithcats.domain.apikey
 
 data class UserModel (
     val message: String,

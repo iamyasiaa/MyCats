@@ -29,6 +29,9 @@ class BottomSheetDialogCats: BottomSheetDialogFragment() {
         val url = args.urlCat
         Glide.with(this)
             .load(url)
+
+
+
             .fitCenter()
             .centerCrop()
             .placeholder(R.drawable.progress_animation)

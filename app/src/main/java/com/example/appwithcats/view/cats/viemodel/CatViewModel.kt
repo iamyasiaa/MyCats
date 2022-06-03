@@ -1,16 +1,13 @@
 package com.example.appwithcats.view.cats.viemodel
 
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.appwithcats.App
-import com.example.appwithcats.domain.CatModel
-import com.example.appwithcats.data.CatRepository
-import com.example.appwithcats.domain.PostFavorites
-import com.example.appwithcats.domain.VoteCatsModel
+import com.example.appwithcats.domain.cats.CatModel
+import com.example.appwithcats.domain.favorites.PostFavorites
+import com.example.appwithcats.domain.cats.votes.VoteCatsModel
 import com.example.appwithcats.view.interfaces.ICatRepo
-import com.example.appwithcats.view.interfaces.ISharPref
 import javax.inject.Inject
 
 class CatViewModel(private val onNavigate: (CatModel) -> Unit, private val cat: CatModel) {

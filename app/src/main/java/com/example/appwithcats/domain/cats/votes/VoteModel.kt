@@ -1,4 +1,4 @@
-package com.example.appwithcats.domain
+package com.example.appwithcats.domain.cats.votes
 
 data class VoteModel(
     val id: Int,

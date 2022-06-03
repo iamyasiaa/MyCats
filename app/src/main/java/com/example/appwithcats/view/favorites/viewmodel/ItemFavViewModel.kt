@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.appwithcats.App
-import com.example.appwithcats.data.CatRepository
 import com.example.appwithcats.data.SharedPreferenceRepository
-import com.example.appwithcats.domain.*
+import com.example.appwithcats.domain.cats.votes.VoteCatsModel
+import com.example.appwithcats.domain.favorites.DeleteFavorites
+import com.example.appwithcats.domain.favorites.FavoritesModel
 import com.example.appwithcats.view.interfaces.ICatRepo
-import com.example.appwithcats.view.interfaces.ISharPref
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers

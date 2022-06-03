@@ -1,4 +1,4 @@
-package com.example.appwithcats.domain
+package com.example.appwithcats.domain.cats
 
 data class CatModel(
     val breeds: List<Any>,

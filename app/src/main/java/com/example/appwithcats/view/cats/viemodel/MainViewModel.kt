@@ -9,7 +9,7 @@ import androidx.paging.PagingData
 import androidx.paging.rxjava3.cachedIn
 import com.example.appwithcats.App
 import com.example.appwithcats.data.CatRepository
-import com.example.appwithcats.domain.CatModel
+import com.example.appwithcats.domain.cats.CatModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 

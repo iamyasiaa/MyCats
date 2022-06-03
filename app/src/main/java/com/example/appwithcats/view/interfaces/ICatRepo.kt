@@ -1,9 +1,14 @@
 package com.example.appwithcats.view.interfaces
 
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
-import com.example.appwithcats.domain.*
-import io.reactivex.rxjava3.core.Flowable
+import com.example.appwithcats.domain.apikey.UserModel
+import com.example.appwithcats.domain.authorization.PersonalData
+import com.example.appwithcats.domain.cats.votes.GetVotes
+import com.example.appwithcats.domain.cats.votes.VoteCatsModel
+import com.example.appwithcats.domain.cats.votes.VoteModel
+import com.example.appwithcats.domain.favorites.DeleteFavorites
+import com.example.appwithcats.domain.favorites.FavoritesModel
+import com.example.appwithcats.domain.favorites.PostFavorites
+import com.example.appwithcats.domain.favorites.PostFavoritesModel
 import io.reactivex.rxjava3.core.Observable
 import org.jetbrains.annotations.NotNull
 

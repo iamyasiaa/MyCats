@@ -6,7 +6,16 @@ import androidx.paging.PagingData
 import androidx.paging.rxjava3.flowable
 import com.example.appwithcats.dagger.api.Api
 import com.example.appwithcats.data.paging.CatsPagingSource
-import com.example.appwithcats.domain.*
+import com.example.appwithcats.domain.apikey.UserModel
+import com.example.appwithcats.domain.authorization.PersonalData
+import com.example.appwithcats.domain.cats.CatModel
+import com.example.appwithcats.domain.cats.votes.GetVotes
+import com.example.appwithcats.domain.cats.votes.VoteCatsModel
+import com.example.appwithcats.domain.cats.votes.VoteModel
+import com.example.appwithcats.domain.favorites.DeleteFavorites
+import com.example.appwithcats.domain.favorites.FavoritesModel
+import com.example.appwithcats.domain.favorites.PostFavorites
+import com.example.appwithcats.domain.favorites.PostFavoritesModel
 import com.example.appwithcats.view.interfaces.ICatRepo
 import com.google.gson.Gson
 import com.google.gson.TypeAdapter

@@ -5,21 +5,12 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
-import androidx.paging.PagingData
-import androidx.paging.rxjava3.cachedIn
 import com.example.appwithcats.App
-import com.example.appwithcats.data.CatRepository
 import com.example.appwithcats.data.SharedPreferenceRepository
-import com.example.appwithcats.domain.*
+import com.example.appwithcats.domain.cats.votes.GetVotes
+import com.example.appwithcats.domain.favorites.FavoritesModel
 import com.example.appwithcats.view.interfaces.ICatRepo
-import com.example.appwithcats.view.interfaces.ISharPref
-import com.google.gson.Gson
-import com.google.gson.TypeAdapter
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import retrofit2.HttpException
-import java.util.*
 import javax.inject.Inject
 
 class FavoritesViewModel(application: Application) : AndroidViewModel(application) {
